@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "TCG Collector chrome extension",
+  "description": "Adds extra functionality to TCG Collector app",
+  "version": "0.1",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    },
+    "default_title": "TCG Collector Settings",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.tcgcollector.com/cards/*/*"
+      ],
+      "js": [
+        "lib/google-sheets-parser.js",
+        "lib/base.js"
+      ],
+      "css": [
+        "css/style.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [ "lib/*", "css/*" ],
+      "matches": [ "https://www.tcgcollector.com/*" ]
+    }
+  ],
+  "permissions": [
+    "declarativeContent", "storage", "management"
+  ]
+}

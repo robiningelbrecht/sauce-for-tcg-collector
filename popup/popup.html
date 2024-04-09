@@ -1,0 +1,43 @@
+<!-- popup.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body{
+            min-height: 200px;
+        }
+        form {
+            box-sizing: border-box;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+            width: 600px;
+        }
+
+        .form-element {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-element label{
+            width: 140px;
+        }
+    </style>
+</head>
+
+<body>
+<script defer src="popup.js" type="module"></script>
+<form>
+    <div class="form-element">
+        <label for="googleSpreadSheetId">Google spreadsheet ID:</label>
+        <input type="text" name="googleSpreadSheetId" id="googleSpreadSheetId" placeholder="1wJQc9-QIBdzfJdq123QTXdbdCWepL-Pmf_m4rdaUBFYk" size="50" required />
+    </div>
+    <div class="form-element">
+        <input type="submit" value="Save" />
+    </div>
+</form>
+</body>
+
+</html>

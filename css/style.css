@@ -1,0 +1,30 @@
+div.tcg-collector-card-prices > div{
+    display: flex;
+    gap: 10px 15px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid;
+}
+
+html[data-darkreader-scheme="dark"] div.tcg-collector-card-prices > div{
+    border-bottom: 1px solid rgb(53, 58, 60);
+}
+
+div.tcg-collector-card-prices-wrapper .title{
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: .5rem;
+    text-transform: none;
+}
+
+div.tcg-collector-card-prices-wrapper .error {
+    background-color: #ffebec;
+    border: 0 solid #e13238;
+    border-left-width: 5px;
+    border-radius: 0.4rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
+    padding: 0.5rem;
+    color: #4b1113;
+    font-size: 14px;
+}
