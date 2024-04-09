@@ -1,0 +1,1 @@
+# tcg-collector-chrome-extension
