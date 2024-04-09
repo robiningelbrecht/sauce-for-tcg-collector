@@ -27,7 +27,7 @@
       ],
       "js": [
         "lib/google-sheets-parser.js",
-        "lib/base.js"
+        "lib/card-detail.js"
       ],
       "css": [
         "css/style.css"
