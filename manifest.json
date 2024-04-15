@@ -33,6 +33,21 @@
       "css": [
         "css/style.css"
       ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.tcgcollector.com/dashboard/intl",
+        "https://www.tcgcollector.com/dashboard/jp"
+      ],
+      "js": [
+        "lib/vendor/google-sheets-parser.js",
+        "lib/utils.js",
+        "lib/dashboard.js"
+      ],
+      "css": [
+        "css/style.css"
+      ]
     }
   ],
   "web_accessible_resources": [
