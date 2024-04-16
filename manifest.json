@@ -44,9 +44,15 @@
         "lib/vendor/google-sheets-parser.js",
         "lib/utils.js",
         "lib/dashboard.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.tcgcollector.com/*"
       ],
-      "css": [
-        "css/style.css"
+      "js": [
+        "lib/menu.js"
       ]
     }
   ],
