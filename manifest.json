@@ -37,13 +37,16 @@
     {
       "run_at": "document_end",
       "matches": [
-        "https://www.tcgcollector.com/dashboard/intl",
-        "https://www.tcgcollector.com/dashboard/jp"
+        "https://www.tcgcollector.com/dashboard"
       ],
       "js": [
+        "lib/vendor/echarts.min.js",
         "lib/vendor/google-sheets-parser.js",
         "lib/utils.js",
         "lib/dashboard.js"
+      ],
+      "css": [
+        "css/style.css"
       ]
     },
     {
