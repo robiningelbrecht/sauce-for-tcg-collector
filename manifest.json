@@ -55,7 +55,8 @@
         "https://www.tcgcollector.com/*"
       ],
       "js": [
-        "lib/menu.js"
+        "lib/menu.js",
+        "lib/currencies.js"
       ]
     }
   ],
