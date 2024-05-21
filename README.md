@@ -1,4 +1,4 @@
-# tcg-collector-chrome-extension
+# Sauce for TCG Collector
 
 Include custom paid prices for cards:
 - Enable developer mode in Chrome
