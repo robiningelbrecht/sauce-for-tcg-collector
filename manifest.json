@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "TCG Collector chrome extension",
+  "name": "Sauce for TCG Collector",
   "description": "Adds extra functionality to TCG Collector app",
   "version": "0.1",
   "icons": {
@@ -56,7 +56,7 @@
       ],
       "js": [
         "lib/menu.js",
-        "lib/currencies.js"
+        "lib/prices.js"
       ]
     }
   ],

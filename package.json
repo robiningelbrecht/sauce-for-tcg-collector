@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "flowbite": "^1.8.1",
+    "tailwindcss": "^3.3.3"
+  },
+  "scripts": {
+    "flowbite:build": "npx tailwindcss -i popup/popup.css -o popup/popup.min.css --minify"
+  }
+}
