@@ -59,17 +59,6 @@
         "lib/menu.js",
         "lib/hide-prices.js"
       ]
-    },
-    {
-      "run_at": "document_end",
-      "matches": [
-        "https://www.tcgcollector.com/expansions/*"
-      ],
-      "js": [
-        "lib/vendor/google-sheets-parser.js",
-        "lib/utils.js",
-        "lib/expansions.js"
-      ]
     }
   ],
   "web_accessible_resources": [
