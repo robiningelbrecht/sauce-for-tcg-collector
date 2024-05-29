@@ -26,9 +26,7 @@
         "https://www.tcgcollector.com/cards/*/*"
       ],
       "js": [
-        "lib/vendor/google-sheets-parser.js",
-        "lib/utils.js",
-        "lib/card-detail.js"
+        "dist/card-detail.js"
       ],
       "css": [
         "css/style.css"
@@ -40,13 +38,10 @@
         "https://www.tcgcollector.com/dashboard"
       ],
       "js": [
-        "lib/vendor/echarts.min.js",
-        "lib/vendor/google-sheets-parser.js",
-        "lib/utils.js",
-        "lib/dashboard.js"
+        "dist/dashboard.js"
       ],
       "css": [
-        "css/style.css"
+        "dist/css/style.css"
       ]
     },
     {
@@ -55,19 +50,23 @@
         "https://www.tcgcollector.com/*"
       ],
       "js": [
-        "lib/utils.js",
-        "lib/menu.js",
-        "lib/hide-prices.js"
+        "dist/all-pages.js"
       ]
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": [ "lib/*", "css/*" ],
-      "matches": [ "https://www.tcgcollector.com/*" ]
+      "resources": [
+        "dist/*"
+      ],
+      "matches": [
+        "https://www.tcgcollector.com/*"
+      ]
     }
   ],
   "permissions": [
-    "declarativeContent", "storage", "management"
+    "declarativeContent",
+    "storage",
+    "management"
   ]
 }

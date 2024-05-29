@@ -1,8 +1,17 @@
+import { contains } from './utils';
+
 const renderMenu = async () => {
     const {settings} = await chrome.storage.sync.get("settings");
     if (!settings.googleSpreadSheetId) {
         return;
     }
+
+    if (settings.hidePrices) {
+        contains('*', /\$([\d]+\.?\d*)/g).forEach(element => {
+            element.innerHTML = element.innerHTML.replace(/\$([\d]+\.?\d*)/g, '$—')
+        });
+    }
+
 
     const $menu = document.querySelector('div#navbar-buttons');
     const $menuItem = document.createElement("a");

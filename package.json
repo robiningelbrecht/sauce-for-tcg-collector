@@ -4,6 +4,14 @@
     "tailwindcss": "^3.3.3"
   },
   "scripts": {
-    "flowbite:build": "npx tailwindcss -i popup/popup.css -o popup/popup.min.css --minify"
+    "flowbite:build": "npx tailwindcss -i popup/popup.css -o popup/popup.min.css --minify",
+    "build": "webpack --config webpack.config.js"
+  },
+  "dependencies": {
+    "echarts": "^5.5.0",
+    "ejs": "^3.1.10",
+    "public-google-sheets-parser": "^1.5.4",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   }
 }

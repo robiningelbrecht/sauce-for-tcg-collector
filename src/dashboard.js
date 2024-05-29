@@ -1,3 +1,6 @@
+import { parseSheet } from './utils';
+import * as echarts from 'echarts';
+
 const renderDashboard = async () => {
     const parsedRows = await parseSheet(0);
     const cardIds = parsedRows.map(row => parseInt(row.cardId));
