@@ -5,7 +5,7 @@
   },
   "scripts": {
     "flowbite:build": "npx tailwindcss -i popup/popup.css -o popup/popup.min.css --minify",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js && npx tailwindcss -i popup/popup.css -o popup/popup.min.css --minify"
   },
   "dependencies": {
     "echarts": "^5.5.0",
