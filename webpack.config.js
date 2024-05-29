@@ -1,11 +1,12 @@
 const path = require('path');
 
 module.exports = {
-    context: __dirname + '/src',
+    context: __dirname,
     entry: {
-        'all-pages': './all-pages.js',
-        'card-detail': './card-detail.js',
-        'dashboard': './dashboard.js',
+        'all-pages': './src/all-pages.js',
+        'card-detail': './src/card-detail.js',
+        'dashboard': './src/dashboard.js',
+        'popup/popup': './popup/popup.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
