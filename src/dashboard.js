@@ -44,6 +44,7 @@ const renderDashboard = async () => {
 
     const myChart = echarts.init(document.querySelector(".modal-content .chart"));
     const history = (await parseSheet(1488806024)).filter(row => row.region === 'All');
+
     // Sort history ASC.
     history.sort(function (a, b) {
         const keyA = new Date(a.date);
@@ -53,6 +54,8 @@ const renderDashboard = async () => {
         if (keyA > keyB) return 1;
         return 0;
     });
+
+    const currentCollectionState = history[history.length - 1];
 
     const option = {
         animation: false,
@@ -102,16 +105,51 @@ const renderDashboard = async () => {
                 }
             },
         ],
+        graphic: [
+            {
+                type: 'group',
+                left: '15%',
+                top: 70,
+                children: [
+                    {
+                        type: 'rect',
+                        z: 100,
+                        left: 'center',
+                        top: 'middle',
+                        shape: {
+                            width: 180,
+                            height: 90
+                        },
+                        style: {
+                            fill: 'transparent',
+                            stroke: '#d8d4cf',
+                            lineWidth: 1,
+                            shadowBlur: 8,
+                            shadowOffsetX: 3,
+                            shadowOffsetY: 3,
+                            shadowColor: 'rgba(0,0,0,0.2)'
+                        }
+                    },
+                    {
+                        type: 'text',
+                        z: 100,
+                        left: 'center',
+                        top: 'middle',
+                        style: {
+                            width: 170,
+                            fill: '#d8d4cf',
+                            overflow: 'break',
+                            text: `Total value: $${currentCollectionState.totalValue}\nTotal cards: ${currentCollectionState.totalCards}\nUnqiue cards: ${currentCollectionState.uniqueCards}\nUnqiue variants: ${currentCollectionState.uniqueVariants}`,
+                            font: '14px "Titillium Web", sans-serif'
+                        }
+                    }
+                ]
+            }
+        ],
         series: [
             {
                 name: 'Unique cards',
                 type: 'line',
-                endLabel: {
-                    show: true,
-                    formatter: '{a}: {@[1]}',
-                    offset: [-50, -15]
-
-                },
                 data: history.map(row => [
                     row.date,
                     row.uniqueCards
@@ -120,12 +158,6 @@ const renderDashboard = async () => {
             {
                 name: 'Unique variants',
                 type: 'line',
-                endLabel: {
-                    show: true,
-                    formatter: '{a}: {@[1]}',
-                    offset: [-50, -15]
-
-                },
                 data: history.map(row => [
                     row.date,
                     row.uniqueVariants
@@ -134,12 +166,6 @@ const renderDashboard = async () => {
             {
                 name: 'Total cards',
                 type: 'line',
-                endLabel: {
-                    show: true,
-                    formatter: '{a}: {@[1]}',
-                    offset: [-50, -15]
-
-                },
                 data: history.map(row => [
                     row.date,
                     row.totalCards
@@ -148,12 +174,6 @@ const renderDashboard = async () => {
             {
                 name: 'Total value',
                 type: 'line',
-                endLabel: {
-                    show: true,
-                    formatter: '{a}: ${@[1]}',
-                    offset: [-50, -15]
-
-                },
                 tooltip: {
                     valueFormatter: (value) => '$' + value
                 },
