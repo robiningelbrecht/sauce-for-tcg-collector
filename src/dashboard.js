@@ -1,8 +1,9 @@
-import { parseSheet } from './utils';
+import {parseSheet, Region} from './utils';
 import * as echarts from 'echarts';
 
 const renderDashboard = async () => {
-    const parsedRows = await parseSheet(0);
+    const currentRegion = Region.fromCurrentUrl();
+    const parsedRows = currentRegion.filterRows(await parseSheet(0));
     const cardIds = parsedRows.map(row => parseInt(row.cardId));
     const uri = `https://www.tcgcollector.com/cards?releaseDateOrder=newToOld&cardsPerPage=120&displayAs=images&sortBy=cardNameAsc&cards=${cardIds.join(',')}`;
 
@@ -43,7 +44,7 @@ const renderDashboard = async () => {
     document.body.appendChild($modal);
 
     const myChart = echarts.init(document.querySelector(".modal-content .chart"));
-    const history = (await parseSheet(1488806024)).filter(row => row.region === 'All');
+    const history = currentRegion.filterRows(await parseSheet(1488806024), true);
 
     // Sort history ASC.
     history.sort(function (a, b) {
@@ -62,7 +63,7 @@ const renderDashboard = async () => {
         tooltip: {
             trigger: 'axis',
             valueFormatter: (value) => value,
-            backgroundColor: 'transparent',
+            backgroundColor: '#181A1B',
             axisPointer: {
                 label: {
                     formatter: function (params) {

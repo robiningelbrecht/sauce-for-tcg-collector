@@ -35,7 +35,9 @@
     {
       "run_at": "document_end",
       "matches": [
-        "https://www.tcgcollector.com/dashboard"
+        "https://www.tcgcollector.com/dashboard",
+        "https://www.tcgcollector.com/dashboard/intl",
+        "https://www.tcgcollector.com/dashboard/jp"
       ],
       "js": [
         "dist/dashboard.js"
