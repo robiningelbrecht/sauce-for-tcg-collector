@@ -2,25 +2,35 @@ import {parseSheet, Region} from './utils';
 import * as echarts from 'echarts';
 
 const renderDashboard = async () => {
-    const currentRegion = Region.fromCurrentUrl();
-    const parsedRows = currentRegion.filterRows(await parseSheet('Slabs / Singles'));
-    const cardIds = parsedRows.map(row => parseInt(row.cardId));
-    const uri = `https://www.tcgcollector.com/cards?releaseDateOrder=newToOld&cardsPerPage=120&displayAs=images&sortBy=cardNameAsc&cards=${cardIds.join(',')}`;
+    const $quickAccessContainer = document.querySelectorAll('div.dashboard-section div.list-group')[1];
+    $quickAccessContainer.innerHTML = '';
 
-    const $dashboardUrl = document.createElement("a");
-    $dashboardUrl.classList.add('list-group-item');
-    $dashboardUrl.setAttribute('href', uri);
-    $dashboardUrl.innerHTML = `
+    const currentRegion = Region.fromCurrentUrl();
+    const slabsAndSingles = currentRegion.filterRows(await parseSheet('Slabs / Singles'));
+    const cardIds = slabsAndSingles.map(row => parseInt(row.cardId));
+    const uri = `/cards?releaseDateOrder=newToOld&cardsPerPage=120&displayAs=images&sortBy=cardNameAsc&cards=${cardIds.join(',')}`;
+
+    const quickAccessLinks = currentRegion.filterRows(await parseSheet('Quick access links'), true);
+    quickAccessLinks.push({
+        'title': 'Slabs &amp; singles',
+        'url': uri,
+        'icon': 'fa-database'
+    })
+    quickAccessLinks.forEach(link => {
+        const $quickAccessLink = document.createElement("a");
+        $quickAccessLink.classList.add('list-group-item');
+        $quickAccessLink.setAttribute('href', link.url);
+        $quickAccessLink.innerHTML = `
         <span class="list-group-item-left-item-container">
-          <span aria-hidden="true" class="list-group-item-side-item-icon fa-solid fa-database fa-fw"></span>
+          <span aria-hidden="true" class="list-group-item-side-item-icon fa-solid ${link.icon} fa-fw"></span>
         </span>
-        Slabs &amp; singles
+        ${link.title}
         <span class="list-group-item-right-item-container">
           <span aria-hidden="true" class="list-group-item-side-item-icon fa-solid fa-chevron-right"></span>
         </span>`;
 
-    const $appendTo = document.querySelectorAll('div.dashboard-section div.list-group')[1];
-    $appendTo.appendChild($dashboardUrl);
+        $quickAccessContainer.appendChild($quickAccessLink);
+    });
 
     const $modalLink = document.createElement('a');
     $modalLink.setAttribute('href', '#modal');
