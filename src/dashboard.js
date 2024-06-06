@@ -3,7 +3,7 @@ import * as echarts from 'echarts';
 
 const renderDashboard = async () => {
     const currentRegion = Region.fromCurrentUrl();
-    const parsedRows = currentRegion.filterRows(await parseSheet(0));
+    const parsedRows = currentRegion.filterRows(await parseSheet('Slabs / Singles'));
     const cardIds = parsedRows.map(row => parseInt(row.cardId));
     const uri = `https://www.tcgcollector.com/cards?releaseDateOrder=newToOld&cardsPerPage=120&displayAs=images&sortBy=cardNameAsc&cards=${cardIds.join(',')}`;
 
@@ -44,7 +44,7 @@ const renderDashboard = async () => {
     document.body.appendChild($modal);
 
     const myChart = echarts.init(document.querySelector(".modal-content .chart"));
-    const history = currentRegion.filterRows(await parseSheet(1488806024), true);
+    const history = currentRegion.filterRows(await parseSheet('Collection history'), true);
 
     // Sort history ASC.
     history.sort(function (a, b) {

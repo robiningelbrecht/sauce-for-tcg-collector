@@ -32,13 +32,13 @@ export const contains = (selector, text) => {
     return [...document.querySelectorAll(selector)].filter(element => element.childNodes?.[0]?.nodeValue?.match(text))
 }
 
-export const parseSheet = async (sheetId) => {
+export const parseSheet = async (sheetName) => {
     const {settings} = await chrome.storage.sync.get("settings");
     if (!settings.googleSpreadSheetId) {
         return;
     }
 
-    const parser = new PublicGoogleSheetsParser(settings.googleSpreadSheetId, {sheetId: sheetId, useFormat: true});
+    const parser = new PublicGoogleSheetsParser(settings.googleSpreadSheetId, {sheetName: sheetName, useFormat: true});
     const rows = await parser.parse();
 
     return rows.map(row => {

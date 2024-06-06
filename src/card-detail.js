@@ -28,7 +28,7 @@ const displayPurchasePrices = async () => {
     const $priceRowsDiv = document.createElement("div");
     $priceRowsDiv.classList.add('tcg-collector-card-prices');
 
-    const parsedRows = await parseSheet(0);
+    const parsedRows = await parseSheet('Slabs / Singles');
     const matchedRows = parsedRows.filter((row) => row.cardId === cardId);
     if (matchedRows.length === 0) {
         return;
