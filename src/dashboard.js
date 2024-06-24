@@ -2,7 +2,13 @@ import {parseSheet} from './utils';
 import {Region} from "./region";
 import * as echarts from 'echarts';
 
-const renderDashboard = async () => {
+const reorderDashboard = () => {
+    const[ $firstDashboardSectionsRegion, $secondDashboardSectionsRegion] = document.querySelectorAll('div.dashboard-sections-region');
+    $firstDashboardSectionsRegion.querySelector('div#dashboard-expansions-completed-section').style.display = 'none';
+    $secondDashboardSectionsRegion.style.display = 'none';
+    $firstDashboardSectionsRegion.appendChild($secondDashboardSectionsRegion.querySelectorAll('div.dashboard-sections-subregion')[1].querySelector('div.dashboard-section'));
+};
+const renderDashboardQuickLinks = async () => {
     const $quickAccessContainer = document.querySelectorAll('div.dashboard-section div.list-group')[1];
     $quickAccessContainer.innerHTML = '<div class="loading-state-loading-spinner-underlay" style="display: flex; justify-content: center"><div class="loading-state-loading-spinner loading-spinner"></div></div>';
 
@@ -32,7 +38,9 @@ const renderDashboard = async () => {
         </span>`;
         $quickAccessContainer.appendChild($quickAccessLink);
     });
-
+};
+const renderDashboardHistory = async () => {
+    const currentRegion = Region.fromCurrentUrl();
     const $modalLink = document.createElement('a');
     $modalLink.setAttribute('href', '#modal');
     $modalLink.classList.add(...['button', 'button', 'button-primary']);
@@ -200,7 +208,9 @@ const renderDashboard = async () => {
 
 };
 
-renderDashboard();
+reorderDashboard();
+renderDashboardHistory();
+renderDashboardQuickLinks();
 
 window.addEventListener('keydown', (e) => {
     if (e.key == "Escape" && window.location.hash === '#modal') {
