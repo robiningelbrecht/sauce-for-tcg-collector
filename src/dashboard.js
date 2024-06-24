@@ -1,9 +1,10 @@
-import {parseSheet, Region} from './utils';
+import {parseSheet} from './utils';
+import {Region} from "./region";
 import * as echarts from 'echarts';
 
 const renderDashboard = async () => {
     const $quickAccessContainer = document.querySelectorAll('div.dashboard-section div.list-group')[1];
-    $quickAccessContainer.innerHTML = '';
+    $quickAccessContainer.innerHTML = '<div class="loading-state-loading-spinner-underlay" style="display: flex; justify-content: center"><div class="loading-state-loading-spinner loading-spinner"></div></div>';
 
     const currentRegion = Region.fromCurrentUrl();
     const slabsAndSingles = currentRegion.filterRows(await parseSheet('Slabs / Singles'));
@@ -16,6 +17,7 @@ const renderDashboard = async () => {
         'url': uri,
         'icon': 'fa-database'
     })
+    $quickAccessContainer.innerHTML = '';
     quickAccessLinks.forEach(link => {
         const $quickAccessLink = document.createElement("a");
         $quickAccessLink.classList.add('list-group-item');
@@ -28,7 +30,6 @@ const renderDashboard = async () => {
         <span class="list-group-item-right-item-container">
           <span aria-hidden="true" class="list-group-item-side-item-icon fa-solid fa-chevron-right"></span>
         </span>`;
-
         $quickAccessContainer.appendChild($quickAccessLink);
     });
 
