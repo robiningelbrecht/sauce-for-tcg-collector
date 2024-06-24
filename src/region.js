@@ -3,12 +3,23 @@ export class Region {
         this.name = name;
     }
 
+    isAll() {
+        return this.name === 'all';
+    }
+
     filterRows(rows, filterAll = false) {
-        if (this.name === 'all' && !filterAll) {
+        if (this.isAll() && !filterAll) {
             return rows;
         }
 
         return rows.filter(row => row.region === this.name);
+    }
+
+    buildUri(uri) {
+        if (this.isAll()) {
+            return uri.replace('[REGION]', '');
+        }
+        return uri.replace('[REGION]', '/' + this.name);
     }
 
     static fromCurrentUrl() {

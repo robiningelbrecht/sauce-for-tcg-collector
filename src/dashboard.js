@@ -3,7 +3,7 @@ import {Region} from "./region";
 import * as echarts from 'echarts';
 
 const reorderDashboard = () => {
-    const[ $firstDashboardSectionsRegion, $secondDashboardSectionsRegion] = document.querySelectorAll('div.dashboard-sections-region');
+    const [$firstDashboardSectionsRegion, $secondDashboardSectionsRegion] = document.querySelectorAll('div.dashboard-sections-region');
     $firstDashboardSectionsRegion.querySelector('div#dashboard-expansions-completed-section').style.display = 'none';
     $secondDashboardSectionsRegion.style.display = 'none';
     $firstDashboardSectionsRegion.appendChild($secondDashboardSectionsRegion.querySelectorAll('div.dashboard-sections-subregion')[1].querySelector('div.dashboard-section'));
@@ -14,20 +14,23 @@ const renderDashboardQuickLinks = async () => {
 
     const currentRegion = Region.fromCurrentUrl();
     const slabsAndSingles = currentRegion.filterRows(await parseSheet('Slabs / Singles'));
-    const cardIds = slabsAndSingles.map(row => parseInt(row.cardId));
-    const uri = `/cards?releaseDateOrder=newToOld&cardsPerPage=120&displayAs=images&sortBy=cardNameAsc&cards=${cardIds.join(',')}`;
+    const singlesCardIds = slabsAndSingles.filter(row => row.type === 'Single').map(row => parseInt(row.cardId));
+    const uri = `/cards?releaseDateOrder=newToOld&cardsPerPage=120&displayAs=images&sortBy=cardNameAsc&cards=${singlesCardIds.join(',')}`;
 
-    const quickAccessLinks = currentRegion.filterRows(await parseSheet('Quick access links'), true);
+    const quickAccessLinks = (await parseSheet('Quick access links')).filter(row => {
+        return row[currentRegion.name] === "TRUE";
+    });
     quickAccessLinks.push({
-        'title': 'Slabs &amp; singles',
+        'title': 'Singles',
         'url': uri,
         'icon': 'fa-database'
-    })
+    });
+
     $quickAccessContainer.innerHTML = '';
     quickAccessLinks.forEach(link => {
         const $quickAccessLink = document.createElement("a");
         $quickAccessLink.classList.add('list-group-item');
-        $quickAccessLink.setAttribute('href', link.url);
+        $quickAccessLink.setAttribute('href', currentRegion.buildUri(link.url));
         $quickAccessLink.innerHTML = `
         <span class="list-group-item-left-item-container">
           <span aria-hidden="true" class="list-group-item-side-item-icon fa-solid ${link.icon} fa-fw"></span>
