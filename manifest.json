@@ -23,13 +23,10 @@
     {
       "run_at": "document_end",
       "matches": [
-        "https://www.tcgcollector.com/cards/*/*"
+        "https://www.tcgcollector.com/*"
       ],
       "js": [
-        "dist/card.js"
-      ],
-      "css": [
-        "dist/css/style.css"
+        "dist/all-pages.js"
       ]
     },
     {
@@ -43,16 +40,32 @@
         "dist/dashboard.js"
       ],
       "css": [
-        "dist/css/style.css"
+        "dist/css/dashboard.css"
       ]
     },
     {
       "run_at": "document_end",
       "matches": [
-        "https://www.tcgcollector.com/*"
+        "https://www.tcgcollector.com/cards/intl/*",
+        "https://www.tcgcollector.com/cards/jp/*"
       ],
       "js": [
-        "dist/all-pages.js"
+        "dist/expansion.js"
+      ],
+      "css": [
+        "dist/css/expansion.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.tcgcollector.com/cards/*/*"
+      ],
+      "js": [
+        "dist/card.js"
+      ],
+      "css": [
+        "dist/css/card.css"
       ]
     }
   ],

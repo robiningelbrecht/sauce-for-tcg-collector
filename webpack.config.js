@@ -6,6 +6,7 @@ module.exports = {
         'all-pages': './src/all-pages.js',
         'card': './src/card.js',
         'dashboard': './src/dashboard.js',
+        'expansion': './src/expansion.js',
         'popup/popup': './popup/popup.js',
     },
     output: {
