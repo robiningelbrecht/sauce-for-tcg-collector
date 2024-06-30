@@ -1,0 +1,45 @@
+#print, #print * {
+    box-sizing: border-box;
+}
+
+#print {
+    display: none;
+    grid-template-columns: 6.3cm 6.3cm 6.3cm;
+    gap: 2px;
+}
+
+@media print {
+    body > *:not(#print) {
+        display: none;
+    }
+
+    #print {
+        display: grid;
+    }
+}
+
+#print .placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 6.3cm !important;
+    min-width: 6.3cm !important;
+    max-width: 6.3cm !important;
+    height: 8.8cm !important;
+    word-wrap: break-word;
+    font-weight: bold;
+    padding: 0.5em;
+    border-radius: 0.3em;
+    border: 3px solid #bbbbbb;
+}
+
+#print .placeholder:nth-child(9n) {
+    page-break-after: always;
+}
+
+#print .placeholder img {
+    width: 100%;
+    position: absolute;
+    z-index: -10;
+}
