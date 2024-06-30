@@ -1,4 +1,4 @@
-import { parseSheet } from './utils';
+import { parseSheet } from './domain/utils';
 
 const displayPurchasePrices = async () => {
     const {settings} = await chrome.storage.sync.get("settings");

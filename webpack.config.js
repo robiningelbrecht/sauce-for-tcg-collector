@@ -4,7 +4,7 @@ module.exports = {
     context: __dirname,
     entry: {
         'all-pages': './src/all-pages.js',
-        'card-detail': './src/card-detail.js',
+        'card': './src/card.js',
         'dashboard': './src/dashboard.js',
         'popup/popup': './popup/popup.js',
     },

@@ -1,5 +1,5 @@
-import {parseSheet} from './utils';
-import {Region} from "./region";
+import {parseSheet} from './domain/utils';
+import {Region} from "./domain/region";
 import * as echarts from 'echarts';
 
 const reorderDashboard = () => {

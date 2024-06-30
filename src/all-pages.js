@@ -1,4 +1,4 @@
-import { contains } from './utils';
+import { contains } from './domain/utils';
 
 const renderMenu = async () => {
     const {settings} = await chrome.storage.sync.get("settings");
