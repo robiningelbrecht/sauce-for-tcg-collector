@@ -1,6 +1,9 @@
 {
   "scripts": {
-    "build": "cp -R popup/ dist/popup && webpack --config webpack.config.js && npx tailwindcss -i dist/popup/popup.css -o dist/popup/popup.min.css --minify && node-minify --compressor clean-css --input 'css/*.css' --output 'dist/css/$1.min.css'"
+    "build:popup": "cp -R popup/ dist/popup && npx tailwindcss -i dist/popup/popup.css -o dist/popup/popup.min.css --minify",
+    "build:webpack": "webpack --config webpack.config.js",
+    "build:minify-css": "node-minify --compressor clean-css --input 'css/*.css' --output 'dist/css/$1.min.css'",
+    "build": "npm run build:popup && npm run build:webpack && npm run build:minify-css"
   },
   "dependencies": {
     "echarts": "^5.5.0",
