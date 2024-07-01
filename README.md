@@ -9,7 +9,7 @@ Sauce for TCG Collector is a browser extension that upgrades [tcgcollector.com](
 Installation
 --------
 
-- Cone this repository
+- Clone this repository
 - Enable developer mode in Chrome (or any Chromium based browser)
 - Enable this extension
 - Reference your Google spreadsheet ID in the options
