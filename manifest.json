@@ -40,7 +40,7 @@
         "dist/dashboard.js"
       ],
       "css": [
-        "dist/css/dashboard.css"
+        "dist/css/dashboard.min.css"
       ]
     },
     {
@@ -53,7 +53,7 @@
         "dist/expansion.js"
       ],
       "css": [
-        "dist/css/expansion.css"
+        "dist/css/expansion.min.css"
       ]
     },
     {
@@ -65,7 +65,7 @@
         "dist/card.js"
       ],
       "css": [
-        "dist/css/card.css"
+        "dist/css/card.min.css"
       ]
     }
   ],

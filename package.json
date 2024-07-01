@@ -1,12 +1,14 @@
 {
   "scripts": {
-    "build": "cp -R popup/ dist/popup && webpack --config webpack.config.js && npx tailwindcss -i dist/popup/popup.css -o dist/popup/popup.min.css --minify"
+    "build": "cp -R popup/ dist/popup && webpack --config webpack.config.js && npx tailwindcss -i dist/popup/popup.css -o dist/popup/popup.min.css --minify && node-minify --compressor clean-css --input 'css/*.css' --output 'dist/css/$1.min.css'"
   },
   "dependencies": {
     "echarts": "^5.5.0",
     "public-google-sheets-parser": "^1.5.4"
   },
   "devDependencies": {
+    "@node-minify/clean-css": "^8.0.6",
+    "@node-minify/cli": "^8.0.6",
     "flowbite": "^1.8.1",
     "tailwindcss": "^3.3.3",
     "webpack": "^5.91.0",
