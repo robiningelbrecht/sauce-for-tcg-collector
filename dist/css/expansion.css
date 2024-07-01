@@ -6,6 +6,7 @@
     display: none;
     grid-template-columns: 6.3cm 6.3cm 6.3cm;
     gap: 2px;
+    color: #000;
 }
 
 @media print {
@@ -31,7 +32,7 @@
     font-weight: bold;
     padding: 0.5em;
     border-radius: 0.3em;
-    border: 3px solid #bbbbbb;
+    border: 3px solid #000;
 }
 
 #print .placeholder:nth-child(9n) {
