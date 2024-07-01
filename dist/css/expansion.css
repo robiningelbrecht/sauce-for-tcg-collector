@@ -37,9 +37,3 @@
 #print .placeholder:nth-child(9n) {
     page-break-after: always;
 }
-
-#print .placeholder img {
-    width: 100%;
-    position: absolute;
-    z-index: -10;
-}
