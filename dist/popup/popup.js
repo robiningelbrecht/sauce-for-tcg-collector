@@ -1,1 +1,27 @@
-(async()=>{let{settings:e}=await chrome.storage.sync.get("settings");const t=document.querySelector("form"),s=document.getElementById("reminder");e||(e={}),t.elements.googleSpreadSheetId.value=e.googleSpreadSheetId||"",t.elements.hidePrices.checked=e.hidePrices||!1,t.addEventListener("input",(function(e){s.style.display="flex"})),t.addEventListener("submit",(async n=>{n.preventDefault(),s.style.display="none",e.googleSpreadSheetId=t.elements.googleSpreadSheetId.value,e.hidePrices=t.elements.hidePrices.checked,await chrome.storage.sync.set({settings:e})}))})();
+const initPopup = async () => {
+    let {settings} = await chrome.storage.sync.get("settings");
+    const $form = document.querySelector("form");
+    const $reminder =   document.getElementById('reminder');
+
+    if (!settings) {
+        settings = {};
+    }
+
+    $form.elements['googleSpreadSheetId'].value = settings.googleSpreadSheetId || ''
+    $form.elements['hidePrices'].checked = settings.hidePrices || false;
+
+    $form.addEventListener('input', function (event) {
+        $reminder.style.display = 'flex';
+    });
+
+    $form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        $reminder.style.display = 'none';
+
+        settings.googleSpreadSheetId = $form.elements['googleSpreadSheetId'].value;
+        settings.hidePrices = $form.elements['hidePrices'].checked;
+        await chrome.storage.sync.set({settings: settings});
+    });
+};
+
+initPopup();

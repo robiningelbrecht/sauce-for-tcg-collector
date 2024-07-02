@@ -26,7 +26,7 @@
         "https://www.tcgcollector.com/*"
       ],
       "js": [
-        "dist/all-pages.js"
+        "dist/all-pages.min.js"
       ]
     },
     {
@@ -37,7 +37,7 @@
         "https://www.tcgcollector.com/dashboard/jp"
       ],
       "js": [
-        "dist/dashboard.js"
+        "dist/dashboard-page.min.js"
       ],
       "css": [
         "dist/css/dashboard.min.css"
@@ -50,7 +50,7 @@
         "https://www.tcgcollector.com/cards/jp/*"
       ],
       "js": [
-        "dist/expansion.js"
+        "dist/expansion-page.min.js"
       ],
       "css": [
         "dist/css/expansion.min.css"
@@ -62,7 +62,7 @@
         "https://www.tcgcollector.com/cards/*/*"
       ],
       "js": [
-        "dist/card.js"
+        "dist/card-page.min.js"
       ],
       "css": [
         "dist/css/card.min.css"
