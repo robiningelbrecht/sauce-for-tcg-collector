@@ -1,7 +1,12 @@
 import {contains} from './Domain/Utils';
 import {Settings} from "./Domain/Settings";
-import {MenuItem} from "./Domain/Menu/MenuItem";
+import {SpreadsheetMenuItem} from "./Domain/Menu/SpreadsheetMenuItem";
 import {Console} from "./Domain/Console";
+import {PurchasePriceFeature} from "./Domain/Feature/PurchasePriceFeature";
+import {DebugMenuItem} from "./Domain/Menu/DebugMenuItem";
+
+const $menu = document.querySelector('div#navbar-buttons');
+$menu.prepend((new DebugMenuItem().build()));
 
 const settings = await Settings.load();
 if (!settings.googleSpreadSheetId) {
@@ -14,7 +19,4 @@ if (settings.hidePrices) {
     });
 }
 
-const $menu = document.querySelector('div#navbar-buttons');
-$menu.prepend((new MenuItem(settings.googleSpreadSheetId).build()));
-
-(new Console()).checkAndReportFeatures();
+$menu.prepend((new SpreadsheetMenuItem(settings.googleSpreadSheetId).build()));

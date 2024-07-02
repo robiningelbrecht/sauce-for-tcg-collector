@@ -1,4 +1,4 @@
-export class MenuItem{
+export class SpreadsheetMenuItem {
     constructor(spreadSheetId) {
         this.spreadSheetId = spreadSheetId;
     }

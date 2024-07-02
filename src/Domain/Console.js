@@ -1,5 +1,5 @@
 export class Console {
-    checkAndReportFeatures = () => {
+    printListWithLogo = (list) => {
         console.log(`%c
    _____                         __             _______ _____ _____    _____      _ _           _               
   / ____|                       / _|           |__   __/ ____/ ____|  / ____|    | | |         | |              
@@ -8,12 +8,8 @@ export class Console {
   ____) | (_| | |_| | (_|  __/ | || (_) | |       | | | |___| |__| | | |___| (_) | | |  __/ (__| || (_) | |     
  |_____/ \\__,_|\\__,_|\\___\\___| |_| \\___/|_|       |_|  \\_____\\_____|  \\_____\\___/|_|_|\\___|\\___|\\__\\___/|_|     
                                                                                                                 
- %c                                                                                                               
-  ${"• ✅ Purchase prices ".padEnd(109, ' ')}
-  ${"• ❌ Collection history".padEnd(109, ' ')}
-  ${"• ❌ Dashboard re-arrangement".padEnd(109, ' ')}
-  ${"• ❌ Print placeholders for binders".padEnd(109, ' ')}
-  ${"".padEnd(110, ' ')}`,
+%c${list.map(item => '  • ' + item.padEnd(107, ' ')).join("\n")}
+${"".padEnd(112, ' ')}`,
             'color:#FA7035; background:#222;',
             'background:#222; font-weight: bold;'
         );
