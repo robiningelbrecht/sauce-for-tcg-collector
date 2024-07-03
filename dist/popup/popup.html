@@ -29,11 +29,27 @@
                 of slabs and singles.</p>
         </div>
         <div>
-            <label class="inline-flex items-center cursor-pointer">
-                <input type="checkbox" name="hidePrices" class="sr-only peer">
-                <div class="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-checked:bg-orange-500 peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600"></div>
-                <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Hide prices</span>
-            </label>
+            <ul class="items-center w-full tex-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                    <div class="flex items-center ps-3">
+                        <input name="showCardMarketLinks" id="card-market-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 rounded focus:ring-orange-400 dark:focus:ring-orange-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                        <label for="card-market-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Add links to cardmarket.com</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                    <div class="flex items-center ps-3">
+                        <input disabled name="showEbayLinks" id="ebay-checkbox-list" type="checkbox" value="" class="w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 rounded focus:ring-orange-400 dark:focus:ring-orange-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                        <label for="ebay-checkbox-list" class="w-full py-3 ms-2 text-sm font-medium text-gray-400 dark:text-gray-300">Add links to ebay</label>
+                    </div>
+                </li>
+            </ul>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Adds a little icon to each card linking to a cardmarket.com or ebay search.</p>
+        </div>
+        <div>
+            <div class="flex items-center">
+                <input  name="hidePrices" id="hide-prices-checkbox" type="checkbox" value="" class="w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 rounded focus:ring-orange-400 dark:focus:ring-orange-500 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="hide-prices-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Hide prices</label>
+            </div>
             <p class="text-xs text-gray-500 dark:text-gray-400">Hide all prices on TCG Collector.</p>
         </div>
     </div>
