@@ -1,18 +1,25 @@
 import {PurchasePriceFeature} from "./PurchasePriceFeature";
-import {Console} from "../Console";
 import {Settings} from "../Settings";
+import {printListWithLogo} from "../Utils";
 
-export const logFeatureList = async () => {
-    const settings = await Settings.load();
-    const reasonsForFailure = await (new PurchasePriceFeature(settings)).getReasonsForFailure();
+export class FeatureList{
+    constructor() {
+    }
 
-    const list = [
-        "✅ Purchase prices for cards",
-        "✅ New menu item",
-        "❌ Collection history",
-        "❌ Dashboard re-arrangement",
-        "❌ Print placeholders for binders",
-        "✅ Hide prices",
-    ];
-    (new Console()).printListWithLogo(list);
+    debug = async () => {
+        const settings = await Settings.load();
+
+        const features = [
+            new PurchasePriceFeature(settings)
+        ]
+
+        const list = await Promise.all(
+            features.map(async feature => {
+                const reasonsForFailure = await feature.getReasonsForFailure();
+                return (reasonsForFailure.length === 0 ? '✅' : '❌') + " " + feature.getFeatureDescription()
+            })
+        );
+
+        printListWithLogo(list);
+    }
 }

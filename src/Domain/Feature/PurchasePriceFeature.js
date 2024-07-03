@@ -3,6 +3,10 @@ export class PurchasePriceFeature {
         this.settings = settings;
     }
 
+    getFeatureDescription = () => {
+      return 'Purchase prices for cards';
+    };
+
     getReasonsForFailure = async () => {
         const response = await fetch('https://www.tcgcollector.com/cards/42567');
         const html = await response.text();
