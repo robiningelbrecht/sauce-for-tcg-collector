@@ -1,4 +1,3 @@
-import {Region} from "../Region";
 import * as echarts from "echarts";
 import {GoogleSheet} from "../GoogleSheet";
 

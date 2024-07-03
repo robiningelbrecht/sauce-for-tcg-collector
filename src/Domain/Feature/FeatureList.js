@@ -6,6 +6,7 @@ import {CollectionHistoryFeature} from "./CollectionHistoryFeature";
 import {DashboardRearrangementFeature} from "./DashboardRearrangementFeature";
 import {PrintBinderPlaceholdersFeature} from "./PrintBinderPlaceholdersFeature";
 import {HidePricesFeature} from "./HidePricesFeature";
+import {QuickAccessLinksFeature} from "./QuickAccessLinksFeature";
 
 export class FeatureList {
     constructor() {
@@ -13,13 +14,17 @@ export class FeatureList {
 
     debug = async () => {
         const settings = await Settings.load();
+        const $cardDetailHtml = await this.loadHtmlNode('https://www.tcgcollector.com/cards/42567');
+        const $dashboardHtml = await this.loadHtmlNode('https://www.tcgcollector.com/dashboard');
+        const $expansionHtml = await this.loadHtmlNode('https://www.tcgcollector.com/cards/intl/scarlet-and-violet-151');
 
         const features = [
-            new PurchasePriceFeature(settings),
+            new PurchasePriceFeature(settings, $cardDetailHtml),
             new NewMenuItemFeature(settings),
-            new CollectionHistoryFeature(settings),
-            new DashboardRearrangementFeature(),
-            new PrintBinderPlaceholdersFeature(),
+            new CollectionHistoryFeature(settings, $dashboardHtml),
+            new QuickAccessLinksFeature(settings, $dashboardHtml),
+            new DashboardRearrangementFeature($dashboardHtml),
+            new PrintBinderPlaceholdersFeature($expansionHtml),
             new HidePricesFeature(),
         ]
 
@@ -31,5 +36,14 @@ export class FeatureList {
         );
 
         printListWithLogo(list);
+    }
+
+    async loadHtmlNode(url) {
+        const response = await fetch(url);
+        const html = await response.text();
+
+        const template = document.createElement('template');
+        template.innerHTML = '<div>' + html + '</div>';
+        return template.content.children[0];
     }
 }

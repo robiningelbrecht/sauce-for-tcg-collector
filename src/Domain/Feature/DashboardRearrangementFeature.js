@@ -1,6 +1,6 @@
 export class DashboardRearrangementFeature {
-    constructor() {
-
+    constructor($html) {
+        this.$html = $html;
     }
 
     getFeatureDescription = () => {
@@ -8,7 +8,12 @@ export class DashboardRearrangementFeature {
     };
 
     getReasonsForFailure = async () => {
-        return [];
+        const failureReasons = [];
+        if (this.$html.querySelectorAll('div.dashboard-sections-region').length !== 2) {
+            failureReasons.push('Proper dashboard regions to re-arrange dashboard not found');
+        }
+
+        return failureReasons;
     }
 
 
