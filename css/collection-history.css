@@ -1,8 +1,6 @@
-
-
 /* MODAL */
-.modal-window {
-    position: fixed;
+.collection-history-feature .modal-window {
+    position: fixed !important;
     top: 0;
     right: 0;
     bottom: 0;
@@ -15,13 +13,13 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-window:target {
+.collection-history-feature .modal-window:target {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
 }
 
-.modal-window > div {
+.collection-history-feature .modal-window > div {
     background-color: rgb(24, 26, 27);
     box-shadow: rgba(0, 0, 0, 0.5) 0 0 0.75rem;
     border-radius: .375rem;
@@ -34,12 +32,12 @@
     height: 90vh;
 }
 
-.modal-window > div .chart {
+.collection-history-feature .modal-window > div .chart {
     width: 100%;
     height: 100%;
 }
 
-.modal-close {
+.collection-history-feature .modal-close {
     font-weight: 600;
     line-height: 50px;
     position: absolute;

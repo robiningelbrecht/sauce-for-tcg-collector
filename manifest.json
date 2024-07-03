@@ -26,46 +26,13 @@
         "https://www.tcgcollector.com/*"
       ],
       "js": [
-        "dist/all-pages.min.js"
-      ]
-    },
-    {
-      "run_at": "document_end",
-      "matches": [
-        "https://www.tcgcollector.com/dashboard",
-        "https://www.tcgcollector.com/dashboard/intl",
-        "https://www.tcgcollector.com/dashboard/jp"
-      ],
-      "js": [
-        "dist/dashboard-page.min.js"
+        "dist/echarts.min.js",
+        "dist/sauce.min.js"
       ],
       "css": [
-        "dist/css/dashboard.min.css"
-      ]
-    },
-    {
-      "run_at": "document_end",
-      "matches": [
-        "https://www.tcgcollector.com/cards/intl*",
-        "https://www.tcgcollector.com/cards/jp*"
-      ],
-      "js": [
-        "dist/cards-page.min.js"
-      ],
-      "css": [
-        "dist/css/cards.min.css"
-      ]
-    },
-    {
-      "run_at": "document_end",
-      "matches": [
-        "https://www.tcgcollector.com/cards/*/*"
-      ],
-      "js": [
-        "dist/card-page.min.js"
-      ],
-      "css": [
-        "dist/css/card.min.css"
+        "dist/css/collection-history.min.css",
+        "dist/css/print-binder-placeholders.min.css",
+        "dist/css/purchase-price.min.css"
       ]
     }
   ],

@@ -9,7 +9,8 @@ import {QuickAccessLinksFeature} from "./QuickAccessLinksFeature";
 import {Console} from "../Console";
 
 export class FeatureList {
-    constructor() {
+    constructor(featureList) {
+        this.featureList = featureList;
     }
 
     debug = async () => {

@@ -4,10 +4,7 @@ module.exports = {
     mode: 'production',
     context: __dirname,
     entry: {
-        'all-pages.min': './src/all-pages.js',
-        'card-page.min': './src/card-page.js',
-        'cards-page.min': './src/cards-page.js',
-        'dashboard-page.min': './src/dashboard-page.js',
+        'sauce.min': './src/sauce.js',
         'popup/popup.min': './popup/popup.js',
     },
     output: {
