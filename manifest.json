@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Sauce for TCG Collector",
-  "description": "Adds extra functionality to TCG Collector app",
+  "description": "Sauce for TCG Collector is a browser extension that upgrades tcgcollector.com with more features.",
   "version": "1.0",
   "icons": {
     "16": "dist/icons/icon-16.png",

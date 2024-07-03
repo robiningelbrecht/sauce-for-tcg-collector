@@ -1,8 +1,13 @@
 import {PurchasePriceFeature} from "./PurchasePriceFeature";
 import {Settings} from "../Settings";
 import {printListWithLogo} from "../Utils";
+import {NewMenuItemFeature} from "./NewMenuItemFeature";
+import {CollectionHistoryFeature} from "./CollectionHistoryFeature";
+import {DashboardRearrangementFeature} from "./DashboardRearrangementFeature";
+import {PrintBinderPlaceholdersFeature} from "./PrintBinderPlaceholdersFeature";
+import {HidePricesFeature} from "./HidePricesFeature";
 
-export class FeatureList{
+export class FeatureList {
     constructor() {
     }
 
@@ -10,7 +15,12 @@ export class FeatureList{
         const settings = await Settings.load();
 
         const features = [
-            new PurchasePriceFeature(settings)
+            new PurchasePriceFeature(settings),
+            new NewMenuItemFeature(settings),
+            new CollectionHistoryFeature(settings),
+            new DashboardRearrangementFeature(),
+            new PrintBinderPlaceholdersFeature(),
+            new HidePricesFeature(),
         ]
 
         const list = await Promise.all(
