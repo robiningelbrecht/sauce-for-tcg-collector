@@ -11,18 +11,6 @@ export class NewMenuItemFeature {
         return true;
     }
 
-    getReasonsForFailure = async () => {
-        const failureReasons = [];
-        if (document.querySelectorAll('div#navbar-buttons').length === 0) {
-            failureReasons.push('Proper html element to attach menu items to not found ');
-        }
-        if (!this.settings.googleSpreadSheetId) {
-            failureReasons.push('Google Spreadsheet ID not configured');
-        }
-
-        return failureReasons;
-    }
-
     apply = () => {
         const $menu = document.querySelector('div#navbar-buttons');
 

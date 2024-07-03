@@ -14,18 +14,6 @@ export class QuickAccessLinksFeature {
         return currentLocation.pathname.includes('/dashboard');
     }
 
-    getReasonsForFailure = async () => {
-        const failureReasons = [];
-        if (this.$html.querySelectorAll('div.dashboard-section div.list-group').length === 0) {
-            failureReasons.push('Proper html element to attach quick access links to not found');
-        }
-        if (!this.settings.googleSpreadSheetId) {
-            failureReasons.push('Google Spreadsheet ID not configured');
-        }
-
-        return failureReasons;
-    }
-
     apply = async () => {
         const $quickAccessContainer = document.querySelectorAll('div.dashboard-section div.list-group')[1];
         $quickAccessContainer.innerHTML = '<div class="loading-state-loading-spinner-underlay" style="display: flex; justify-content: center"><div class="loading-state-loading-spinner loading-spinner"></div></div>';

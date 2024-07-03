@@ -10,15 +10,6 @@ export class DashboardRearrangementFeature {
         return currentLocation.pathname.includes('/dashboard');
     }
 
-    getReasonsForFailure = async () => {
-        const failureReasons = [];
-        if (document.querySelectorAll('div.dashboard-sections-region').length !== 2) {
-            failureReasons.push('Proper dashboard regions to re-arrange dashboard not found');
-        }
-
-        return failureReasons;
-    }
-
     apply = async () => {
         const [$firstDashboardSectionsRegion, $secondDashboardSectionsRegion] = document.querySelectorAll('div.dashboard-sections-region');
         $firstDashboardSectionsRegion.querySelector('div#dashboard-expansions-completed-section').style.display = 'none';

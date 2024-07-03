@@ -13,10 +13,6 @@ export class HidePricesFeature {
         return true;
     }
 
-    getReasonsForFailure = async () => {
-        return [];
-    }
-
     apply = () => {
         if (!this.settings.hidePrices) {
             return;

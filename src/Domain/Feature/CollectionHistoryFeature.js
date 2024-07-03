@@ -14,15 +14,6 @@ export class CollectionHistoryFeature {
         return currentLocation.pathname.includes('/dashboard');
     }
 
-    getReasonsForFailure = async () => {
-        const failureReasons = [];
-        if (document.querySelectorAll('div#tcg-region-button-group-container').length === 0) {
-            failureReasons.push('Proper html element to attach collection history to not found');
-        }
-
-        return failureReasons;
-    }
-
     apply = async () => {
         const $appendTo = document.querySelector('main#page-content');
         const $modalLink = document.createElement('a');

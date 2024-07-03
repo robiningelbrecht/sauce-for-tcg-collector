@@ -9,6 +9,7 @@ const initPopup = async () => {
 
     $form.elements['googleSpreadSheetId'].value = settings.googleSpreadSheetId || ''
     $form.elements['hidePrices'].checked = settings.hidePrices || false;
+    $form.elements['showCardMarketLinks'].checked = settings.showCardMarketLinks || false;
 
     $form.addEventListener('input', function () {
         $reminder.style.display = 'flex';
@@ -20,6 +21,7 @@ const initPopup = async () => {
 
         settings.googleSpreadSheetId = $form.elements['googleSpreadSheetId'].value;
         settings.hidePrices = $form.elements['hidePrices'].checked;
+        settings.showCardMarketLinks = $form.elements['showCardMarketLinks'].checked;
         await chrome.storage.sync.set({settings: settings});
     });
 };
