@@ -1,18 +1,21 @@
 import {PurchasePriceFeature} from "./PurchasePriceFeature";
 import {Settings} from "../Settings";
-import {printListWithLogo} from "../Utils";
 import {NewMenuItemFeature} from "./NewMenuItemFeature";
 import {CollectionHistoryFeature} from "./CollectionHistoryFeature";
 import {DashboardRearrangementFeature} from "./DashboardRearrangementFeature";
 import {PrintBinderPlaceholdersFeature} from "./PrintBinderPlaceholdersFeature";
 import {HidePricesFeature} from "./HidePricesFeature";
 import {QuickAccessLinksFeature} from "./QuickAccessLinksFeature";
+import {Console} from "../Console";
 
 export class FeatureList {
     constructor() {
     }
 
     debug = async () => {
+        const console = new Console();
+        console.printLogo('Loading debug info...');
+
         const settings = await Settings.load();
         const $cardDetailHtml = await this.loadHtmlNode('https://www.tcgcollector.com/cards/42567');
         const $dashboardHtml = await this.loadHtmlNode('https://www.tcgcollector.com/dashboard');
@@ -35,7 +38,7 @@ export class FeatureList {
             })
         );
 
-        printListWithLogo(list);
+        console.printList(list);
     }
 
     async loadHtmlNode(url) {

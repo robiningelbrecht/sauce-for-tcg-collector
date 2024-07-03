@@ -20,5 +20,6 @@ Feature highlights
 * Hide prices on TCG Collector
 * Manage & display purchases prices for cards
 * Visualize the value of your collection trough time
+* Manage the quick access links on the dashboard
 * Re-arrange dashboard and get rid of clutter
 * Print placeholders for your binders
