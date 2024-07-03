@@ -3,9 +3,22 @@ export class PrintBinderPlaceholdersFeature {
 
     }
 
-    getFeatureDescription = () => {
-        return 'Print placeholders for binders';
+    getId = () => {
+        return 'print-binder-placeholders-feature';
     };
+
+    needsToBeAppliedForLocation = (currentLocation) => {
+        if (currentLocation.pathname === '/cards') {
+            return true;
+        }
+        if (currentLocation.pathname === '/cards/intl') {
+            return true;
+        }
+        if (currentLocation.pathname === '/cards/jp') {
+            return true;
+        }
+        return currentLocation.pathname.includes('/cards/jp/') || currentLocation.pathname.includes('/cards/intl/');
+    }
 
     getReasonsForFailure = async () => {
         const failureReasons = [];

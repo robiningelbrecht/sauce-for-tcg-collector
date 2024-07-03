@@ -6,9 +6,13 @@ export class CollectionHistoryFeature {
         this.currentRegion = currentRegion;
     }
 
-    getFeatureDescription = () => {
-        return 'Collection history';
+    getId = () => {
+        return 'collection-history-feature';
     };
+
+    needsToBeAppliedForLocation = (currentLocation) => {
+        return currentLocation.pathname.includes('/dashboard');
+    }
 
     getReasonsForFailure = async () => {
         const failureReasons = [];

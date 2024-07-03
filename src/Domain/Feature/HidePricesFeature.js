@@ -5,9 +5,13 @@ export class HidePricesFeature {
         this.settings = settings;
     }
 
-    getFeatureDescription = () => {
-        return 'Hide prices';
+    getId = () => {
+        return 'hide-prices-feature';
     };
+
+    needsToBeAppliedForLocation = (currentLocation) => {
+        return true;
+    }
 
     getReasonsForFailure = async () => {
         return [];
@@ -15,7 +19,7 @@ export class HidePricesFeature {
 
     apply = () => {
         if (!this.settings.hidePrices) {
-           return;
+            return;
         }
 
         contains('*', /\$([\d]+\.?\d*)/g).forEach(element => {

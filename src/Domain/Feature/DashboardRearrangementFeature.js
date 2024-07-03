@@ -2,9 +2,13 @@ export class DashboardRearrangementFeature {
     constructor() {
     }
 
-    getFeatureDescription = () => {
-        return 'Dashboard re-arrangement';
+    getId = () => {
+        return 'dashboard-rearrangement-feature';
     };
+
+    needsToBeAppliedForLocation = (currentLocation) => {
+        return currentLocation.pathname.includes('/dashboard');
+    }
 
     getReasonsForFailure = async () => {
         const failureReasons = [];

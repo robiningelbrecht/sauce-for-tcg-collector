@@ -6,9 +6,13 @@ export class QuickAccessLinksFeature {
         this.currentRegion = currentRegion;
     }
 
-    getFeatureDescription = () => {
-        return 'Quick access links';
+    getId = () => {
+        return 'quick-access-links-feature';
     };
+
+    needsToBeAppliedForLocation = (currentLocation) => {
+        return currentLocation.pathname.includes('/dashboard');
+    }
 
     getReasonsForFailure = async () => {
         const failureReasons = [];

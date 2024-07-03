@@ -1,6 +1,4 @@
 import {Settings} from "./Domain/Settings";
-import {FeatureList} from "./Domain/Feature/FeatureList";
-import {Page} from "./Domain/Page";
 import {NewMenuItemFeature} from "./Domain/Feature/NewMenuItemFeature";
 import {HidePricesFeature} from "./Domain/Feature/HidePricesFeature";
 import {CollectionHistoryFeature} from "./Domain/Feature/CollectionHistoryFeature";
@@ -9,6 +7,7 @@ import {DashboardRearrangementFeature} from "./Domain/Feature/DashboardRearrange
 import {QuickAccessLinksFeature} from "./Domain/Feature/QuickAccessLinksFeature";
 import {PurchasePriceFeature} from "./Domain/Feature/PurchasePriceFeature";
 import {PrintBinderPlaceholdersFeature} from "./Domain/Feature/PrintBinderPlaceholdersFeature";
+import {consolePrintLogo} from "./Domain/Utils";
 
 const settings = await Settings.load();
 const currentRegion = Region.fromCurrentUrl();
@@ -22,45 +21,28 @@ const quickAccessLinksFeature = new QuickAccessLinksFeature(settings, currentReg
 const purchasePriceFeature = new PurchasePriceFeature(settings);
 const printBinderPlaceholdersFeature = new PrintBinderPlaceholdersFeature();
 
-if (settings.enableDebugMode) {
-    (new FeatureList([
-        newMenuItemFeature,
-        hidePricesFeature,
-        collectionHistoryFeature,
-        dashboardRearrangementFeature,
-        quickAccessLinksFeature,
-        purchasePriceFeature,
-        printBinderPlaceholdersFeature
-    ])).debug();
-}
+const featureList = [
+    newMenuItemFeature,
+    hidePricesFeature,
+    collectionHistoryFeature,
+    dashboardRearrangementFeature,
+    quickAccessLinksFeature,
+    purchasePriceFeature,
+    printBinderPlaceholdersFeature
+];
 
 if (!settings.googleSpreadSheetId) {
     throw new Error('Google Spreadsheet ID not configured');
 }
 
 const $body = document.body;
-const page = new Page(currentLocation);
+for (const feature of featureList) {
+    $body.classList.add(feature.getId());
 
-newMenuItemFeature.apply();
-hidePricesFeature.apply();
-
-if (page.needsCollectionHistoryFeature()) {
-    $body.classList.add('collection-history-feature');
-    collectionHistoryFeature.apply();
-}
-if (page.needsDashboardRearrangementFeature()) {
-    dashboardRearrangementFeature.apply();
-}
-if (page.needsQuickAccessLinksFeature()) {
-    quickAccessLinksFeature.apply();
-}
-if (page.needsPurchasePriceFeature()) {
-    $body.classList.add('purchase-price-feature');
-    purchasePriceFeature.apply();
-}
-if (page.needsPrintBinderPlaceholdersFeature()) {
-    $body.classList.add('print-binder-placeholders-feature');
-    printBinderPlaceholdersFeature.apply();
+    if (feature.needsToBeAppliedForLocation(currentLocation)) {
+        consolePrintLogo('Applying that sweet sauce 🥫');
+        feature.apply();
+    }
 }
 
 window.addEventListener('keydown', (e) => {

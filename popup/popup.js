@@ -9,7 +9,6 @@ const initPopup = async () => {
 
     $form.elements['googleSpreadSheetId'].value = settings.googleSpreadSheetId || ''
     $form.elements['hidePrices'].checked = settings.hidePrices || false;
-    $form.elements['enableDebugMode'].checked = settings.enableDebugMode || false;
 
     $form.addEventListener('input', function () {
         $reminder.style.display = 'flex';
@@ -21,7 +20,6 @@ const initPopup = async () => {
 
         settings.googleSpreadSheetId = $form.elements['googleSpreadSheetId'].value;
         settings.hidePrices = $form.elements['hidePrices'].checked;
-        settings.enableDebugMode = $form.elements['enableDebugMode'].checked;
         await chrome.storage.sync.set({settings: settings});
     });
 };

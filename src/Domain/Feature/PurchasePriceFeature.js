@@ -6,9 +6,14 @@ export class PurchasePriceFeature {
         this.$html = $html;
     }
 
-    getFeatureDescription = () => {
-        return 'Purchase prices for cards';
+    getId = () => {
+        return 'purchase-price-feature';
     };
+
+    needsToBeAppliedForLocation = (currentLocation) => {
+        const regex = /cards\/[\d]+\/[\S]+/mi;
+        return regex.test(currentLocation.pathname);
+    }
 
     getReasonsForFailure = async () => {
         const failureReasons = [];

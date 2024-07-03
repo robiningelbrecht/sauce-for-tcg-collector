@@ -3,9 +3,13 @@ export class NewMenuItemFeature {
         this.settings = settings;
     }
 
-    getFeatureDescription = () => {
-        return 'New menu item';
+    getId = () => {
+        return 'new-menu-item-feature';
     };
+
+    needsToBeAppliedForLocation = (currentLocation) => {
+        return true;
+    }
 
     getReasonsForFailure = async () => {
         const failureReasons = [];
