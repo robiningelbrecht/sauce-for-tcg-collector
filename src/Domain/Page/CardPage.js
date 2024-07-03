@@ -20,7 +20,7 @@ export class CardPage {
         const parsedRows = await googleSheet.parse();
         const matchedRows = parsedRows.filter((row) => row.cardId === this.cardId);
         if (matchedRows.length === 0) {
-            return;
+            return $wrapperDiv;
         }
 
         matchedRows.forEach(function (row) {

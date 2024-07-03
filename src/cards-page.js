@@ -1,4 +1,4 @@
-import {ExpansionPage} from "./Domain/Page/ExpansionPage";
+import {CardsPage} from "./Domain/Page/CardsPage";
 
 const bodyHtml = document.body.innerHTML;
 const regex = /window.tcgcollector[\s]*=[\s]*{[\s]*appState:(.*),[\s]*}/mi;
@@ -7,8 +7,8 @@ if (!regex.test(bodyHtml)) {
 }
 
 const appState = JSON.parse(document.body.innerHTML.match(regex)[1]);
-const expansionPage = new ExpansionPage(
+const cardsPage = new CardsPage(
     document.querySelector('main#page-content'),
     appState
 );
-document.body.appendChild(expansionPage.buildPrintPlaceholders());
+document.body.appendChild(cardsPage.buildPrintPlaceholders());

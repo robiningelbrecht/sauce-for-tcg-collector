@@ -1,4 +1,4 @@
-export class ExpansionPage{
+export class CardsPage {
     constructor($element, appState) {
         this.$element = $element;
         this.appState = appState;

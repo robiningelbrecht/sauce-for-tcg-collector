@@ -46,14 +46,14 @@
     {
       "run_at": "document_end",
       "matches": [
-        "https://www.tcgcollector.com/cards/intl/*",
-        "https://www.tcgcollector.com/cards/jp/*"
+        "https://www.tcgcollector.com/cards/intl*",
+        "https://www.tcgcollector.com/cards/jp*"
       ],
       "js": [
-        "dist/expansion-page.min.js"
+        "dist/cards-page.min.js"
       ],
       "css": [
-        "dist/css/expansion.min.css"
+        "dist/css/cards.min.css"
       ]
     },
     {
