@@ -10,14 +10,10 @@ export class HidePricesFeature {
     };
 
     needsToBeAppliedForLocation = (currentLocation) => {
-        return true;
+        return this.settings.hidePrices;
     }
 
     apply = () => {
-        if (!this.settings.hidePrices) {
-            return;
-        }
-
         contains('*', /\$([\d]+\.?\d*)/g).forEach(element => {
             element.innerHTML = element.innerHTML.replace(/\$([\d]+\.?\d*)/g, '$—')
         });

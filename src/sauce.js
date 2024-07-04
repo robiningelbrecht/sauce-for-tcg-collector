@@ -8,10 +8,15 @@ import {QuickAccessLinksFeature} from "./Domain/Feature/QuickAccessLinksFeature"
 import {PurchasePriceFeature} from "./Domain/Feature/PurchasePriceFeature";
 import {PrintBinderPlaceholdersFeature} from "./Domain/Feature/PrintBinderPlaceholdersFeature";
 import {consolePrintLogo} from "./Domain/Utils";
+import {IncludeMarketPlaceLinksFeature} from "./Domain/Feature/IncludeMarketPlaceLinksFeature";
 
 const settings = await Settings.load();
 const currentRegion = Region.fromCurrentUrl();
 const currentLocation = window.location;
+
+if (!settings.googleSpreadSheetId) {
+    throw new Error('Google Spreadsheet ID not configured');
+}
 
 const newMenuItemFeature = new NewMenuItemFeature(settings);
 const hidePricesFeature = new HidePricesFeature(settings);
@@ -20,6 +25,7 @@ const dashboardRearrangementFeature = new DashboardRearrangementFeature();
 const quickAccessLinksFeature = new QuickAccessLinksFeature(settings, currentRegion);
 const purchasePriceFeature = new PurchasePriceFeature(settings);
 const printBinderPlaceholdersFeature = new PrintBinderPlaceholdersFeature();
+const includeMarketPlaceLinksFeature = new IncludeMarketPlaceLinksFeature(settings);
 
 const featureList = [
     newMenuItemFeature,
@@ -28,19 +34,15 @@ const featureList = [
     dashboardRearrangementFeature,
     quickAccessLinksFeature,
     purchasePriceFeature,
-    printBinderPlaceholdersFeature
+    printBinderPlaceholdersFeature,
+    includeMarketPlaceLinksFeature
 ];
 
-if (!settings.googleSpreadSheetId) {
-    throw new Error('Google Spreadsheet ID not configured');
-}
-
+consolePrintLogo('Applying that sweet sauce 🥫');
 const $body = document.body;
 for (const feature of featureList) {
-    $body.classList.add(feature.getId());
-
     if (feature.needsToBeAppliedForLocation(currentLocation)) {
-        consolePrintLogo('Applying that sweet sauce 🥫');
+        $body.classList.add(feature.getId());
         feature.apply();
     }
 }

@@ -8,7 +8,7 @@ export class NewMenuItemFeature {
     };
 
     needsToBeAppliedForLocation = (currentLocation) => {
-        return true;
+        return document.querySelectorAll('div#navbar-buttons').length > 0;
     }
 
     apply = () => {
