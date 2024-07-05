@@ -1,4 +1,4 @@
-div.tcg-collector-card-prices > div {
+body.purchase-price-feature div.tcg-collector-card-prices > div {
     display: flex;
     gap: 10px 15px;
     justify-content: space-between;
@@ -7,25 +7,25 @@ div.tcg-collector-card-prices > div {
     border-bottom: 1px solid;
 }
 
-html[data-darkreader-scheme="dark"] div.tcg-collector-card-prices > div {
+body.purchase-price-feature html[data-darkreader-scheme="dark"] div.tcg-collector-card-prices > div {
     border-bottom: 1px solid rgb(53, 58, 60);
 }
 
-html[data-darkreader-scheme="dark"] .card-image-grid-item-info-overlay-text {
+body.purchase-price-feature html[data-darkreader-scheme="dark"] .card-image-grid-item-info-overlay-text {
     border-right-color: rgb(48, 52, 54);
     color: rgb(166, 158, 146);
     background-color: rgb(24, 26, 27);
     border-top-color: rgb(48, 52, 54);
 }
 
-div.tcg-collector-card-prices-wrapper .title {
+body.purchase-price-feature div.tcg-collector-card-prices-wrapper .title {
     font-size: 1rem;
     font-weight: 600;
     margin-top: .5rem;
     text-transform: none;
 }
 
-div.tcg-collector-card-prices-wrapper .error {
+body.purchase-price-feature div.tcg-collector-card-prices-wrapper .error {
     background-color: #ffebec;
     border: 0 solid #e13238;
     border-left-width: 5px;

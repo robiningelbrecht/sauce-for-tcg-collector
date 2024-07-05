@@ -30,10 +30,7 @@
         "dist/sauce.min.js"
       ],
       "css": [
-        "dist/css/collection-history.min.css",
-        "dist/css/print-binder-placeholders.min.css",
-        "dist/css/purchase-price.min.css",
-        "dist/css/include-market-place-links.min.css"
+        "dist/css/style.min.css"
       ]
     }
   ],
