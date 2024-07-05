@@ -30,7 +30,7 @@
         "dist/sauce.min.js"
       ],
       "css": [
-        "dist/css/style.min.css"
+        "dist/sauce.min.css"
       ]
     }
   ],

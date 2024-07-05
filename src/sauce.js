@@ -1,3 +1,4 @@
+import './../scss/sauce.scss';
 import {Settings} from "./Domain/Settings";
 import {NewMenuItemFeature} from "./Domain/Feature/NewMenuItemFeature";
 import {HidePricesFeature} from "./Domain/Feature/HidePricesFeature";
