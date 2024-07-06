@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="dist/icons/logo.png" alt="Sauce for TCG Collector">
+	<img src="dist/icons/readme.png" alt="Sauce for TCG Collector">
 </p>
 
 ---
@@ -19,6 +19,7 @@ Feature highlights
 
 * Hide prices on TCG Collector
 * Manage & display purchases prices for cards
+* Links to slab certifications
 * Visualize the value of your collection trough time
 * Manage the quick access links on the dashboard
 * Re-arrange dashboard and get rid of clutter
