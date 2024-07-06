@@ -120,13 +120,36 @@ body.purchase-price-feature {
       text-transform: none;
     }
 
-    div.tcg-collector-card-prices > div {
+    div.tcg-collector-card-prices > * {
       display: flex;
       gap: 10px 15px;
       justify-content: space-between;
       align-items: center;
       padding: 10px 0;
       border-bottom: 1px solid;
+
+      div.grading {
+        display: flex;
+        align-items: center;
+        column-gap: 2px;
+
+        a.icon {
+          display: block;
+          width: 35px;
+          text-indent: -99999px;
+          background-position: center;
+          background-repeat: no-repeat;
+
+          &.psa {
+            background-size: auto 12px;
+            background-image: url('chrome-extension://__MSG_@@extension_id__/dist/icons/psa.png');
+          }
+          &.cgc {
+            background-size: 22px auto;
+            background-image: url('chrome-extension://__MSG_@@extension_id__/dist/icons/cgc.png');
+          }
+        }
+      }
     }
   }
 }

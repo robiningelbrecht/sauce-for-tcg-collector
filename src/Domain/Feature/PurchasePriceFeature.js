@@ -1,4 +1,5 @@
 import {GoogleSheet} from "../GoogleSheet";
+import {GradingCompany} from "../GradingCompany";
 
 export class PurchasePriceFeature {
     constructor(settings) {
@@ -34,7 +35,21 @@ export class PurchasePriceFeature {
 
         matchedRows.forEach(function (row) {
             const $priceRowDiv = document.createElement("div");
-            $priceRowDiv.innerHTML = `<div>${row.purchaseDate}</div><div>${row.price}</div><div title="${row.gradingCompany || row.type}">${row.type}</div>`
+            $priceRowDiv.innerHTML = `<div>${row.purchaseDate}</div><div>${row.price}</div>`;
+
+            try {
+                const gradingCompany = new GradingCompany(row.gradingCompany);
+                $priceRowDiv.innerHTML += `
+<div class="grading">
+    <span>${row.type}</span>
+    <a href="${gradingCompany.getGetCertUrl(row.certNumber)}" target="_blank" title="${gradingCompany.getLabel()}" class="icon ${gradingCompany.getName()}">
+        ${gradingCompany.getLabel()}
+    </a>
+</div>`;
+            } catch (e) {
+                $priceRowDiv.innerHTML += `<div>${row.type}</div>`;
+            }
+
             $priceRowsDiv.appendChild($priceRowDiv);
         });
 

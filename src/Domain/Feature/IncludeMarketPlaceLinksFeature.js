@@ -28,7 +28,7 @@ export class IncludeMarketPlaceLinksFeature {
 
     apply = () => {
         const $cards = document.querySelectorAll('div#card-image-grid div.card-image-grid-item');
-        const cardMarketIcon = chrome.runtime.getURL('dist/icons/card-market.jpg');
+        const cardMarketIconUrl = chrome.runtime.getURL('dist/icons/card-market.jpg');
         const expansionCode = document.querySelector('span#card-search-result-title-expansion-code')?.innerText || '';
 
         $cards.forEach($card => {
@@ -41,7 +41,7 @@ export class IncludeMarketPlaceLinksFeature {
             $marketPlaceLink.setAttribute('href', `https://www.cardmarket.com/en/Pokemon/Products/Search?searchString=${cardName}+${cardNumber}+${expansionCode}`);
             $marketPlaceLink.setAttribute('title', 'Navigate to cardmarket.com');
             $marketPlaceLink.setAttribute('target', '_blank');
-            $marketPlaceLink.innerHTML = `<img src="${cardMarketIcon}" alt="Card market" />`;
+            $marketPlaceLink.innerHTML = `<img src="${cardMarketIconUrl}" alt="Card market" />`;
 
             $card.querySelector('div.card-image-controls-item').appendChild($marketPlaceLink);
         });
