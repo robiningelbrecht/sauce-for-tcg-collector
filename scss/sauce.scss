@@ -142,15 +142,15 @@ body.purchase-price-feature {
 
           &.psa {
             background-size: auto 12px;
-            background-image: url('chrome-extension://__MSG_@@extension_id__/dist/icons/psa.png');
+            background-image: url('chrome-extension://__MSG_@@extension_id__/dist/assets/psa.png');
           }
           &.cgc {
             background-size: 22px auto;
-            background-image: url('chrome-extension://__MSG_@@extension_id__/dist/icons/cgc.png');
+            background-image: url('chrome-extension://__MSG_@@extension_id__/dist/assets/cgc.png');
           }
           &.ucg {
             background-size: 22px auto;
-            background-image: url('chrome-extension://__MSG_@@extension_id__/dist/icons/ucg.png');
+            background-image: url('chrome-extension://__MSG_@@extension_id__/dist/assets/ucg.png');
           }
         }
       }

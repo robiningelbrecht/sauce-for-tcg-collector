@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="dist/icons/readme.png" alt="Sauce for TCG Collector">
+	<img src="dist/assets/readme-logo.png" alt="Sauce for TCG Collector">
 </p>
 
 ---
@@ -13,6 +13,8 @@ Installation
 - Enable developer mode in Chrome (or any Chromium based browser)
 - Enable this extension
 - Reference your Google spreadsheet ID in the options
+
+![Settings!](dist/assets/settings.png)
 
 Feature highlights
 --------

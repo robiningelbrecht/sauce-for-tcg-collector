@@ -28,7 +28,7 @@ export class IncludeMarketPlaceLinksFeature {
 
     apply = () => {
         const $cards = document.querySelectorAll('div#card-image-grid div.card-image-grid-item');
-        const cardMarketIconUrl = chrome.runtime.getURL('dist/icons/card-market.jpg');
+        const cardMarketIconUrl = chrome.runtime.getURL('dist/assets/card-market.jpg');
         const expansionCode = document.querySelector('span#card-search-result-title-expansion-code')?.innerText || '';
 
         $cards.forEach($card => {
