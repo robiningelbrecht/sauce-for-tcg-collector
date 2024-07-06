@@ -133,7 +133,7 @@ body.purchase-price-feature {
         align-items: center;
         column-gap: 2px;
 
-        a.icon {
+        .icon {
           display: block;
           width: 35px;
           text-indent: -99999px;
@@ -147,6 +147,10 @@ body.purchase-price-feature {
           &.cgc {
             background-size: 22px auto;
             background-image: url('chrome-extension://__MSG_@@extension_id__/dist/icons/cgc.png');
+          }
+          &.ucg {
+            background-size: 22px auto;
+            background-image: url('chrome-extension://__MSG_@@extension_id__/dist/icons/ucg.png');
           }
         }
       }

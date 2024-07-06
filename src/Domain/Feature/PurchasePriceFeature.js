@@ -39,13 +39,23 @@ export class PurchasePriceFeature {
 
             try {
                 const gradingCompany = new GradingCompany(row.gradingCompany);
-                $priceRowDiv.innerHTML += `
+                if(row.certNumber){
+                    $priceRowDiv.innerHTML += `
 <div class="grading">
     <span>${row.type}</span>
     <a href="${gradingCompany.getGetCertUrl(row.certNumber)}" target="_blank" title="${gradingCompany.getLabel()}" class="icon ${gradingCompany.getName()}">
         ${gradingCompany.getLabel()}
     </a>
 </div>`;
+                }else{
+                    $priceRowDiv.innerHTML += `
+<div class="grading">
+    <span>${row.type}</span>
+    <span title="${gradingCompany.getLabel()}" class="icon ${gradingCompany.getName()}">
+        ${gradingCompany.getLabel()}
+    </span>
+</div>`;
+                }
             } catch (e) {
                 $priceRowDiv.innerHTML += `<div>${row.type}</div>`;
             }
