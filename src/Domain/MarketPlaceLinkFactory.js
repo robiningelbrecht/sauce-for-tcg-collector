@@ -18,21 +18,8 @@ export class MarketPlaceLinkFactory {
         if (this.settings[SETTING_MARKET_PLACE_LINKS] === 'cardMarket') {
             const cardNumber = parseInt($card.querySelector('span.card-image-grid-item-info-overlay-text-part').innerText.split('/')[0].replace(/\D/g, "").trim());
 
-            const query = {};
-            if (this.settings.minCondition) {
-                query.minCondition = this.settings.minCondition;
-            }
-            if (this.settings.cardMarketCardLanguages) {
-                query.language = this.settings.cardMarketCardLanguages;
-            }
-            if (this.settings.cardMarketSellerLocations) {
-                query.sellerCountry = this.settings.cardMarketSellerLocations;
-            }
-
-            // return `${su.api_url}/sch/i.html?_from=R40&_nkw=${name}+${number}&_sacat=0&rt=nc&LH_${listing_types[lt.listing_type]}=1&_sop=${sort_orders[so.sort_order]}`
-
             $marketPlaceLink.classList.add('market-place-link');
-            $marketPlaceLink.setAttribute('href', `https://www.cardmarket.com/en/Pokemon/Products/Search?searchString=${cardName}+${cardNumber}+${expansionCode}&${(new URLSearchParams(query)).toString()}`);
+            $marketPlaceLink.setAttribute('href', `https://www.cardmarket.com/en/Pokemon/Products/Search?searchString=${cardName}+${cardNumber}+${expansionCode}`);
             $marketPlaceLink.setAttribute('title', 'Find this card on cardmarket.com');
             $marketPlaceLink.setAttribute('target', '_blank');
 

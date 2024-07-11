@@ -6,6 +6,7 @@ module.exports = {
     context: __dirname,
     entry: {
         'sauce.min': './src/sauce.js',
+        'gravy.min': './src/gravy.js',
         'popup/popup.min': './popup/popup.js',
     },
     output: {

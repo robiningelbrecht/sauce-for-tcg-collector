@@ -32,6 +32,15 @@
       "css": [
         "dist/sauce.min.css"
       ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://www.cardmarket.com/*/Pokemon/Products/Singles/*"
+      ],
+      "js": [
+        "dist/gravy.min.js"
+      ]
     }
   ],
   "web_accessible_resources": [
