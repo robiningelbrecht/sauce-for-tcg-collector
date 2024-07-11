@@ -15,6 +15,15 @@ export class CollectionHistoryFeature {
     }
 
     apply = async () => {
+        const googleSheetCollectionHistory = new GoogleSheet(
+            this.settings.googleSpreadSheetId,
+            'Collection history',
+        );
+        const history = this.currentRegion.filterRows(await googleSheetCollectionHistory.parse(), true);
+        if (history.length === 0) {
+            return;
+        }
+
         const $appendTo = document.querySelector('main#page-content');
         const $modalLink = document.createElement('a');
         $modalLink.setAttribute('href', '#modal');
@@ -37,13 +46,7 @@ export class CollectionHistoryFeature {
 
         $appendTo.appendChild($modal);
 
-        const googleSheetCollectionHistory = new GoogleSheet(
-            this.settings.googleSpreadSheetId,
-            'Collection history',
-        );
-
         const myChart = echarts.init($modal.querySelector(".modal-content .chart"));
-        const history = this.currentRegion.filterRows(await googleSheetCollectionHistory.parse(), true);
 
         // Sort history ASC.
         history.sort(function (a, b) {
@@ -105,50 +108,9 @@ export class CollectionHistoryFeature {
                     }
                 },
             ],
-            graphic: [
-                {
-                    type: 'group',
-                    left: '15%',
-                    top: 70,
-                    children: [
-                        {
-                            type: 'rect',
-                            z: 100,
-                            left: 'center',
-                            top: 'middle',
-                            shape: {
-                                width: 180,
-                                height: 90
-                            },
-                            style: {
-                                fill: 'transparent',
-                                stroke: '#d8d4cf',
-                                lineWidth: 1,
-                                shadowBlur: 8,
-                                shadowOffsetX: 3,
-                                shadowOffsetY: 3,
-                                shadowColor: 'rgba(0,0,0,0.2)'
-                            }
-                        },
-                        {
-                            type: 'text',
-                            z: 100,
-                            left: 'center',
-                            top: 'middle',
-                            style: {
-                                width: 170,
-                                fill: '#d8d4cf',
-                                overflow: 'break',
-                                text: `Total value: $${currentCollectionState.totalValue}\nTotal cards: ${currentCollectionState.totalCards}\nUnqiue cards: ${currentCollectionState.uniqueCards}\nUnqiue variants: ${currentCollectionState.uniqueVariants}`,
-                                font: '14px "Titillium Web", sans-serif'
-                            }
-                        }
-                    ]
-                }
-            ],
             series: [
                 {
-                    name: 'Unique cards',
+                    name: `Unique cards(${currentCollectionState.uniqueCards})`,
                     type: 'line',
                     data: history.map(row => [
                         row.date,
@@ -156,7 +118,7 @@ export class CollectionHistoryFeature {
                     ])
                 },
                 {
-                    name: 'Unique variants',
+                    name: `Unique variants (${currentCollectionState.uniqueVariants})`,
                     type: 'line',
                     data: history.map(row => [
                         row.date,
@@ -164,7 +126,7 @@ export class CollectionHistoryFeature {
                     ])
                 },
                 {
-                    name: 'Total cards',
+                    name: `Total cards ($${currentCollectionState.totalCards})`,
                     type: 'line',
                     data: history.map(row => [
                         row.date,
@@ -172,7 +134,7 @@ export class CollectionHistoryFeature {
                     ])
                 },
                 {
-                    name: 'Total value',
+                    name: `Total value ($${currentCollectionState.totalValue})`,
                     type: 'line',
                     tooltip: {
                         valueFormatter: (value) => '$' + value
