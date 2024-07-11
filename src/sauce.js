@@ -9,7 +9,7 @@ import {QuickAccessLinksFeature} from "./Domain/Feature/QuickAccessLinksFeature"
 import {PurchasePriceFeature} from "./Domain/Feature/PurchasePriceFeature";
 import {PrintBinderPlaceholdersFeature} from "./Domain/Feature/PrintBinderPlaceholdersFeature";
 import {consolePrintLogo} from "./Domain/Utils";
-import {IncludeMarketPlaceLinksFeature} from "./Domain/Feature/IncludeMarketPlaceLinksFeature";
+import {MarketPlaceLinksFeature} from "./Domain/Feature/marketPlaceLinksFeature";
 
 const settings = await Settings.load();
 const currentRegion = Region.fromCurrentUrl();
@@ -26,7 +26,7 @@ const dashboardRearrangementFeature = new DashboardRearrangementFeature();
 const quickAccessLinksFeature = new QuickAccessLinksFeature(settings, currentRegion);
 const purchasePriceFeature = new PurchasePriceFeature(settings);
 const printBinderPlaceholdersFeature = new PrintBinderPlaceholdersFeature();
-const includeMarketPlaceLinksFeature = new IncludeMarketPlaceLinksFeature(settings);
+const includeMarketPlaceLinksFeature = new MarketPlaceLinksFeature(settings);
 
 const featureList = [
     newMenuItemFeature,

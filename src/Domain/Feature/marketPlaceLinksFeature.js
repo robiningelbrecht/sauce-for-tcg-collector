@@ -1,12 +1,12 @@
 import {contains} from "../Utils";
 
-export class IncludeMarketPlaceLinksFeature {
+export class MarketPlaceLinksFeature {
     constructor(settings) {
         this.settings = settings;
     }
 
     getId = () => {
-        return 'include-market-place-links-feature';
+        return 'market-place-links-feature';
     };
 
     needsToBeAppliedForLocation = (currentLocation) => {
@@ -41,8 +41,19 @@ export class IncludeMarketPlaceLinksFeature {
 
             const $marketPlaceLink = document.createElement('a');
 
+            const query = {};
+            if(this.settings.minCondition){
+                query.minCondition = this.settings.minCondition;
+            }
+            if(this.settings.cardMarketCardLanguages){
+               query.language = this.settings.cardMarketCardLanguages;
+            }
+            if(this.settings.cardMarketSellerLocations){
+                query.sellerCountry = this.settings.cardMarketSellerLocations;
+            }
+
             $marketPlaceLink.classList.add('market-place-link');
-            $marketPlaceLink.setAttribute('href', `https://www.cardmarket.com/en/Pokemon/Products/Search?searchString=${cardName}+${cardNumber}+${expansionCode}`);
+            $marketPlaceLink.setAttribute('href', `https://www.cardmarket.com/en/Pokemon/Products/Search?searchString=${cardName}+${cardNumber}+${expansionCode}&${(new URLSearchParams(query)).toString()}`);
             $marketPlaceLink.setAttribute('title', 'Navigate to cardmarket.com');
             $marketPlaceLink.setAttribute('target', '_blank');
             $marketPlaceLink.innerHTML = `<img src="${cardMarketIconUrl}" alt="Card market" />`;
