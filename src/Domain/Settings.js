@@ -4,6 +4,7 @@ export const SETTING_MARKET_PLACE_LINKS = 'marketPlaceLinks';
 export const SETTING_CARD_MARKET_CARD_LANGUAGES = 'cardMarketCardLanguages';
 export const SETTING_CARD_MARKET_SELLER_LOCATIONS = 'cardMarketSellerLocations';
 export const SETTING_CARD_MARKET_MIN_CONDITION = 'cardMarketMinCondition';
+export const SETTING_EBAY_URL = 'ebayUrl';
 
 export class Settings {
     static load = async () => {
@@ -18,6 +19,7 @@ export class Settings {
             settings[SETTING_CARD_MARKET_CARD_LANGUAGES] = [];
             settings[SETTING_CARD_MARKET_SELLER_LOCATIONS] = [];
             settings[SETTING_CARD_MARKET_MIN_CONDITION] = 2;
+            settings[SETTING_EBAY_URL] = '';
         }
 
         return settings;

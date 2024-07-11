@@ -52,9 +52,11 @@ export class MarketPlaceLinksFeature {
                 query.sellerCountry = this.settings.cardMarketSellerLocations;
             }
 
+            // return `${su.api_url}/sch/i.html?_from=R40&_nkw=${name}+${number}&_sacat=0&rt=nc&LH_${listing_types[lt.listing_type]}=1&_sop=${sort_orders[so.sort_order]}`
+
             $marketPlaceLink.classList.add('market-place-link');
             $marketPlaceLink.setAttribute('href', `https://www.cardmarket.com/en/Pokemon/Products/Search?searchString=${cardName}+${cardNumber}+${expansionCode}&${(new URLSearchParams(query)).toString()}`);
-            $marketPlaceLink.setAttribute('title', 'Navigate to cardmarket.com');
+            $marketPlaceLink.setAttribute('title', 'Find this card on cardmarket.com');
             $marketPlaceLink.setAttribute('target', '_blank');
             $marketPlaceLink.innerHTML = `<img src="${cardMarketIconUrl}" alt="Card market" />`;
 

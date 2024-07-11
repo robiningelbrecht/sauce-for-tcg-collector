@@ -1,6 +1,6 @@
 import {
     SETTING_CARD_MARKET_CARD_LANGUAGES,
-    SETTING_CARD_MARKET_MIN_CONDITION, SETTING_CARD_MARKET_SELLER_LOCATIONS,
+    SETTING_CARD_MARKET_MIN_CONDITION, SETTING_CARD_MARKET_SELLER_LOCATIONS, SETTING_EBAY_URL,
     SETTING_GOOGLE_SPREADSHEET_ID,
     SETTING_HIDE_PRICES,
     SETTING_MARKET_PLACE_LINKS,
@@ -15,6 +15,7 @@ const initPopup = async () => {
     $form.elements[SETTING_HIDE_PRICES].checked = settings[SETTING_HIDE_PRICES];
     $form.elements[SETTING_MARKET_PLACE_LINKS].value = settings[SETTING_MARKET_PLACE_LINKS];
     $form.elements[SETTING_CARD_MARKET_MIN_CONDITION].value = settings[SETTING_CARD_MARKET_MIN_CONDITION];
+    $form.elements[SETTING_EBAY_URL].value = settings[SETTING_EBAY_URL];
 
     Settings.getPropertiesWithMultipleValues().forEach(prop => {
         settings[prop].forEach(value => {

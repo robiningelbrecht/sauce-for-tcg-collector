@@ -108,10 +108,37 @@
                 </li>
                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                     <div class="flex items-center ps-3">
-                        <input disabled name="marketPlaceLinks" id="market-place-ebay-radio" type="radio" value="ebay"
+                        <input data-target-toggle="ebayOptions" name="marketPlaceLinks" id="market-place-ebay-radio" type="radio" value="ebay"
                                class="w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-400 dark:focus:ring-orange-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                         <label for="market-place-ebay-radio"
-                               class="w-full py-3 ms-2 text-sm font-medium text-gray-400 dark:text-gray-300">Add links to ebay</label>
+                               class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Add links to ebay</label>
+                    </div>
+                    <div data-toggle-id="ebayOptions" class="hidden px-3 pb-3 gap-x-4 justify-between">
+                        <div>
+                            <label for="ebayUrl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Ebay URL</label>
+                            <input type="url" id="ebayUrl" name="ebayUrl" class="px-2 py-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Eg: https://www.ebay.co.uk/</p>
+                        </div>
+                        <div>
+                            <label for="ebayListingType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Listing type</label>
+                            <select id="ebayListingType" name="ebayListingType" class="px-2 py-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="all">All</option>
+                                <option value="accepts_offers">Accepts Offers</option>
+                                <option value="auction">Auction</option>
+                                <option value="buy_it_now">Buy It Now</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="ebaySortBy" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sort by</label>
+                            <select id="ebaySortBy" name="ebaySortBy" class="px-2 py-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="best_match">Best Match</option>
+                                <option value="lowest_price">Lowest Price</option>
+                                <option value="highest_price">Highest Price</option>
+                                <option value="newly_listed">Newly Listed</option>
+                                <option value="ending_soonest">Ending Soonest</option>
+                                <option value="nearest_first">Newest First</option>
+                            </select>
+                        </div>
                     </div>
                 </li>
                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
@@ -123,8 +150,7 @@
                     </div>
                 </li>
             </ul>
-            <p class="text-xs text-gray-500 dark:text-gray-400">Adds a little icon to each card linking to a
-                cardmarket.com or ebay search.</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Adds a little icon to each card linking to a cardmarket.com or ebay search.</p>
         </div>
         <div>
             <div class="flex items-center">
