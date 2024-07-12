@@ -13,6 +13,7 @@ import {
 const initPopup = async () => {
     const settings = await Settings.fromSyncStorage();
     const $form = document.querySelector("form");
+    const $submitButton = $form.querySelector('button');
 
     $form.elements[SETTING_GOOGLE_SPREADSHEET_ID].value = settings.getGoogleSpreadSheetId();
     $form.elements[SETTING_HIDE_PRICES].checked = settings.hidePrices();
@@ -35,6 +36,7 @@ const initPopup = async () => {
 
     $form.addEventListener('input', function (event) {
         const el = event.target;
+        $submitButton.disabled = false;
 
         if (el.hasAttribute('data-target-toggle')) {
             $form.querySelectorAll('[data-toggle-id]').forEach(function (el) {
@@ -49,6 +51,7 @@ const initPopup = async () => {
 
     $form.addEventListener("submit", async (e) => {
         e.preventDefault();
+        $submitButton.disabled = true;
         const formData = new FormData($form);
         await Settings.save(formData);
 
