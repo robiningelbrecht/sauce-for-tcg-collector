@@ -26,4 +26,4 @@ Feature highlights
 * Manage the quick access links on the dashboard
 * Re-arrange dashboard and get rid of clutter
 * Print placeholders for your binders
-* Add [cardmarket.com](https://www.cardmarket.com) links to card overviews
+* Add [cardmarket.com](https://www.cardmarket.com) or Ebay links to card overviews

@@ -19,6 +19,9 @@ if (!settings.getGoogleSpreadSheetId()) {
     throw new Error('Google Spreadsheet ID not configured');
 }
 
+// Update navbar logo and start adding the sauce.
+document.querySelector('a.navbar-logo-link img').setAttribute('src', chrome.runtime.getURL('dist/assets/tcgc-logo.png'));
+
 const newMenuItemFeature = new NewMenuItemFeature(settings);
 const hidePricesFeature = new HidePricesFeature(settings);
 const collectionHistoryFeature = new CollectionHistoryFeature(settings, currentRegion);
