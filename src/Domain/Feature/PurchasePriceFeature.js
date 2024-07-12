@@ -24,7 +24,7 @@ export class PurchasePriceFeature {
         $priceRowsDiv.classList.add('tcg-collector-card-prices');
 
         const googleSheet = new GoogleSheet(
-            this.settings.googleSpreadSheetId,
+            this.settings.getGoogleSpreadSheetId(),
             'Slabs / Singles',
         )
         const parsedRows = await googleSheet.parse();

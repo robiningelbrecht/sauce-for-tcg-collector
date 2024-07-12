@@ -11,19 +11,19 @@ import {
 } from "../src/Domain/Settings";
 
 const initPopup = async () => {
-    const settings = await Settings.load();
+    const settings = await Settings.fromSyncStorage();
     const $form = document.querySelector("form");
 
-    $form.elements[SETTING_GOOGLE_SPREADSHEET_ID].value = settings[SETTING_GOOGLE_SPREADSHEET_ID];
-    $form.elements[SETTING_HIDE_PRICES].checked = settings[SETTING_HIDE_PRICES];
-    $form.elements[SETTING_MARKET_PLACE_LINKS].value = settings[SETTING_MARKET_PLACE_LINKS];
-    $form.elements[SETTING_CARD_MARKET_MIN_CONDITION].value = settings[SETTING_CARD_MARKET_MIN_CONDITION];
-    $form.elements[SETTING_EBAY_URL].value = settings[SETTING_EBAY_URL];
-    $form.elements[SETTING_EBAY_LISTING_TYPE].value = settings[SETTING_EBAY_LISTING_TYPE];
-    $form.elements[SETTING_EBAY_SORT_BY].value = settings[SETTING_EBAY_SORT_BY];
+    $form.elements[SETTING_GOOGLE_SPREADSHEET_ID].value = settings.getGoogleSpreadSheetId();
+    $form.elements[SETTING_HIDE_PRICES].checked = settings.hidePrices();
+    $form.elements[SETTING_MARKET_PLACE_LINKS].value = settings.getMarketPlaceLinks();
+    $form.elements[SETTING_CARD_MARKET_MIN_CONDITION].value = settings.getCardMarketMinCondition();
+    $form.elements[SETTING_EBAY_URL].value = settings.getEbayUrl();
+    $form.elements[SETTING_EBAY_LISTING_TYPE].value = settings.getEbayListingType();
+    $form.elements[SETTING_EBAY_SORT_BY].value = settings.getEbaySortBy();
 
-    Settings.getPropertiesWithMultipleValues().forEach(prop => {
-        settings[prop].forEach(value => {
+    Settings.getSettingsWithMultipleValues().forEach(prop => {
+        settings.get(prop).forEach(value => {
             $form.elements[prop + '[' + value + ']'].checked = true;
         });
     });

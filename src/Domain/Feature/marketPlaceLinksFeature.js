@@ -10,11 +10,11 @@ export class MarketPlaceLinksFeature {
     };
 
     needsToBeAppliedForLocation = (currentLocation) => {
-        if (!this.settings.marketPlaceLinks) {
+        if (!this.settings.getMarketPlaceLinks()) {
             return false;
         }
 
-        if (this.settings.marketPlaceLinks === 'none') {
+        if (this.settings.getMarketPlaceLinks() === 'none') {
             return false;
         }
 

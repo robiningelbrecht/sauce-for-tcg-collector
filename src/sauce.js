@@ -11,11 +11,11 @@ import {PrintBinderPlaceholdersFeature} from "./Domain/Feature/PrintBinderPlaceh
 import {consolePrintLogo} from "./Domain/Utils";
 import {MarketPlaceLinksFeature} from "./Domain/Feature/marketPlaceLinksFeature";
 
-const settings = await Settings.load();
+const settings = await Settings.fromSyncStorage();
 const currentRegion = Region.fromCurrentUrl();
 const currentLocation = window.location;
 
-if (!settings.googleSpreadSheetId) {
+if (!settings.getGoogleSpreadSheetId()) {
     throw new Error('Google Spreadsheet ID not configured');
 }
 

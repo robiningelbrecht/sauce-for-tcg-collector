@@ -16,7 +16,7 @@ export class CollectionHistoryFeature {
 
     apply = async () => {
         const googleSheetCollectionHistory = new GoogleSheet(
-            this.settings.googleSpreadSheetId,
+            this.settings.getGoogleSpreadSheetId(),
             'Collection history',
         );
         const history = this.currentRegion.filterRows(await googleSheetCollectionHistory.parse(), true);

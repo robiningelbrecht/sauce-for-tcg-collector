@@ -19,7 +19,7 @@ export class QuickAccessLinksFeature {
         $quickAccessContainer.innerHTML = '<div class="loading-state-loading-spinner-underlay" style="display: flex; justify-content: center"><div class="loading-state-loading-spinner loading-spinner"></div></div>';
 
         const googleSheetSlabsAndSingles = new GoogleSheet(
-            this.settings.googleSpreadSheetId,
+            this.settings.getGoogleSpreadSheetId(),
             'Slabs / Singles'
         );
         const slabsAndSingles = this.currentRegion.filterRows(await googleSheetSlabsAndSingles.parse());
@@ -27,7 +27,7 @@ export class QuickAccessLinksFeature {
         const uri = `/cards?releaseDateOrder=newToOld&cardsPerPage=120&displayAs=images&sortBy=cardNameAsc&cards=${singlesCardIds.join(',')}`;
 
         const googleSheetQuickAccessLinks = new GoogleSheet(
-            this.settings.googleSpreadSheetId,
+            this.settings.getGoogleSpreadSheetId(),
             'Quick access links',
         );
         const quickAccessLinks = (await googleSheetQuickAccessLinks.parse()).filter(row => {

@@ -1,8 +1,8 @@
 import {Settings} from "./Domain/Settings";
 
 const pourGravy = async () => {
-    const settings = await Settings.load();
-    if (settings.marketPlaceLinks !== 'cardMarket') {
+    const settings = await Settings.fromSyncStorage();
+    if (settings.getMarketPlaceLinks() !== 'cardMarket') {
         return;
     }
 
@@ -12,14 +12,14 @@ const pourGravy = async () => {
     }
 
     const query = {};
-    if (settings.cardMarketMinCondition) {
-        query.minCondition = settings.cardMarketMinCondition;
+    if (settings.getCardMarketMinCondition()) {
+        query.minCondition = settings.getCardMarketMinCondition();
     }
-    if (settings.cardMarketCardLanguages) {
-        query.language = settings.cardMarketCardLanguages;
+    if (settings.getCardMarketCardLanguages()) {
+        query.language = settings.getCardMarketCardLanguages();
     }
-    if (settings.cardMarketSellerLocations) {
-        query.sellerCountry = settings.cardMarketSellerLocations;
+    if (settings.getCardMarketSellerLocations()) {
+        query.sellerCountry = settings.getCardMarketSellerLocations();
     }
 
     window.location.replace(`${window.location.href.replace(/\/$/, "")}?${(new URLSearchParams(query)).toString()}`);
