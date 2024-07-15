@@ -126,7 +126,7 @@ export class CollectionHistoryFeature {
                     ])
                 },
                 {
-                    name: `Total cards ($${currentCollectionState.totalCards})`,
+                    name: `Total cards (${currentCollectionState.totalCards})`,
                     type: 'line',
                     data: history.map(row => [
                         row.date,
