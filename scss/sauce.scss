@@ -1,5 +1,10 @@
 /* COLLECTION HISTORY */
 body.collection-history-feature {
+  a.chart-modal {
+    min-width: auto;
+    margin-left: 3px;
+  }
+
   .modal-window {
     position: fixed !important;
     top: 0;
@@ -68,44 +73,55 @@ body.market-place-links-feature {
 
 /* PRINT BINDER PLACEHOLDERS */
 body.print-binder-placeholders-feature {
-  #print, #print * {
-    box-sizing: border-box;
+  button.print-placeholders {
+    min-width: auto;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    margin-left: 5px;
   }
 
-  #print {
-    display: none;
-    grid-template-columns: 6.3cm 6.3cm 6.3cm;
-    gap: 2px;
-    color: #000;
-
-    .placeholder {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      width: 6.3cm !important;
-      min-width: 6.3cm !important;
-      max-width: 6.3cm !important;
-      height: 8.8cm !important;
-      word-wrap: break-word;
-      font-weight: bold;
-      padding: 0.5em;
-      border-radius: 0.3em;
-      border: 3px solid #000;
-
-      &:nth-child(9n) {
-        page-break-after: always;
-      }
-    }
-  }
-
-  @media print {
-    > *:not(#print) {
-      display: none;
+  &.printing {
+    #print, #print * {
+      box-sizing: border-box;
     }
 
     #print {
-      display: grid;
+      display: none;
+      grid-template-columns: 6.3cm 6.3cm 6.3cm;
+      gap: 2px;
+      color: #000;
+
+      .placeholder {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        width: 6.3cm !important;
+        min-width: 6.3cm !important;
+        max-width: 6.3cm !important;
+        height: 8.8cm !important;
+        word-wrap: break-word;
+        font-weight: bold;
+        padding: 0.5em;
+        border-radius: 0.3em;
+        border: 3px solid #000;
+
+        &:nth-child(9n) {
+          page-break-after: always;
+        }
+      }
+    }
+
+    @media print {
+      > *:not(#print) {
+        display: none;
+      }
+
+      #print {
+        display: grid;
+      }
     }
   }
 }
@@ -144,10 +160,12 @@ body.purchase-price-feature {
             background-size: auto 12px;
             background-image: url('chrome-extension://__MSG_@@extension_id__/dist/assets/psa.png');
           }
+
           &.cgc {
             background-size: 22px auto;
             background-image: url('chrome-extension://__MSG_@@extension_id__/dist/assets/cgc.png');
           }
+
           &.ucg {
             background-size: 22px auto;
             background-image: url('chrome-extension://__MSG_@@extension_id__/dist/assets/ucg.png');

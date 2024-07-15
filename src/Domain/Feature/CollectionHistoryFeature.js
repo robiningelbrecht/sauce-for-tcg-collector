@@ -27,9 +27,7 @@ export class CollectionHistoryFeature {
         const $appendTo = document.querySelector('main#page-content');
         const $modalLink = document.createElement('a');
         $modalLink.setAttribute('href', '#modal');
-        $modalLink.classList.add(...['button', 'button', 'button-primary']);
-        $modalLink.style.minWidth = 'auto';
-        $modalLink.style.marginLeft = '3px';
+        $modalLink.classList.add(...['button', 'button-primary', 'chart-modal']);
         $modalLink.innerHTML = `<span class="fa-solid fa-chart-line"></span>`;
 
         document.querySelector('div#tcg-region-button-group-container').appendChild($modalLink);

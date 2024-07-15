@@ -52,7 +52,23 @@ export class PrintBinderPlaceholdersFeature {
                 $printWrapper.appendChild($placeholder);
             });
         });
+        document.body.appendChild($printWrapper);
 
-        return document.body.appendChild($printWrapper);
+        const $printButton = document.createElement('button');
+        $printButton.classList.add(...['button', 'button-primary', 'print-placeholders']);
+        $printButton.setAttribute('title', 'Print binder placeholders');
+        $printButton.innerHTML = `<span class="fa-solid fa-print"></span>`;
+        $printButton.addEventListener('click', () => {
+            document.body.classList.add('printing');
+            window.print();
+        });
+
+        const $appendAfter = document.querySelector('div#card-search-result-title');
+        $appendAfter.parentNode.insertBefore($printButton, $appendAfter.nextSibling);
+
+        addEventListener("afterprint", () => {
+            document.body.classList.remove('printing');
+        });
+
     }
 }
