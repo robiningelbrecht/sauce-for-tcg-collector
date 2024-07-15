@@ -110,7 +110,7 @@ export class CollectionHistoryFeature {
             ],
             series: [
                 {
-                    name: `Unique cards(${currentCollectionState.uniqueCards})`,
+                    name: `Unique cards (${currentCollectionState.uniqueCards})`,
                     type: 'line',
                     data: history.map(row => [
                         row.date,
