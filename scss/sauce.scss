@@ -87,36 +87,36 @@ body.print-binder-placeholders-feature {
     column-gap: 5px;
   }
 
+  #print {
+    display: none;
+    grid-template-columns: 6.3cm 6.3cm 6.3cm;
+    gap: 2px;
+    color: #000;
+
+    .placeholder {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      width: 6.3cm !important;
+      min-width: 6.3cm !important;
+      max-width: 6.3cm !important;
+      height: 8.8cm !important;
+      word-wrap: break-word;
+      font-weight: bold;
+      padding: 0.5em;
+      border-radius: 0.3em;
+      border: 3px solid #000;
+
+      &:nth-child(9n) {
+        page-break-after: always;
+      }
+    }
+  }
+
   &.printing {
     #print, #print * {
       box-sizing: border-box;
-    }
-
-    #print {
-      display: none;
-      grid-template-columns: 6.3cm 6.3cm 6.3cm;
-      gap: 2px;
-      color: #000;
-
-      .placeholder {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        width: 6.3cm !important;
-        min-width: 6.3cm !important;
-        max-width: 6.3cm !important;
-        height: 8.8cm !important;
-        word-wrap: break-word;
-        font-weight: bold;
-        padding: 0.5em;
-        border-radius: 0.3em;
-        border: 3px solid #000;
-
-        &:nth-child(9n) {
-          page-break-after: always;
-        }
-      }
     }
 
     @media print {
@@ -187,6 +187,7 @@ html[data-darkreader-scheme="dark"] body.purchase-price-feature {
   }
 }
 
+/* TOASTIFY */
 .toastify {
   padding: 12px 20px;
   color: #ffffff;
