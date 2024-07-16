@@ -1,4 +1,5 @@
 import './../scss/sauce.scss';
+import Toastify from 'toastify-js'
 import {Settings} from "./Domain/Settings";
 import {NewMenuItemFeature} from "./Domain/Feature/NewMenuItemFeature";
 import {HidePricesFeature} from "./Domain/Feature/HidePricesFeature";
@@ -50,7 +51,19 @@ for (const feature of featureList) {
         try {
             feature.apply();
         } catch (error) {
-            consolePrint(error);
+            Toastify({
+                text: `Oops, something 🐟y is going on. Check console for details.`,
+                className: "error",
+                duration: 5000,
+                destination: "#",
+                newWindow: false,
+                close: true,
+                gravity: "bottom", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+            }).showToast();
+
+            consolePrint(error.stack);
         }
 
     }
@@ -60,6 +73,6 @@ window.addEventListener('keydown', (e) => {
     if (e.key === "Escape" && window.location.hash === '#modal') {
         window.location.hash = ""
     }
-})
+});
 
 

@@ -16,7 +16,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(scss|css)$/,
+                test: /\.(scss)$/,
                 exclude: /node_modules/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },

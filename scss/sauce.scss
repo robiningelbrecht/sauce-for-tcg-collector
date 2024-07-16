@@ -186,3 +186,72 @@ html[data-darkreader-scheme="dark"] body.purchase-price-feature {
     border-bottom: 1px solid rgb(53, 58, 60);
   }
 }
+
+.toastify {
+  padding: 12px 20px;
+  color: #ffffff;
+  display: inline-block;
+  box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba(77, 96, 232, 0.3);
+  position: fixed;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  max-width: calc(50% - 20px);
+  z-index: 2147483647;
+  background: #1f2937 no-repeat;
+
+  &.error {
+    background-color: #9b1c1c;
+  }
+
+  @media only screen and (max-width: 360px) {
+    &.toastify-right, &.toastify-left {
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      max-width: fit-content;
+    }
+  }
+
+  &.toastify-right {
+    right: 15px;
+  }
+
+  &.toastify-left {
+    left: 15px;
+  }
+
+  &.toastify-top {
+    top: -150px;
+  }
+
+  &.toastify-bottom {
+    bottom: -150px;
+  }
+
+  &.toastify-center {
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    max-width: fit-content;
+  }
+
+  &.on {
+    opacity: 1;
+  }
+
+  .toast-close {
+    background: transparent;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1em;
+    opacity: 0.4;
+    padding: 0 5px;
+  }
+}
