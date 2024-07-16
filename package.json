@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build:popup": "cp -R popup/ dist/popup && npx tailwindcss -i dist/popup/popup.css -o dist/popup/popup.min.css --minify",
+    "build:popup": "cp -R popup/ dist/popup && npx tailwindcss -c popup/tailwind.config.js -i dist/popup/popup.css -o dist/popup/popup.min.css --minify && rm dist/popup/tailwind.config.js",
     "build:webpack": "webpack --config webpack.config.js",
     "build": "npm run build:popup && npm run build:webpack"
   },
