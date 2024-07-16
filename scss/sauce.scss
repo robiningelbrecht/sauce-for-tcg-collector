@@ -73,13 +73,18 @@ body.market-place-links-feature {
 
 /* PRINT BINDER PLACEHOLDERS */
 body.print-binder-placeholders-feature {
+  div#card-search-result-header {
+    display: flex;
+    align-items: center;
+  }
+
   button.print-placeholders {
+    display: flex;
+    align-items: center;
     min-width: auto;
-    width: 30px;
-    height: 30px;
-    padding: 0;
-    text-align: center;
-    margin-left: 5px;
+    margin-left: 15px;
+    padding: .175rem .35rem;
+    column-gap: 5px;
   }
 
   &.printing {

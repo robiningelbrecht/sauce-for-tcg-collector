@@ -8,8 +8,13 @@ export const contains = (selector, text) => {
     return [...document.querySelectorAll(selector)].filter(element => element.childNodes?.[0]?.nodeValue?.match(text))
 }
 
+export const consolePrint = (msg) => {
+    console.log(`%c${msg}`, 'color:#FA7035; background:#222;'
+    );
+}
+
 export const consolePrintLogo = (subTitle) => {
-    console.log(`%c
+    consolePrint(`
    _____                         __             _______ _____ _____    _____      _ _           _               
   / ____|                       / _|           |__   __/ ____/ ____|  / ____|    | | |         | |              
  | (___   __ _ _   _  ___ ___  | |_ ___  _ __     | | | |   | |  __  | |     ___ | | | ___  ___| |_ ___  _ __   
@@ -18,7 +23,5 @@ export const consolePrintLogo = (subTitle) => {
  |_____/ \\__,_|\\__,_|\\___\\___| |_| \\___/|_|       |_|  \\_____\\_____|  \\_____\\___/|_|_|\\___|\\___|\\__\\___/|_|     
                                                                                                                 
   ${subTitle.padEnd(110, ' ')}
-`,
-        'color:#FA7035; background:#222;'
-    );
+`);
 }

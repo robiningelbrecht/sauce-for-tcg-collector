@@ -8,7 +8,7 @@ import {DashboardRearrangementFeature} from "./Domain/Feature/DashboardRearrange
 import {QuickAccessLinksFeature} from "./Domain/Feature/QuickAccessLinksFeature";
 import {PurchasePriceFeature} from "./Domain/Feature/PurchasePriceFeature";
 import {PrintBinderPlaceholdersFeature} from "./Domain/Feature/PrintBinderPlaceholdersFeature";
-import {consolePrintLogo} from "./Domain/Utils";
+import {consolePrint, consolePrintLogo} from "./Domain/Utils";
 import {MarketPlaceLinksFeature} from "./Domain/Feature/marketPlaceLinksFeature";
 
 const settings = await Settings.fromSyncStorage();
@@ -47,7 +47,12 @@ const $body = document.body;
 for (const feature of featureList) {
     if (feature.needsToBeAppliedForLocation(currentLocation)) {
         $body.classList.add(feature.getId());
-        feature.apply();
+        try {
+            feature.apply();
+        } catch (error) {
+            consolePrint(error);
+        }
+
     }
 }
 
