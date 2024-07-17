@@ -1,4 +1,4 @@
-import {contains} from "../Infrastructure/Utils";
+import {contains} from "../Infrastructure/Utils/Functions";
 
 export class HidePricesFeature {
     constructor(settings) {

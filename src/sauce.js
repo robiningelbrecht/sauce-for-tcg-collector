@@ -8,7 +8,7 @@ import {QuickAccessLinksFeature} from "./Feature/QuickAccessLinksFeature";
 import {PurchasePriceFeature} from "./Feature/PurchasePriceFeature";
 import {PrintBinderPlaceholdersFeature} from "./Feature/PrintBinderPlaceholdersFeature";
 import {MarketPlaceLinksFeature} from "./Feature/marketPlaceLinksFeature";
-import {consolePrint, consolePrintLogo} from "./Infrastructure/Utils";
+import {consolePrint, consolePrintLogo} from "./Infrastructure/Utils/Console";
 import {TcgRegion} from "./Domain/TcgCollector/TcgRegion";
 import {Toast} from "./Component/Toast";
 
