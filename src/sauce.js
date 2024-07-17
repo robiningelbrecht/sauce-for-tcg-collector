@@ -11,6 +11,7 @@ import {MarketPlaceLinksFeature} from "./Feature/marketPlaceLinksFeature";
 import {consolePrint, consolePrintLogo} from "./Infrastructure/Utils/Console";
 import {TcgRegion} from "./Domain/TcgCollector/TcgRegion";
 import {Toast} from "./Component/Toast";
+import {SyncAndDisplayJapanesePrices} from "./Feature/SyncAndDisplayJapanesePrices";
 
 const settings = await Settings.fromSyncStorage();
 const currentRegion = TcgRegion.fromCurrentUrl();
@@ -32,6 +33,7 @@ const quickAccessLinksFeature = new QuickAccessLinksFeature(settings, currentReg
 const purchasePriceFeature = new PurchasePriceFeature(settings);
 const printBinderPlaceholdersFeature = new PrintBinderPlaceholdersFeature();
 const includeMarketPlaceLinksFeature = new MarketPlaceLinksFeature(settings);
+const syncAndDisplayJapanesePrices = new SyncAndDisplayJapanesePrices(settings);
 
 const featureList = [
     newMenuItemFeature,
@@ -41,7 +43,8 @@ const featureList = [
     quickAccessLinksFeature,
     purchasePriceFeature,
     printBinderPlaceholdersFeature,
-    includeMarketPlaceLinksFeature
+    includeMarketPlaceLinksFeature,
+    syncAndDisplayJapanesePrices
 ];
 
 consolePrintLogo('Applying that sweet sauce 🥫');
@@ -59,9 +62,9 @@ for (const feature of featureList) {
     }
 }
 
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    if (message.message === "myMessage") {
-        console.log("recieved message");
+chrome.runtime.onMessage.addListener(function (message) {
+    if (message.cmd === "showToast") {
+        (new Toast(message.payload.type, message.payload.msg)).show();
     }
 });
 

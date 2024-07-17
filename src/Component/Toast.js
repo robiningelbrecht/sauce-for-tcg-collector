@@ -1,6 +1,6 @@
 import Toastify from "toastify-js";
 
-export class Toast{
+export class Toast {
     constructor(type, message) {
         this.type = type;
         this.message = message;
@@ -8,6 +8,10 @@ export class Toast{
 
     static error = (message) => {
         return new Toast('error', message);
+    }
+
+    static success = (message) => {
+        return new Toast('success', message);
     }
 
     show = () => {

@@ -204,6 +204,10 @@ html[data-darkreader-scheme="dark"] body.purchase-price-feature {
   z-index: 2147483647;
   background: #1f2937 no-repeat;
 
+  &.success {
+    background-color: #0e9f6e;
+  }
+
   &.error {
     background-color: #9b1c1c;
   }

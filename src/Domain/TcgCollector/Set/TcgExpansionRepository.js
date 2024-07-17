@@ -1,10 +1,10 @@
-export class TcgSetRepository{
+export class TcgExpansionRepository {
     constructor(connection) {
         this.connection = connection;
     }
 
     findAll = async () => {
-        return await this.connection.TcgSet.toArray();
+        return await this.connection.TcgExpansion.toArray();
     };
 
 
