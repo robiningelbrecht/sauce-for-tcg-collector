@@ -6,6 +6,7 @@
     "build": "npm run build:popup && npm run build:webpack && npm run build:cleanup"
   },
   "dependencies": {
+    "dexie": "^4.0.8",
     "public-google-sheets-parser": "^1.5.4",
     "toastify-js": "^1.12.0"
   },

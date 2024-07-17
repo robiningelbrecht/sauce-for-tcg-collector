@@ -1,5 +1,4 @@
 import './../scss/sauce.scss';
-import Toastify from 'toastify-js'
 import {Settings} from "./Domain/Settings";
 import {NewMenuItemFeature} from "./Domain/Feature/NewMenuItemFeature";
 import {HidePricesFeature} from "./Domain/Feature/HidePricesFeature";
@@ -11,12 +10,14 @@ import {PurchasePriceFeature} from "./Domain/Feature/PurchasePriceFeature";
 import {PrintBinderPlaceholdersFeature} from "./Domain/Feature/PrintBinderPlaceholdersFeature";
 import {consolePrint, consolePrintLogo} from "./Domain/Utils";
 import {MarketPlaceLinksFeature} from "./Domain/Feature/marketPlaceLinksFeature";
+import {Toast} from "./Domain/Component/Toast";
 
 const settings = await Settings.fromSyncStorage();
 const currentRegion = Region.fromCurrentUrl();
 const currentLocation = window.location;
 
 if (!settings.getGoogleSpreadSheetId()) {
+    Toast.error(`Google Spreadsheet ID not configured`).show();
     throw new Error('Google Spreadsheet ID not configured');
 }
 
@@ -51,23 +52,18 @@ for (const feature of featureList) {
         try {
             feature.apply();
         } catch (error) {
-            Toastify({
-                text: `Oops, something 🐟y is going on. Check console for details.`,
-                className: "error",
-                duration: 5000,
-                destination: "#",
-                newWindow: false,
-                close: true,
-                gravity: "bottom", // `top` or `bottom`
-                position: "right", // `left`, `center` or `right`
-                stopOnFocus: true, // Prevents dismissing of toast on hover
-            }).showToast();
-
+            Toast.error(`Oops, something 🐟y is going on. Check console for details.`).show();
             consolePrint(error.stack);
         }
 
     }
 }
+
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    if (message.message === "myMessage") {
+        console.log("recieved message");
+    }
+});
 
 window.addEventListener('keydown', (e) => {
     if (e.key === "Escape" && window.location.hash === '#modal') {

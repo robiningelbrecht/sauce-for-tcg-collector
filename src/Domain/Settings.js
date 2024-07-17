@@ -50,7 +50,7 @@ export class Settings {
     }
 
     get = (property) => {
-        return this.storage[property];
+        return this.storage[property] || [];
     }
 
     static getSettingsWithMultipleValues = () => {
