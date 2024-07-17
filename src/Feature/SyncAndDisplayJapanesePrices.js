@@ -18,6 +18,9 @@ export class SyncAndDisplayJapanesePrices {
     }
 
     apply = async () => {
+        if (document.querySelectorAll('#card-search-result-title-expansion-code').length === 0) {
+            return;
+        }
         const expansionCode = document.querySelector('#card-search-result-title-expansion-code').innerText.trim().toLowerCase();
 
         const $syncPricesButton = document.createElement('button');

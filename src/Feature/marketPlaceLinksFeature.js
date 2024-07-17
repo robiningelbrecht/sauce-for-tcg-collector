@@ -30,7 +30,7 @@ export class MarketPlaceLinksFeature {
         return currentLocation.pathname.includes('/cards/jp/') || currentLocation.pathname.includes('/cards/intl/');
     }
 
-    apply = () => {
+    apply = async () => {
         const $cards = document.querySelectorAll('div#card-image-grid div.card-image-grid-item');
         const expansionCode = document.querySelector('span#card-search-result-title-expansion-code')?.innerText || '';
         const marketPlaceLinkFactory = new MarketPlaceLinkFactory(this.settings);

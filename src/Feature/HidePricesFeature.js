@@ -13,7 +13,7 @@ export class HidePricesFeature {
         return this.settings.hidePrices();
     }
 
-    apply = () => {
+    apply = async () => {
         contains('*', /\$([\d]+\.?\d*)/g).forEach(element => {
             element.innerHTML = element.innerHTML.replace(/\$([\d]+\.?\d*)/g, '$—')
         });

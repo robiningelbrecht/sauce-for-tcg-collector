@@ -52,12 +52,11 @@ const $body = document.body;
 for (const feature of featureList) {
     if (feature.needsToBeAppliedForLocation(currentLocation)) {
         $body.classList.add(feature.getId());
-        try {
-            feature.apply();
-        } catch (error) {
+
+        feature.apply().catch(error => {
             Toast.error(`Oops, something 🐟y is going on. Check console for details.`).show();
-            consolePrint(error.stack);
-        }
+            consolePrint(error.message);
+        });
 
     }
 }
