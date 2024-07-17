@@ -25,6 +25,8 @@ chrome.runtime.onMessage.addListener(
         if (request.cmd === 'FetchJapanesePrices') {
             (new TcgExpansionRepository(connection)).findAll().then(expansions => {
                 sendResponse(expansions);
+            }).catch(e => {
+                pushErrorToContent(e.message);
             });
 
             return true;

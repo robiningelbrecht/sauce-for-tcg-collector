@@ -56,13 +56,14 @@ for (const feature of featureList) {
         feature.apply().catch(error => {
             Toast.error(`Oops, something 🐟y is going on. Check console for details.`).show();
             consolePrint(error.message);
+            consolePrint(error.stack);
         });
 
     }
 }
 
 chrome.runtime.onMessage.addListener(function (message) {
-    if (message.cmd === "showToast") {
+    if (message.cmd === 'showToast') {
         (new Toast(message.payload.type, message.payload.msg)).show();
     }
 });
