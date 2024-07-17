@@ -1,14 +1,12 @@
 import {
-    SETTING_CARD_MARKET_CARD_LANGUAGES,
     SETTING_CARD_MARKET_MIN_CONDITION,
-    SETTING_CARD_MARKET_SELLER_LOCATIONS,
     SETTING_EBAY_LISTING_TYPE, SETTING_EBAY_SORT_BY,
     SETTING_EBAY_URL,
     SETTING_GOOGLE_SPREADSHEET_ID,
     SETTING_HIDE_PRICES,
     SETTING_MARKET_PLACE_LINKS,
     Settings
-} from "../src/Domain/Settings";
+} from "../src/Infrastructure/Settings";
 
 const initPopup = async () => {
     const settings = await Settings.fromSyncStorage();

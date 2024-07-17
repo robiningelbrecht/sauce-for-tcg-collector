@@ -1,5 +1,5 @@
 import PublicGoogleSheetsParser from "public-google-sheets-parser";
-import {camelize} from "./Utils";
+import {camelize} from "../Infrastructure/Utils";
 
 export class GoogleSheet{
     constructor(spreadSheetId, sheetName) {

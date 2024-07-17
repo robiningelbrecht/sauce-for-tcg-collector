@@ -1,5 +1,3 @@
-import {GoogleSheet} from "../GoogleSheet";
-
 export class QuickAccessLinksFeature {
     constructor(settings, currentRegion) {
         this.settings = settings;

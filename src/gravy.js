@@ -1,4 +1,4 @@
-import {Settings} from "./Domain/Settings";
+import {Settings} from "./Infrastructure/Settings";
 
 const pourGravy = async () => {
     const settings = await Settings.fromSyncStorage();

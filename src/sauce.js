@@ -1,19 +1,19 @@
 import './../scss/sauce.scss';
-import {Settings} from "./Domain/Settings";
-import {NewMenuItemFeature} from "./Domain/Feature/NewMenuItemFeature";
-import {HidePricesFeature} from "./Domain/Feature/HidePricesFeature";
-import {CollectionHistoryFeature} from "./Domain/Feature/CollectionHistoryFeature";
-import {Region} from "./Domain/Region";
-import {DashboardRearrangementFeature} from "./Domain/Feature/DashboardRearrangementFeature";
-import {QuickAccessLinksFeature} from "./Domain/Feature/QuickAccessLinksFeature";
-import {PurchasePriceFeature} from "./Domain/Feature/PurchasePriceFeature";
-import {PrintBinderPlaceholdersFeature} from "./Domain/Feature/PrintBinderPlaceholdersFeature";
-import {consolePrint, consolePrintLogo} from "./Domain/Utils";
-import {MarketPlaceLinksFeature} from "./Domain/Feature/marketPlaceLinksFeature";
-import {Toast} from "./Domain/Component/Toast";
+import {Settings} from "./Infrastructure/Settings";
+import {NewMenuItemFeature} from "./Feature/NewMenuItemFeature";
+import {HidePricesFeature} from "./Feature/HidePricesFeature";
+import {CollectionHistoryFeature} from "./Feature/CollectionHistoryFeature";
+import {DashboardRearrangementFeature} from "./Feature/DashboardRearrangementFeature";
+import {QuickAccessLinksFeature} from "./Feature/QuickAccessLinksFeature";
+import {PurchasePriceFeature} from "./Feature/PurchasePriceFeature";
+import {PrintBinderPlaceholdersFeature} from "./Feature/PrintBinderPlaceholdersFeature";
+import {MarketPlaceLinksFeature} from "./Feature/marketPlaceLinksFeature";
+import {consolePrint, consolePrintLogo} from "./Infrastructure/Utils";
+import {TcgRegion} from "./Domain/TcgCollector/TcgRegion";
+import {Toast} from "./Component/Toast";
 
 const settings = await Settings.fromSyncStorage();
-const currentRegion = Region.fromCurrentUrl();
+const currentRegion = TcgRegion.fromCurrentUrl();
 const currentLocation = window.location;
 
 if (!settings.getGoogleSpreadSheetId()) {
