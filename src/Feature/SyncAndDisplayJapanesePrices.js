@@ -38,7 +38,7 @@ export class SyncAndDisplayJapanesePrices {
         document.querySelector('div#cards-page-buttons').appendChild($syncPricesButton);
 
         const expansion = await chrome.runtime.sendMessage({
-            cmd: 'FetchJapanesePrices',
+            cmd: 'FetchJapaneseCardPrices',
             payload: {expansionCode: expansionCode}
         });
 
