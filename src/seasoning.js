@@ -22,13 +22,17 @@ chrome.runtime.onMessage.addListener(
                 new JpnCardsApi(),
                 tcgExpansionRepository,
                 tcgCardPriceRepository
-            )).syncAndPersistForExpansion(request.payload.expansionCode).catch(e => {
-                pushErrorToContent(e.message);
-            });
+            )).syncAndPersistForExpansion(request.payload.expansionCode)
+                .then(() => {
+                    pushMessageToContent(`Prices for expansion "${request.payload.expansionCode}" have been synced`);
+                })
+                .catch(e => {
+                    pushErrorToContent(e.message);
+                });
         }
         if (request.cmd === 'FetchJapaneseCardPrices') {
-            tcgCardPriceRepository.findByExpansion(request.payload.expansionCode).then(expansion => {
-                sendResponse(expansion);
+            tcgCardPriceRepository.findByExpansion(request.payload.expansionCode).then(cards => {
+                sendResponse(cards);
             }).catch(e => {
                 pushErrorToContent(e.message);
             });
@@ -37,6 +41,12 @@ chrome.runtime.onMessage.addListener(
         }
     }
 );
+
+const pushMessageToContent = (msg) => {
+    chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {cmd: 'showToast', payload: {type: 'success', msg: msg}});
+    });
+}
 
 const pushErrorToContent = (msg) => {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {

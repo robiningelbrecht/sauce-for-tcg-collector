@@ -8,7 +8,7 @@ export class JpnCardsPriceSyncer {
     syncAndPersistForExpansion = async (expansionCode) => {
         const sets = (await this.api.getSets()).filter(set => set.set_code.toLowerCase() === expansionCode);
         if (sets.length !== 1) {
-            throw new Error(`Set "${expansionCode}" not found`);
+            throw new Error(`Prices for expansion "${expansionCode}" not found`);
         }
 
         const set = sets.at(0);

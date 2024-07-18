@@ -37,12 +37,17 @@ export class SyncAndDisplayJapanesePrices {
         });
         document.querySelector('div#cards-page-buttons').appendChild($syncPricesButton);
 
-        const expansion = await chrome.runtime.sendMessage({
+        const cards = await chrome.runtime.sendMessage({
             cmd: 'FetchJapaneseCardPrices',
             payload: {expansionCode: expansionCode}
         });
 
-        console.log(expansion);
+        cards.forEach(card => {
+            const $card = document.querySelector(`div.card-image-grid-item[data-card-id="${card.tcgCardId}"]`);
+            if (card.prices.length > 0) {
+                $card.querySelector('.card-image-controls-item-price').innerHTML = `¥${card.prices[0].priceAmount}`;
+            }
+        });
     }
 
 }
