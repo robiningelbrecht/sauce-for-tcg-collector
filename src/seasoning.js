@@ -1,7 +1,6 @@
 import {JpnCardsPriceSyncer} from "./Domain/JpnCards/JpnCardsPriceSyncer";
-import {TcgExpansionRepository} from "./Domain/TcgCollector/TcgExpansionRepository";
-import connection from "./Infrastructure/Database/Connection";
 import {JpnCardsApi} from "./Domain/JpnCards/JpnCardsApi";
+import tcgExpansionRepository from "./Infrastructure/Database/Connection";
 
 chrome.runtime.onInstalled.addListener(async () => {
     // @TODO: Save default settings.
@@ -21,13 +20,13 @@ chrome.runtime.onMessage.addListener(
         if (request.cmd === 'SyncJapanesePrices') {
             (new JpnCardsPriceSyncer(
                 new JpnCardsApi(),
-                new TcgExpansionRepository(connection),
+                tcgExpansionRepository,
             )).syncAndPersistForExpansion(request.payload.expansionCode).catch(e => {
                 pushErrorToContent(e.message);
             });
         }
         if (request.cmd === 'FetchJapanesePrices') {
-            (new TcgExpansionRepository(connection)).find(request.payload.expansionCode).then(expansion => {
+            tcgExpansionRepository.find(request.payload.expansionCode).then(expansion => {
                 sendResponse(expansion);
             }).catch(e => {
                 pushErrorToContent(e.message);

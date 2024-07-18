@@ -1,7 +1,7 @@
 export class JpnCardsPriceSyncer {
-    constructor(api, tcgRepository) {
+    constructor(api, tcgExpansionRepository) {
         this.api = api;
-        this.tcgRepository = tcgRepository;
+        this.tcgExpansionRepository = tcgExpansionRepository;
     }
 
     syncAndPersistForExpansion = async (expansionCode) => {
@@ -11,7 +11,7 @@ export class JpnCardsPriceSyncer {
         }
 
         const set = sets.at(0);
-        await this.tcgRepository.save({
+        await this.tcgExpansionRepository.save({
             expansionCode: set.set_code.toLowerCase(),
             expansionName: set.name,
             updatedOn: new Date()

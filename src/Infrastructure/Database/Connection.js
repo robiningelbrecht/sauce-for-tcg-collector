@@ -1,4 +1,5 @@
 import Dexie from "dexie";
+import {TcgExpansionRepository} from "../../Domain/TcgCollector/TcgExpansionRepository";
 
 const connection = new Dexie('TcgCollector');
 connection.version(1).stores({
@@ -6,4 +7,5 @@ connection.version(1).stores({
     TcgCardPrice: `tcgCardId,cardNumber,expansionCode`,
 });
 
-export default connection;
+const tcgExpansionRepository = new TcgExpansionRepository(connection);
+export default tcgExpansionRepository;
