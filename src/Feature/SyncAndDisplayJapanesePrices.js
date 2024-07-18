@@ -37,11 +37,12 @@ export class SyncAndDisplayJapanesePrices {
         });
         document.querySelector('div#cards-page-buttons').appendChild($syncPricesButton);
 
-        const response = await chrome.runtime.sendMessage({
+        const expansion = await chrome.runtime.sendMessage({
             cmd: 'FetchJapanesePrices',
             payload: {expansionCode: expansionCode}
         });
-        console.log(response);
+
+        console.log(expansion);
     }
 
 }

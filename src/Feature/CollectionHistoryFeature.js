@@ -24,6 +24,12 @@ export class CollectionHistoryFeature {
             return;
         }
 
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "Escape" && window.location.hash === '#modal') {
+                window.location.hash = ""
+            }
+        });
+
         const $appendTo = document.querySelector('main#page-content');
         const $modalLink = document.createElement('a');
         $modalLink.setAttribute('href', '#modal');

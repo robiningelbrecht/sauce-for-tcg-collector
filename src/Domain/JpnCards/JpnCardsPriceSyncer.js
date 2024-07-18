@@ -1,8 +1,7 @@
-import {JpnCardsApi} from "./JpnCardsApi";
-
 export class JpnCardsPriceSyncer {
-    constructor() {
-        this.api = new JpnCardsApi();
+    constructor(api, tcgRepository) {
+        this.api = api;
+        this.tcgRepository = tcgRepository;
     }
 
     syncAndPersistForExpansion = async (expansionCode) => {
@@ -11,7 +10,12 @@ export class JpnCardsPriceSyncer {
             throw new Error(`Set "${expansionCode}" not found`);
         }
 
-        console.log(sets.at(0));
+        const set = sets.at(0);
+        await this.tcgRepository.save({
+            expansionCode: set.set_code.toLowerCase(),
+            expansionName: set.name,
+            updatedOn: new Date()
+        });
 
         const cards = await this.api.getCardsForSet(expansionCode);
         console.log(cards);

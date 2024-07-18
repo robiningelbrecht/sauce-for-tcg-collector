@@ -68,10 +68,4 @@ chrome.runtime.onMessage.addListener(function (message) {
     }
 });
 
-window.addEventListener('keydown', (e) => {
-    if (e.key === "Escape" && window.location.hash === '#modal') {
-        window.location.hash = ""
-    }
-});
-
 
