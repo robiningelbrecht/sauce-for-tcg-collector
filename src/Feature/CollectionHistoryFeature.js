@@ -116,6 +116,8 @@ export class CollectionHistoryFeature {
                 {
                     name: `Unique cards (${currentCollectionState.uniqueCards})`,
                     type: 'line',
+                    symbol: 'none',
+                    smooth: 0.6,
                     data: history.map(row => [
                         row.date,
                         row.uniqueCards
@@ -124,6 +126,8 @@ export class CollectionHistoryFeature {
                 {
                     name: `Unique variants (${currentCollectionState.uniqueVariants})`,
                     type: 'line',
+                    symbol: 'none',
+                    smooth: 0.6,
                     data: history.map(row => [
                         row.date,
                         row.uniqueVariants
@@ -132,6 +136,8 @@ export class CollectionHistoryFeature {
                 {
                     name: `Total cards (${currentCollectionState.totalCards})`,
                     type: 'line',
+                    symbol: 'none',
+                    smooth: 0.6,
                     data: history.map(row => [
                         row.date,
                         row.totalCards
@@ -140,6 +146,8 @@ export class CollectionHistoryFeature {
                 {
                     name: `Total value ($${currentCollectionState.totalValue})`,
                     type: 'line',
+                    symbol: 'none',
+                    smooth: 0.6,
                     tooltip: {
                         valueFormatter: (value) => '$' + value
                     },
