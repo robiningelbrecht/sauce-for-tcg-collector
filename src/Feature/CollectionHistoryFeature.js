@@ -1,9 +1,9 @@
 import {GoogleSheet} from "../Infrastructure/Utils/GoogleSheet";
+import {TcgRegion} from "../Domain/TcgCollector/TcgRegion";
 
 export class CollectionHistoryFeature {
-    constructor(settings, currentRegion) {
+    constructor(settings) {
         this.settings = settings;
-        this.currentRegion = currentRegion;
     }
 
     getId = () => {
@@ -15,11 +15,12 @@ export class CollectionHistoryFeature {
     }
 
     apply = async () => {
+        const currentRegion = TcgRegion.fromCurrentUrl();
         const googleSheetCollectionHistory = new GoogleSheet(
             this.settings.getGoogleSpreadSheetId(),
             'Collection history',
         );
-        const history = this.currentRegion.filterRows(await googleSheetCollectionHistory.parse(), true);
+        const history = currentRegion.filterRows(await googleSheetCollectionHistory.parse(), true);
         if (history.length === 0) {
             return;
         }

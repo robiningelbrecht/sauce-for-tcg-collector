@@ -1,9 +1,9 @@
 import {GoogleSheet} from "../Infrastructure/Utils/GoogleSheet";
+import {TcgRegion} from "../Domain/TcgCollector/TcgRegion";
 
 export class QuickAccessLinksFeature {
-    constructor(settings, currentRegion) {
+    constructor(settings) {
         this.settings = settings;
-        this.currentRegion = currentRegion;
     }
 
     getId = () => {
@@ -15,6 +15,7 @@ export class QuickAccessLinksFeature {
     }
 
     apply = async () => {
+        const currentRegion = TcgRegion.fromCurrentUrl();
         const $quickAccessContainer = document.querySelectorAll('div.dashboard-section div.list-group')[1];
         $quickAccessContainer.innerHTML = '<div class="loading-state-loading-spinner-underlay" style="display: flex; justify-content: center"><div class="loading-state-loading-spinner loading-spinner"></div></div>';
 
@@ -22,7 +23,7 @@ export class QuickAccessLinksFeature {
             this.settings.getGoogleSpreadSheetId(),
             'Slabs / Singles'
         );
-        const slabsAndSingles = this.currentRegion.filterRows(await googleSheetSlabsAndSingles.parse());
+        const slabsAndSingles = currentRegion.filterRows(await googleSheetSlabsAndSingles.parse());
         const singlesCardIds = slabsAndSingles.filter(row => row.type === 'Single').map(row => parseInt(row.cardId));
         const uri = `/cards?releaseDateOrder=newToOld&cardsPerPage=120&displayAs=images&sortBy=cardNameAsc&cards=${singlesCardIds.join(',')}`;
 
@@ -31,7 +32,7 @@ export class QuickAccessLinksFeature {
             'Quick access links',
         );
         const quickAccessLinks = (await googleSheetQuickAccessLinks.parse()).filter(row => {
-            return row[this.currentRegion.name] === "TRUE";
+            return row[currentRegion.name] === "TRUE";
         });
         quickAccessLinks.push({
             'title': 'Singles',
@@ -43,7 +44,7 @@ export class QuickAccessLinksFeature {
         quickAccessLinks.forEach(link => {
             const $quickAccessLink = document.createElement("a");
             $quickAccessLink.classList.add('list-group-item');
-            $quickAccessLink.setAttribute('href', this.currentRegion.buildUri(link.url));
+            $quickAccessLink.setAttribute('href', currentRegion.buildUri(link.url));
             $quickAccessLink.innerHTML = `
         <span class="list-group-item-left-item-container">
           <span aria-hidden="true" class="list-group-item-side-item-icon fa-solid ${link.icon} fa-fw"></span>

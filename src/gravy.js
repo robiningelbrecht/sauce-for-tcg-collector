@@ -1,4 +1,6 @@
 import {Settings} from "./Infrastructure/Settings";
+import {Toast} from "./Component/Toast";
+import {consolePrint} from "./Infrastructure/Utils/Console";
 
 const pourGravy = async () => {
     const settings = await Settings.fromSyncStorage();
@@ -26,5 +28,9 @@ const pourGravy = async () => {
 }
 
 
-pourGravy();
+pourGravy().catch(error => {
+    Toast.error(`Oops, something 🐟y is going on. Check console for details.`).show();
+    consolePrint(error.message);
+    consolePrint(error.stack);
+});
 
