@@ -1,4 +1,4 @@
-import {GoogleSheet} from "../Infrastructure/GoogleSheet";
+import {GoogleSheet} from "../Infrastructure/Utils/GoogleSheet";
 
 export class CollectionHistoryFeature {
     constructor(settings, currentRegion) {

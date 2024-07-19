@@ -1,4 +1,4 @@
-import {GoogleSheet} from "../Infrastructure/GoogleSheet";
+import {GoogleSheet} from "../Infrastructure/Utils/GoogleSheet";
 import {GradingCompany} from "../Domain/GradingCompany";
 
 export class PurchasePriceFeature {

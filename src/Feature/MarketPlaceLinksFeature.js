@@ -1,4 +1,4 @@
-import {MarketPlaceLinkFactory} from "../Infrastructure/MarketPlaceLinkFactory";
+import {MarketPlaceLinkFactory} from "../Infrastructure/Utils/MarketPlaceLinkFactory";
 
 export class MarketPlaceLinksFeature {
     constructor(settings) {
