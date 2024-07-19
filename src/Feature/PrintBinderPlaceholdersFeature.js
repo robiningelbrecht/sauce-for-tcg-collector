@@ -20,7 +20,7 @@ export class PrintBinderPlaceholdersFeature {
         return currentLocation.pathname.includes('/cards/jp/') || currentLocation.pathname.includes('/cards/intl/');
     }
 
-    apply = () => {
+    apply = async () => {
         const bodyHtml = document.body.innerHTML;
         const regex = /window.tcgcollector[\s]*=[\s]*{[\s]*appState:(.*),[\s]*}/mi;
         if (!regex.test(bodyHtml)) {

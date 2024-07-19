@@ -1,4 +1,4 @@
-export class Region {
+export class TcgRegion {
     constructor(name) {
         this.name = name;
     }
@@ -25,8 +25,8 @@ export class Region {
     static fromCurrentUrl() {
         const href = window.location.href.replace('#', '');
         if (href.split('/').length === 4) {
-            return new Region('all');
+            return new TcgRegion('all');
         }
-        return new Region(href.split('/').slice(-1)[0]);
+        return new TcgRegion(href.split('/').slice(-1)[0]);
     }
 }

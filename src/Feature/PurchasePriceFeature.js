@@ -1,5 +1,5 @@
-import {GoogleSheet} from "../GoogleSheet";
-import {GradingCompany} from "../GradingCompany";
+import {GoogleSheet} from "../Infrastructure/GoogleSheet";
+import {GradingCompany} from "../Domain/GradingCompany";
 
 export class PurchasePriceFeature {
     constructor(settings) {

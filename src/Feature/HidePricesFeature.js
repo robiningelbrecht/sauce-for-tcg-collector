@@ -1,4 +1,4 @@
-import {contains} from "../Utils";
+import {contains} from "../Infrastructure/Utils/Functions";
 
 export class HidePricesFeature {
     constructor(settings) {
@@ -13,7 +13,7 @@ export class HidePricesFeature {
         return this.settings.hidePrices();
     }
 
-    apply = () => {
+    apply = async () => {
         contains('*', /\$([\d]+\.?\d*)/g).forEach(element => {
             element.innerHTML = element.innerHTML.replace(/\$([\d]+\.?\d*)/g, '$—')
         });

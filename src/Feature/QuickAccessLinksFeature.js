@@ -1,4 +1,4 @@
-import {GoogleSheet} from "../GoogleSheet";
+import {GoogleSheet} from "../Infrastructure/GoogleSheet";
 
 export class QuickAccessLinksFeature {
     constructor(settings, currentRegion) {

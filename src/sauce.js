@@ -1,22 +1,24 @@
 import './../scss/sauce.scss';
-import Toastify from 'toastify-js'
-import {Settings} from "./Domain/Settings";
-import {NewMenuItemFeature} from "./Domain/Feature/NewMenuItemFeature";
-import {HidePricesFeature} from "./Domain/Feature/HidePricesFeature";
-import {CollectionHistoryFeature} from "./Domain/Feature/CollectionHistoryFeature";
-import {Region} from "./Domain/Region";
-import {DashboardRearrangementFeature} from "./Domain/Feature/DashboardRearrangementFeature";
-import {QuickAccessLinksFeature} from "./Domain/Feature/QuickAccessLinksFeature";
-import {PurchasePriceFeature} from "./Domain/Feature/PurchasePriceFeature";
-import {PrintBinderPlaceholdersFeature} from "./Domain/Feature/PrintBinderPlaceholdersFeature";
-import {consolePrint, consolePrintLogo} from "./Domain/Utils";
-import {MarketPlaceLinksFeature} from "./Domain/Feature/marketPlaceLinksFeature";
+import {Settings} from "./Infrastructure/Settings";
+import {NewMenuItemFeature} from "./Feature/NewMenuItemFeature";
+import {HidePricesFeature} from "./Feature/HidePricesFeature";
+import {CollectionHistoryFeature} from "./Feature/CollectionHistoryFeature";
+import {DashboardRearrangementFeature} from "./Feature/DashboardRearrangementFeature";
+import {QuickAccessLinksFeature} from "./Feature/QuickAccessLinksFeature";
+import {PurchasePriceFeature} from "./Feature/PurchasePriceFeature";
+import {PrintBinderPlaceholdersFeature} from "./Feature/PrintBinderPlaceholdersFeature";
+import {MarketPlaceLinksFeature} from "./Feature/marketPlaceLinksFeature";
+import {consolePrint, consolePrintLogo} from "./Infrastructure/Utils/Console";
+import {TcgRegion} from "./Domain/TcgCollector/TcgRegion";
+import {Toast} from "./Component/Toast";
+import {SyncAndDisplayJapanesePrices} from "./Feature/SyncAndDisplayJapanesePrices";
 
 const settings = await Settings.fromSyncStorage();
-const currentRegion = Region.fromCurrentUrl();
+const currentRegion = TcgRegion.fromCurrentUrl();
 const currentLocation = window.location;
 
 if (!settings.getGoogleSpreadSheetId()) {
+    Toast.error(`Google Spreadsheet ID not configured`).show();
     throw new Error('Google Spreadsheet ID not configured');
 }
 
@@ -31,6 +33,7 @@ const quickAccessLinksFeature = new QuickAccessLinksFeature(settings, currentReg
 const purchasePriceFeature = new PurchasePriceFeature(settings);
 const printBinderPlaceholdersFeature = new PrintBinderPlaceholdersFeature();
 const includeMarketPlaceLinksFeature = new MarketPlaceLinksFeature(settings);
+const syncAndDisplayJapanesePrices = new SyncAndDisplayJapanesePrices(settings);
 
 const featureList = [
     newMenuItemFeature,
@@ -40,7 +43,8 @@ const featureList = [
     quickAccessLinksFeature,
     purchasePriceFeature,
     printBinderPlaceholdersFeature,
-    includeMarketPlaceLinksFeature
+    includeMarketPlaceLinksFeature,
+    syncAndDisplayJapanesePrices
 ];
 
 consolePrintLogo('Applying that sweet sauce 🥫');
@@ -48,30 +52,19 @@ const $body = document.body;
 for (const feature of featureList) {
     if (feature.needsToBeAppliedForLocation(currentLocation)) {
         $body.classList.add(feature.getId());
-        try {
-            feature.apply();
-        } catch (error) {
-            Toastify({
-                text: `Oops, something 🐟y is going on. Check console for details.`,
-                className: "error",
-                duration: 5000,
-                destination: "#",
-                newWindow: false,
-                close: true,
-                gravity: "bottom", // `top` or `bottom`
-                position: "right", // `left`, `center` or `right`
-                stopOnFocus: true, // Prevents dismissing of toast on hover
-            }).showToast();
 
+        feature.apply().catch(error => {
+            Toast.error(`Oops, something 🐟y is going on. Check console for details.`).show();
+            consolePrint(error.message);
             consolePrint(error.stack);
-        }
+        });
 
     }
 }
 
-window.addEventListener('keydown', (e) => {
-    if (e.key === "Escape" && window.location.hash === '#modal') {
-        window.location.hash = ""
+chrome.runtime.onMessage.addListener(function (message) {
+    if (message.cmd === 'showToast') {
+        (new Toast(message.payload.type, message.payload.msg)).show();
     }
 });
 

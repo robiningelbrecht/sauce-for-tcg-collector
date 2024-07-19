@@ -5,8 +5,9 @@ module.exports = {
     mode: 'production',
     context: __dirname,
     entry: {
-        'sauce.min': './src/sauce.js',
         'gravy.min': './src/gravy.js',
+        'sauce.min': './src/sauce.js',
+        'seasoning.min': './src/seasoning.js',
         'popup/popup.min': './popup/popup.js',
     },
     output: {

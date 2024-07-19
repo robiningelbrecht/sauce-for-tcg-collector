@@ -11,7 +11,7 @@ export class NewMenuItemFeature {
         return document.querySelectorAll('div#navbar-buttons').length > 0;
     }
 
-    apply = () => {
+    apply = async () => {
         const $menu = document.querySelector('div#navbar-buttons');
 
         const $menuItem = document.createElement("a");

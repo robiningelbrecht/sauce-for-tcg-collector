@@ -1,4 +1,4 @@
-import {GoogleSheet} from "../GoogleSheet";
+import {GoogleSheet} from "../Infrastructure/GoogleSheet";
 
 export class CollectionHistoryFeature {
     constructor(settings, currentRegion) {
@@ -23,6 +23,12 @@ export class CollectionHistoryFeature {
         if (history.length === 0) {
             return;
         }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "Escape" && window.location.hash === '#modal') {
+                window.location.hash = ""
+            }
+        });
 
         const $appendTo = document.querySelector('main#page-content');
         const $modalLink = document.createElement('a');
@@ -110,6 +116,8 @@ export class CollectionHistoryFeature {
                 {
                     name: `Unique cards (${currentCollectionState.uniqueCards})`,
                     type: 'line',
+                    symbol: 'none',
+                    smooth: 0.6,
                     data: history.map(row => [
                         row.date,
                         row.uniqueCards
@@ -118,6 +126,8 @@ export class CollectionHistoryFeature {
                 {
                     name: `Unique variants (${currentCollectionState.uniqueVariants})`,
                     type: 'line',
+                    symbol: 'none',
+                    smooth: 0.6,
                     data: history.map(row => [
                         row.date,
                         row.uniqueVariants
@@ -126,6 +136,8 @@ export class CollectionHistoryFeature {
                 {
                     name: `Total cards (${currentCollectionState.totalCards})`,
                     type: 'line',
+                    symbol: 'none',
+                    smooth: 0.6,
                     data: history.map(row => [
                         row.date,
                         row.totalCards
@@ -134,6 +146,8 @@ export class CollectionHistoryFeature {
                 {
                     name: `Total value ($${currentCollectionState.totalValue})`,
                     type: 'line',
+                    symbol: 'none',
+                    smooth: 0.6,
                     tooltip: {
                         valueFormatter: (value) => '$' + value
                     },
