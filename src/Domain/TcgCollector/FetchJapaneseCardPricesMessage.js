@@ -1,13 +1,13 @@
 import {KEY_CURRENCY_RATE_JPY_TO_USD} from "../KeyValueRepository";
 
-export class FetchJapaneseCardPricesCommand {
+export class FetchJapaneseCardPricesMessage {
     constructor(tcgCardPriceRepository, keyValueRepository, currencyApi) {
         this.tcgCardPriceRepository = tcgCardPriceRepository;
         this.keyValueRepository = keyValueRepository;
         this.currencyApi = currencyApi;
     }
 
-    static getCommandName = () => {
+    static getId = () => {
         return 'FetchJapaneseCardPrices';
     }
 

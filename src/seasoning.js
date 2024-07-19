@@ -1,5 +1,5 @@
 import Container from "./Infrastructure/Container";
-import {ShowToastCommand} from "./Domain/ShowToastCommand";
+import {ShowToastMessage} from "./Domain/ShowToastMessage";
 import {Settings} from "./Infrastructure/Settings";
 
 chrome.runtime.onInstalled.addListener(async () => {
@@ -19,15 +19,15 @@ chrome.runtime.onInstalled.addListener(async () => {
 );*/
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request.cmd === ShowToastCommand.getCommandName()) {
+    if (request.cmd === ShowToastMessage.getId()) {
         return;
     }
 
-    const command = Container.getCommand(request.cmd);
-    command.handle(request.payload).then(response => {
+    const message = Container.getMessage(request.cmd);
+    message.handle(request.payload).then(response => {
         sendResponse(response);
-        if (command.getSuccessMessage) {
-            pushMessageToContent(command.getSuccessMessage(request.payload));
+        if (message.getSuccessMessage) {
+            pushMessageToContent(message.getSuccessMessage(request.payload));
         }
     }).catch(e => {
         pushErrorToContent(e.message);
@@ -39,7 +39,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 const pushMessageToContent = (msg) => {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {
-            cmd: ShowToastCommand.getCommandName(), payload: {type: 'success', msg: msg}
+            cmd: ShowToastMessage.getId(), payload: {type: 'success', msg: msg}
         });
     });
 }
@@ -47,7 +47,7 @@ const pushMessageToContent = (msg) => {
 const pushErrorToContent = (msg) => {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {
-            cmd: ShowToastCommand.getCommandName(), payload: {type: 'error', msg: msg}
+            cmd: ShowToastMessage.getId(), payload: {type: 'error', msg: msg}
         });
     });
 }

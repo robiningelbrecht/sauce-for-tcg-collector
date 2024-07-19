@@ -1,11 +1,11 @@
-export class SyncJpnCardPricesCommand {
+export class SyncJpnCardPricesMessage {
     constructor(api, tcgExpansionRepository, tcgCardPriceRepository) {
         this.api = api;
         this.tcgExpansionRepository = tcgExpansionRepository;
         this.tcgCardPriceRepository = tcgCardPriceRepository;
     }
 
-    static getCommandName = () => {
+    static getId = () => {
         return 'SyncJapanesePrices';
     }
 

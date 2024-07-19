@@ -14,9 +14,9 @@ import {PrintBinderPlaceholdersFeature} from "../Feature/PrintBinderPlaceholders
 import {MarketPlaceLinksFeature} from "../Feature/MarketPlaceLinksFeature";
 import {SyncAndDisplayJapanesePrices} from "../Feature/SyncAndDisplayJapanesePrices";
 import {Settings} from "./Settings";
-import {SyncJpnCardPricesCommand} from "../Domain/JpnCards/SyncJpnCardPricesCommand";
-import {FetchJapaneseCardPricesCommand} from "../Domain/TcgCollector/FetchJapaneseCardPricesCommand";
-import {ShowToastCommand} from "../Domain/ShowToastCommand";
+import {SyncJpnCardPricesMessage} from "../Domain/JpnCards/SyncJpnCardPricesMessage";
+import {FetchJapaneseCardPricesMessage} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessage";
+import {ShowToastMessage} from "../Domain/ShowToastMessage";
 
 const connection = new Dexie('TcgCollector');
 connection.version(1).stores({
@@ -42,14 +42,14 @@ const features = [
     new SyncAndDisplayJapanesePrices(settings),
 ];
 
-const commands = [];
-commands[FetchJapaneseCardPricesCommand.getCommandName()] = new FetchJapaneseCardPricesCommand(
+const messages = [];
+messages[FetchJapaneseCardPricesMessage.getId()] = new FetchJapaneseCardPricesMessage(
     tcgCardPriceRepository,
     keyValueRepository,
     new CurrencyApi()
 );
-commands[ShowToastCommand.getCommandName()] = new ShowToastCommand();
-commands[SyncJpnCardPricesCommand.getCommandName()] = new SyncJpnCardPricesCommand(
+messages[ShowToastMessage.getId()] = new ShowToastMessage();
+messages[SyncJpnCardPricesMessage.getId()] = new SyncJpnCardPricesMessage(
     new JpnCardsApi(),
     tcgExpansionRepository,
     tcgCardPriceRepository
@@ -62,12 +62,12 @@ const Container = {
     KeyValueRepository: keyValueRepository,
     TcgCardPriceRepository: tcgCardPriceRepository,
     Features: features,
-    getCommand: (commandName) => {
-        if (!commands.hasOwnProperty(commandName)) {
-            throw new Error(`Command ${commandName} not found`);
+    getMessage: (messageName) => {
+        if (!messages.hasOwnProperty(messageName)) {
+            throw new Error(`Message ${messageName} not found`);
         }
 
-        return commands[commandName];
+        return messages[messageName];
     }
 }
 

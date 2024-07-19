@@ -1,12 +1,12 @@
 import {Toast} from "../Component/Toast";
 
-export class ShowToastCommand {
+export class ShowToastMessage {
     constructor() {
 
     }
 
-    static getCommandName = () => {
-        return 'ShowToastCommand';
+    static getId = () => {
+        return 'ShowToast';
     }
 
     handle = (payload) => {

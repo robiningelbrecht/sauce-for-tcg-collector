@@ -2,7 +2,7 @@ import './../scss/sauce.scss';
 import {consolePrint, consolePrintLogo} from "./Infrastructure/Utils/Console";
 import {Toast} from "./Component/Toast";
 import Container from "./Infrastructure/Container";
-import {ShowToastCommand} from "./Domain/ShowToastCommand";
+import {ShowToastMessage} from "./Domain/ShowToastMessage";
 
 const currentLocation = window.location;
 
@@ -30,8 +30,8 @@ for (const feature of Container.Features) {
 }
 
 chrome.runtime.onMessage.addListener(function (request) {
-    if (request.cmd === ShowToastCommand.getCommandName()) {
-        Container.getCommand(request.cmd).handle(request.payload)
+    if (request.cmd === ShowToastMessage.getId()) {
+        Container.getMessage(request.cmd).handle(request.payload)
     }
 });
 

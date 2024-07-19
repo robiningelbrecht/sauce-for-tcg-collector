@@ -1,6 +1,6 @@
 import {Toast} from "../Component/Toast";
-import {SyncJpnCardPricesCommand} from "../Domain/JpnCards/SyncJpnCardPricesCommand";
-import {FetchJapaneseCardPricesCommand} from "../Domain/TcgCollector/FetchJapaneseCardPricesCommand";
+import {SyncJpnCardPricesMessage} from "../Domain/JpnCards/SyncJpnCardPricesMessage";
+import {FetchJapaneseCardPricesMessage} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessage";
 
 export class SyncAndDisplayJapanesePrices {
     constructor(settings) {
@@ -33,7 +33,7 @@ export class SyncAndDisplayJapanesePrices {
         $syncPricesButton.addEventListener('click', () => {
             // @TODO: Only allow one refresh per day.
             chrome.runtime.sendMessage({
-                cmd: SyncJpnCardPricesCommand.getCommandName(),
+                cmd: SyncJpnCardPricesMessage.getId(),
                 payload: {expansionCode: expansionCode}
             });
             Toast.success('Price update started. You can navigate away from this page.').show();
@@ -41,7 +41,7 @@ export class SyncAndDisplayJapanesePrices {
         document.querySelector('div#cards-page-buttons').appendChild($syncPricesButton);
 
         const cards = await chrome.runtime.sendMessage({
-            cmd: FetchJapaneseCardPricesCommand.getCommandName(),
+            cmd: FetchJapaneseCardPricesMessage.getId(),
             payload: {expansionCode: expansionCode}
         });
 
