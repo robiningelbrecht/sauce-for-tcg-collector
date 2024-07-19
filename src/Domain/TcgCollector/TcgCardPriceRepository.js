@@ -18,6 +18,7 @@ export class TcgCardPriceRepository{
         cards.forEach(card => {
             card.priceInUsdInCents = null;
             if (card.prices.length > 0) {
+                // @TODO: Use correct price source.
                 card.priceInUsdInCents = (card.prices[0].priceAmount * conversionRate.value).toFixed(2);
             }
         });

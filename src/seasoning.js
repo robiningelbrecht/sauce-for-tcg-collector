@@ -1,7 +1,4 @@
 import Container from "./Infrastructure/Container";
-import {SyncJpnCardPricesCommand} from "./Domain/JpnCards/SyncJpnCardPricesCommand";
-import {FetchJapaneseCardPricesCommand} from "./Domain/TcgCollector/FetchJapaneseCardPricesCommand";
-import {UpdateCurrencyConversionRatesCommand} from "./Domain/JpnCards/UpdateCurrencyConversionRatesCommand";
 import {ShowToastCommand} from "./Domain/ShowToastCommand";
 
 chrome.runtime.onInstalled.addListener(async () => {

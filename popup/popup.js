@@ -12,7 +12,8 @@ import Container from "../src/Infrastructure/Container";
 const initPopup = async () => {
     const settings = Container.Settings;
     const $form = document.querySelector("form");
-    const $submitButton = $form.querySelector('button');
+    const $submitButton = $form.querySelector('button[type="submit"]');
+    const $clearIndexedDbButton = $form.querySelector('button[type="button"]');
 
     $form.elements[SETTING_GOOGLE_SPREADSHEET_ID].value = settings.getGoogleSpreadSheetId();
     $form.elements[SETTING_HIDE_PRICES].checked = settings.hidePrices();
@@ -48,7 +49,7 @@ const initPopup = async () => {
         }
     });
 
-    $form.addEventListener("submit", async (e) => {
+    $form.addEventListener('submit', async (e) => {
         e.preventDefault();
         $submitButton.disabled = true;
         const formData = new FormData($form);
@@ -61,6 +62,11 @@ const initPopup = async () => {
             chrome.tabs.update(tab.id, {url: tab.url});
         });
     });
+
+    $clearIndexedDbButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        Container.Connection.delete();
+    })
 };
 
 initPopup();

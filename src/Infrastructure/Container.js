@@ -31,6 +31,18 @@ const keyValueRepository = new KeyValueRepository(connection);
 const tcgExpansionRepository = new TcgExpansionRepository(connection);
 const tcgCardPriceRepository = new TcgCardPriceRepository(connection, keyValueRepository);
 
+const features = [
+    new NewMenuItemFeature(settings),
+    new HidePricesFeature(settings),
+    new CollectionHistoryFeature(settings),
+    new DashboardRearrangementFeature(),
+    new QuickAccessLinksFeature(settings),
+    new PurchasePriceFeature(settings),
+    new PrintBinderPlaceholdersFeature(),
+    new MarketPlaceLinksFeature(settings),
+    new SyncAndDisplayJapanesePrices(settings),
+];
+
 const commands = [];
 commands[FetchJapaneseCardPricesCommand.getCommandName()] = new FetchJapaneseCardPricesCommand(
     tcgCardPriceRepository
@@ -48,20 +60,11 @@ commands[UpdateCurrencyConversionRatesCommand.getCommandName()] = new UpdateCurr
 
 const Container = {
     Settings: settings,
+    Connection: connection,
     TcgExpansionRepository: tcgExpansionRepository,
     KeyValueRepository: keyValueRepository,
     TcgCardPriceRepository: tcgCardPriceRepository,
-    Features: [
-        new NewMenuItemFeature(settings),
-        new HidePricesFeature(settings),
-        new CollectionHistoryFeature(settings),
-        new DashboardRearrangementFeature(),
-        new QuickAccessLinksFeature(settings),
-        new PurchasePriceFeature(settings),
-        new PrintBinderPlaceholdersFeature(),
-        new MarketPlaceLinksFeature(settings),
-        new SyncAndDisplayJapanesePrices(settings),
-    ],
+    Features: features,
     getCommand: (commandName) => {
         if (!commands.hasOwnProperty(commandName)) {
             throw new Error(`Command ${commandName} not found`);
