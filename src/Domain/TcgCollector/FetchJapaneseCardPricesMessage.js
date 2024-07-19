@@ -28,10 +28,37 @@ export class FetchJapaneseCardPricesMessage {
         const cards = await this.tcgCardPriceRepository.findByCardsIds(payload.cardIds);
 
         cards.forEach(card => {
-            card.priceInUsdInCents = null;
+            card.priceInUsd = null;
             if (card.prices.length > 0) {
-                // @TODO: Use correct price source.
-                card.priceInUsdInCents = (card.prices[0].priceAmount * conversionRate.value).toFixed(2);
+                // First try to find a price in JPY for "NM" card.
+                let price = card.prices.find(
+                    price => price.priceCurrency === 'JPY' && price.condition === 'NM'
+                );
+
+                if (!price) {
+                    // If not found, use any price in JYP.
+                    price = card.prices.find(price => price.priceCurrency === 'JPY');
+                }
+
+                if (!price) {
+                    // If not found, use price in USD for "Ungraded" card.
+                    price = card.prices.find(
+                        price => price.priceCurrency === 'USD Cents' && price.condition === 'Ungraded'
+                    );
+                }
+
+                if (!price) {
+                    // If not found, use first price.
+                    price = card.prices[0];
+                }
+
+                if (price.priceCurrency === 'USD Cents') {
+                    card.priceInUsd = (price.priceAmount / 100).toFixed(2);
+                } else if (price.priceCurrency === 'JPY') {
+                    card.priceInUsd = (price.priceAmount * conversionRate.value).toFixed(2);
+                }
+
+                card.urlToListing = price.listingUrl;
             }
         });
 

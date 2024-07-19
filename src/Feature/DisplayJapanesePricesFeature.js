@@ -29,8 +29,9 @@ export class DisplayJapanesePricesFeature {
 
         cards.forEach(card => {
             const $card = document.querySelector(`div.card-image-grid-item[data-card-id="${card.tcgCardId}"]`);
-            if ($card && card.priceInUsdInCents) {
-                $card.querySelector('.card-image-controls-item-price').innerHTML = `$${card.priceInUsdInCents}`;
+            if ($card && card.priceInUsd) {
+                $card.querySelector('.card-image-controls-item-price').innerHTML =
+                    `<a href="${card.urlToListing}" target="_blank">$${card.priceInUsd}</a>`;
             }
         });
     }
