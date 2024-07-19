@@ -12,7 +12,7 @@ import {QuickAccessLinksFeature} from "../Feature/QuickAccessLinksFeature";
 import {PurchasePriceFeature} from "../Feature/PurchasePriceFeature";
 import {PrintBinderPlaceholdersFeature} from "../Feature/PrintBinderPlaceholdersFeature";
 import {MarketPlaceLinksFeature} from "../Feature/MarketPlaceLinksFeature";
-import {SyncAndDisplayJapanesePrices} from "../Feature/SyncAndDisplayJapanesePrices";
+import {SyncAndDisplayJapanesePricesFeature} from "../Feature/SyncAndDisplayJapanesePricesFeature";
 import {Settings} from "./Settings";
 import {SyncJpnCardPricesMessage} from "../Domain/JpnCards/SyncJpnCardPricesMessage";
 import {FetchJapaneseCardPricesMessage} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessage";
@@ -39,7 +39,7 @@ const features = [
     new PurchasePriceFeature(settings),
     new PrintBinderPlaceholdersFeature(),
     new MarketPlaceLinksFeature(settings),
-    new SyncAndDisplayJapanesePrices(settings),
+    new SyncAndDisplayJapanesePricesFeature(settings),
 ];
 
 const messages = [];

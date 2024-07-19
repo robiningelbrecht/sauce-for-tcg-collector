@@ -2,7 +2,7 @@ import {Toast} from "../Component/Toast";
 import {SyncJpnCardPricesMessage} from "../Domain/JpnCards/SyncJpnCardPricesMessage";
 import {FetchJapaneseCardPricesMessage} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessage";
 
-export class SyncAndDisplayJapanesePrices {
+export class SyncAndDisplayJapanesePricesFeature {
     constructor(settings) {
         this.settings = settings;
     }
