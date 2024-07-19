@@ -9,6 +9,10 @@ export class SyncJpnCardPricesCommand {
         return 'SyncJapanesePrices';
     }
 
+    getSuccessMessage = (payload) => {
+        return `Prices for expansion "${payload.expansionCode}" have been synced`;
+    }
+
     handle = async (payload) => {
         const expansionCode = payload.expansionCode;
         const sets = (await this.api.getSets()).filter(set => set.set_code.toLowerCase() === expansionCode);

@@ -18,47 +18,32 @@ chrome.runtime.onInstalled.addListener(async () => {
     {url: [{hostSuffix: 'tcgcollector.com'}]}
 );*/
 
-chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
-        if (request.cmd === SyncJpnCardPricesCommand.getCommandName()) {
-            Container.getCommand(request.cmd).handle(request.payload)
-                .then(() => {
-                    pushMessageToContent(`Prices for expansion "${request.payload.expansionCode}" have been synced`);
-                })
-                .catch(e => {
-                    pushErrorToContent(`Could not sync prices: ${e.message}`);
-                });
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    const command = Container.getCommand(request.cmd);
+    command.handle(request.payload).then(response => {
+        sendResponse(response);
+        if (command.getSuccessMessage) {
+            pushMessageToContent(command.getSuccessMessage(request.payload));
         }
-        if (request.cmd === FetchJapaneseCardPricesCommand.getCommandName()) {
-            Container.getCommand(request.cmd).handle(request.payload).then(cards => {
-                sendResponse(cards);
-            }).catch(e => {
-                pushErrorToContent(`Could not fetch prices: ${e.message}`);
-            });
+    }).catch(e => {
+        pushErrorToContent(e.message);
+    });
 
-            return true;
-        }
-
-        if (request.cmd === UpdateCurrencyConversionRatesCommand.getCommandName()) {
-            Container.getCommand(request.cmd).handle(request.payload).then(() => {
-                sendResponse({});
-            }).catch(e => {
-                pushErrorToContent(`Could update currency conversion rates: ${e.message}`);
-            });
-
-            return true;
-        }
-    }
-);
+    return true;
+});
 
 const pushMessageToContent = (msg) => {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {cmd: ShowToastCommand.getCommandName(), payload: {type: 'success', msg: msg}});
+        chrome.tabs.sendMessage(tabs[0].id, {
+            cmd: ShowToastCommand.getCommandName(), payload: {type: 'success', msg: msg}
+        });
     });
 }
 
 const pushErrorToContent = (msg) => {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {cmd: ShowToastCommand.getCommandName(), payload: {type: 'error', msg: msg}});
+        chrome.tabs.sendMessage(tabs[0].id, {
+            cmd: ShowToastCommand.getCommandName(), payload: {type: 'error', msg: msg}
+        });
     });
 }
