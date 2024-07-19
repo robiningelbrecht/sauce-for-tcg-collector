@@ -19,6 +19,10 @@ chrome.runtime.onInstalled.addListener(async () => {
 );*/
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    if (request.cmd === ShowToastCommand.getCommandName()) {
+        return;
+    }
+
     const command = Container.getCommand(request.cmd);
     command.handle(request.payload).then(response => {
         sendResponse(response);
