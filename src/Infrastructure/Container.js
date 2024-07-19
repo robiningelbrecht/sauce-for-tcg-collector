@@ -50,7 +50,13 @@ const Container = {
         new PrintBinderPlaceholdersFeature(),
         new MarketPlaceLinksFeature(settings),
         new SyncAndDisplayJapanesePrices(settings),
-    ]
+    ],
+    Commands: {
+        FetchJapaneseCardPrices: 'FetchJapaneseCardPrices',
+        ShowToast: 'ShowToast',
+        SyncJapanesePrices: 'SyncJapanesePrices',
+        UpdateCurrencyConversionRates: 'UpdateCurrencyConversionRates'
+    }
 }
 
 export default Container;

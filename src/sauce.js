@@ -1,7 +1,6 @@
 import './../scss/sauce.scss';
 import {consolePrint, consolePrintLogo} from "./Infrastructure/Utils/Console";
 import {Toast} from "./Component/Toast";
-import Command from "./Infrastructure/Commands";
 import Container from "./Infrastructure/Container";
 
 const currentLocation = window.location;
@@ -30,7 +29,7 @@ for (const feature of Container.Features) {
 }
 
 chrome.runtime.onMessage.addListener(function (message) {
-    if (message.cmd === Command.ShowToast) {
+    if (message.cmd === Container.Commands.ShowToast) {
         (new Toast(message.payload.type, message.payload.msg)).show();
     }
 });

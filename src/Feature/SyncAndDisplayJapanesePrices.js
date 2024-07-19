@@ -1,6 +1,5 @@
 import {Toast} from "../Component/Toast";
-import Command from "../Infrastructure/Commands";
-import Commands from "../Infrastructure/Commands";
+import Container from "../Infrastructure/Container";
 
 export class SyncAndDisplayJapanesePrices {
     constructor(settings) {
@@ -33,7 +32,7 @@ export class SyncAndDisplayJapanesePrices {
         $syncPricesButton.addEventListener('click', () => {
             // @TODO: Only allow one refresh per day.
             chrome.runtime.sendMessage({
-                cmd: Command.SyncJapanesePrices,
+                cmd: Container.Commands.SyncJapanesePrices,
                 payload: {expansionCode: expansionCode}
             });
             Toast.success('Price update started. You can navigate away from this page.').show();
@@ -41,11 +40,11 @@ export class SyncAndDisplayJapanesePrices {
         document.querySelector('div#cards-page-buttons').appendChild($syncPricesButton);
 
         await chrome.runtime.sendMessage({
-            cmd: Command.UpdateCurrencyConversionRates,
+            cmd: Container.Commands.UpdateCurrencyConversionRates,
             payload: {}
         });
         const cards = await chrome.runtime.sendMessage({
-            cmd: Command.FetchJapaneseCardPrices,
+            cmd: Container.Commands.FetchJapaneseCardPrices,
             payload: {expansionCode: expansionCode}
         });
 

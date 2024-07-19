@@ -1,9 +1,9 @@
-import {Settings} from "./Infrastructure/Settings";
 import {Toast} from "./Component/Toast";
 import {consolePrint} from "./Infrastructure/Utils/Console";
+import Container from "./Infrastructure/Container";
 
 const pourGravy = async () => {
-    const settings = await Settings.fromSyncStorage();
+    const settings = Container.Settings;
     if (settings.getMarketPlaceLinks() !== 'cardMarket') {
         return;
     }

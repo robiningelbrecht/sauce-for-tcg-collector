@@ -1,4 +1,3 @@
-import Command from "./Infrastructure/Commands";
 import {KEY_CURRENCY_RATE_JPY_TO_USD} from "./Domain/KeyValueRepository";
 import Container from "./Infrastructure/Container";
 
@@ -18,7 +17,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        if (request.cmd === Command.SyncJapanesePrices) {
+        if (request.cmd === Container.Commands.SyncJapanesePrices) {
             Container.JpnCardsPriceSyncer.syncAndPersistForExpansion(request.payload.expansionCode)
                 .then(() => {
                     pushMessageToContent(`Prices for expansion "${request.payload.expansionCode}" have been synced`);
@@ -27,7 +26,7 @@ chrome.runtime.onMessage.addListener(
                     pushErrorToContent(`Could not sync prices: ${e.message}`);
                 });
         }
-        if (request.cmd === Command.FetchJapaneseCardPrices) {
+        if (request.cmd === Container.Commands.FetchJapaneseCardPrices) {
             Container.TcgCardPriceRepository.findByExpansion(request.payload.expansionCode).then(cards => {
                 sendResponse(cards);
             }).catch(e => {
@@ -37,7 +36,7 @@ chrome.runtime.onMessage.addListener(
             return true;
         }
 
-        if (request.cmd === Command.UpdateCurrencyConversionRates) {
+        if (request.cmd === Container.Commands.UpdateCurrencyConversionRates) {
             Container.KeyValueRepository.find(KEY_CURRENCY_RATE_JPY_TO_USD).then(rate => {
                 if (rate && (new Date()).setHours(0, 0, 0, 0) === (new Date(rate.updatedOn)).setHours(0, 0, 0, 0)) {
                     // Currency rate has already been updated today.
@@ -64,12 +63,12 @@ chrome.runtime.onMessage.addListener(
 
 const pushMessageToContent = (msg) => {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {cmd: Command.ShowToast, payload: {type: 'success', msg: msg}});
+        chrome.tabs.sendMessage(tabs[0].id, {cmd: Container.Commands.ShowToast, payload: {type: 'success', msg: msg}});
     });
 }
 
 const pushErrorToContent = (msg) => {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {cmd: Command.ShowToast, payload: {type: 'error', msg: msg}});
+        chrome.tabs.sendMessage(tabs[0].id, {cmd: Container.Commands.ShowToast, payload: {type: 'error', msg: msg}});
     });
 }

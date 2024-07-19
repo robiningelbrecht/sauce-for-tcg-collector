@@ -7,9 +7,10 @@ import {
     SETTING_MARKET_PLACE_LINKS,
     Settings
 } from "../src/Infrastructure/Settings";
+import Container from "../src/Infrastructure/Container";
 
 const initPopup = async () => {
-    const settings = await Settings.fromSyncStorage();
+    const settings = Container.Settings;
     const $form = document.querySelector("form");
     const $submitButton = $form.querySelector('button');
 
