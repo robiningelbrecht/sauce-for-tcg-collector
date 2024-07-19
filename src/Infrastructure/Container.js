@@ -17,6 +17,7 @@ import {Settings} from "./Settings";
 import {SyncJpnCardPricesCommand} from "../Domain/JpnCards/SyncJpnCardPricesCommand";
 import {FetchJapaneseCardPricesCommand} from "../Domain/TcgCollector/FetchJapaneseCardPricesCommand";
 import {UpdateCurrencyConversionRatesCommand} from "../Domain/JpnCards/UpdateCurrencyConversionRatesCommand";
+import {ShowToastCommand} from "../Domain/ShowToastCommand";
 
 const connection = new Dexie('TcgCollector');
 connection.version(1).stores({
@@ -48,7 +49,7 @@ const Container = {
     ],
     Commands: {
         FetchJapaneseCardPrices: new FetchJapaneseCardPricesCommand(tcgCardPriceRepository),
-        ShowToast: 'ShowToast',
+        ShowToast: new ShowToastCommand(),
         SyncJapanesePrices: new SyncJpnCardPricesCommand(
             new JpnCardsApi(),
             tcgExpansionRepository,

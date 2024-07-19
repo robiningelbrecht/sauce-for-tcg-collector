@@ -28,9 +28,9 @@ for (const feature of Container.Features) {
     }
 }
 
-chrome.runtime.onMessage.addListener(function (message) {
-    if (message.cmd === Container.Commands.ShowToast) {
-        (new Toast(message.payload.type, message.payload.msg)).show();
+chrome.runtime.onMessage.addListener(function (request) {
+    if (request.cmd === Container.Commands.ShowToast.getCommandName()) {
+        Container.Commands.ShowToast.handle(request.payload)
     }
 });
 
