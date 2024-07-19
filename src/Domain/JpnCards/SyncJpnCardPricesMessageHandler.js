@@ -1,4 +1,4 @@
-export class SyncJpnCardPricesMessage {
+export class SyncJpnCardPricesMessageHandler {
     constructor(api, tcgExpansionRepository, tcgCardPriceRepository) {
         this.api = api;
         this.tcgExpansionRepository = tcgExpansionRepository;

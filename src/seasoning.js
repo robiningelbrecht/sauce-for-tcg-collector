@@ -1,5 +1,6 @@
+import {DateTime} from "luxon";
 import Container from "./Infrastructure/Container";
-import {ShowToastMessage} from "./Domain/ShowToastMessage";
+import {ShowToastMessageHandler} from "./Domain/ShowToastMessageHandler";
 import {Settings} from "./Infrastructure/Settings";
 
 chrome.runtime.onInstalled.addListener(async () => {
@@ -8,26 +9,24 @@ chrome.runtime.onInstalled.addListener(async () => {
     });
 });
 
-// @TODO: Auto refresh price after a week.
-/*chrome.webNavigation.onCompleted.addListener(
+chrome.webNavigation.onCompleted.addListener(
     function () {
-        chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {message: "myMessage"});
-        });
+        const today = DateTime.now();
+        console.log(today.weekNumber);
     },
     {url: [{hostSuffix: 'tcgcollector.com'}]}
-);*/
+);
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request.cmd === ShowToastMessage.getId()) {
+    if (request.handler === ShowToastMessageHandler.getId()) {
         return;
     }
 
-    const message = Container.getMessage(request.cmd);
-    message.handle(request.payload).then(response => {
+    const messageHandler = Container.getMessageHandler(request.handler);
+    messageHandler.handle(request.payload).then(response => {
         sendResponse(response);
-        if (message.getSuccessMessage) {
-            pushMessageToContent(message.getSuccessMessage(request.payload));
+        if (messageHandler.getSuccessMessage) {
+            pushMessageToContent(messageHandler.getSuccessMessage(request.payload));
         }
     }).catch(e => {
         pushErrorToContent(e.message);
@@ -39,7 +38,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 const pushMessageToContent = (msg) => {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {
-            cmd: ShowToastMessage.getId(), payload: {type: 'success', msg: msg}
+            handler: ShowToastMessageHandler.getId(), payload: {type: 'success', msg: msg}
         });
     });
 }
@@ -47,7 +46,7 @@ const pushMessageToContent = (msg) => {
 const pushErrorToContent = (msg) => {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {
-            cmd: ShowToastMessage.getId(), payload: {type: 'error', msg: msg}
+            handler: ShowToastMessageHandler.getId(), payload: {type: 'error', msg: msg}
         });
     });
 }

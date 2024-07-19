@@ -14,9 +14,9 @@ import {PrintBinderPlaceholdersFeature} from "../Feature/PrintBinderPlaceholders
 import {MarketPlaceLinksFeature} from "../Feature/MarketPlaceLinksFeature";
 import {SyncJapanesePricesFeature} from "../Feature/SyncJapanesePricesFeature";
 import {Settings} from "./Settings";
-import {SyncJpnCardPricesMessage} from "../Domain/JpnCards/SyncJpnCardPricesMessage";
-import {FetchJapaneseCardPricesMessage} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessage";
-import {ShowToastMessage} from "../Domain/ShowToastMessage";
+import {SyncJpnCardPricesMessageHandler} from "../Domain/JpnCards/SyncJpnCardPricesMessageHandler";
+import {FetchJapaneseCardPricesMessageHandler} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessageHandler";
+import {ShowToastMessageHandler} from "../Domain/ShowToastMessageHandler";
 import {DisplayJapanesePricesFeature} from "../Feature/DisplayJapanesePricesFeature";
 
 const connection = new Dexie('TcgCollector');
@@ -44,14 +44,14 @@ const features = [
     new DisplayJapanesePricesFeature(settings),
 ];
 
-const messages = [];
-messages[FetchJapaneseCardPricesMessage.getId()] = new FetchJapaneseCardPricesMessage(
+const messagesHandlers = [];
+messagesHandlers[FetchJapaneseCardPricesMessageHandler.getId()] = new FetchJapaneseCardPricesMessageHandler(
     tcgCardPriceRepository,
     keyValueRepository,
     new CurrencyApi()
 );
-messages[ShowToastMessage.getId()] = new ShowToastMessage();
-messages[SyncJpnCardPricesMessage.getId()] = new SyncJpnCardPricesMessage(
+messagesHandlers[ShowToastMessageHandler.getId()] = new ShowToastMessageHandler();
+messagesHandlers[SyncJpnCardPricesMessageHandler.getId()] = new SyncJpnCardPricesMessageHandler(
     new JpnCardsApi(),
     tcgExpansionRepository,
     tcgCardPriceRepository
@@ -64,12 +64,12 @@ const Container = {
     KeyValueRepository: keyValueRepository,
     TcgCardPriceRepository: tcgCardPriceRepository,
     Features: features,
-    getMessage: (messageName) => {
-        if (!messages.hasOwnProperty(messageName)) {
-            throw new Error(`Message ${messageName} not found`);
+    getMessageHandler: (handlerName) => {
+        if (!messagesHandlers.hasOwnProperty(handlerName)) {
+            throw new Error(`MessageHandler ${handlerName} not found`);
         }
 
-        return messages[messageName];
+        return messagesHandlers[handlerName];
     }
 }
 

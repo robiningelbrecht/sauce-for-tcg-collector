@@ -1,6 +1,6 @@
 import {Toast} from "../Component/Toast";
-import {SyncJpnCardPricesMessage} from "../Domain/JpnCards/SyncJpnCardPricesMessage";
-import {FetchJapaneseCardPricesMessage} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessage";
+import {SyncJpnCardPricesMessageHandler} from "../Domain/JpnCards/SyncJpnCardPricesMessageHandler";
+import {FetchJapaneseCardPricesMessageHandler} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessageHandler";
 
 export class DisplayJapanesePricesFeature {
     constructor(settings) {
@@ -23,7 +23,7 @@ export class DisplayJapanesePricesFeature {
         const cardIds = [...document.querySelectorAll(`div.card-image-grid-item[data-card-id]`)]
             .map(el => parseInt(el.getAttribute('data-card-id')));
         const cards = await chrome.runtime.sendMessage({
-            cmd: FetchJapaneseCardPricesMessage.getId(),
+            handler: FetchJapaneseCardPricesMessageHandler.getId(),
             payload: {cardIds: cardIds}
         });
 

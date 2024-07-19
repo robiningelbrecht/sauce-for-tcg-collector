@@ -1,6 +1,6 @@
 import {Toast} from "../Component/Toast";
 
-export class ShowToastMessage {
+export class ShowToastMessageHandler {
     constructor() {
 
     }
