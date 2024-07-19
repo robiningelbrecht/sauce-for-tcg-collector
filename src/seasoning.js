@@ -17,8 +17,8 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        if (request.cmd === Container.Commands.SyncJapanesePrices) {
-            Container.JpnCardsPriceSyncer.syncAndPersistForExpansion(request.payload.expansionCode)
+        if (request.cmd === Container.Commands.SyncJapanesePrices.getCommandName()) {
+            Container.Commands.SyncJapanesePrices.handle(request.payload)
                 .then(() => {
                     pushMessageToContent(`Prices for expansion "${request.payload.expansionCode}" have been synced`);
                 })
@@ -26,8 +26,8 @@ chrome.runtime.onMessage.addListener(
                     pushErrorToContent(`Could not sync prices: ${e.message}`);
                 });
         }
-        if (request.cmd === Container.Commands.FetchJapaneseCardPrices) {
-            Container.TcgCardPriceRepository.findByExpansion(request.payload.expansionCode).then(cards => {
+        if (request.cmd === Container.Commands.FetchJapaneseCardPrices.getCommandName()) {
+            Container.Commands.FetchJapaneseCardPrices.handle(request.payload).then(cards => {
                 sendResponse(cards);
             }).catch(e => {
                 pushErrorToContent(`Could not fetch prices: ${e.message}`);

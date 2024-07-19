@@ -32,7 +32,7 @@ export class SyncAndDisplayJapanesePrices {
         $syncPricesButton.addEventListener('click', () => {
             // @TODO: Only allow one refresh per day.
             chrome.runtime.sendMessage({
-                cmd: Container.Commands.SyncJapanesePrices,
+                cmd: Container.Commands.SyncJapanesePrices.getCommandName(),
                 payload: {expansionCode: expansionCode}
             });
             Toast.success('Price update started. You can navigate away from this page.').show();
@@ -44,7 +44,7 @@ export class SyncAndDisplayJapanesePrices {
             payload: {}
         });
         const cards = await chrome.runtime.sendMessage({
-            cmd: Container.Commands.FetchJapaneseCardPrices,
+            cmd: Container.Commands.FetchJapaneseCardPrices.getCommandName(),
             payload: {expansionCode: expansionCode}
         });
 

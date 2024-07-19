@@ -1,11 +1,16 @@
-export class JpnCardsPriceSyncer {
+export class SyncJpnCardPrices {
     constructor(api, tcgExpansionRepository, tcgCardPriceRepository) {
         this.api = api;
         this.tcgExpansionRepository = tcgExpansionRepository;
         this.tcgCardPriceRepository = tcgCardPriceRepository;
     }
 
-    syncAndPersistForExpansion = async (expansionCode) => {
+    getCommandName = () => {
+        return 'SyncJapanesePrices';
+    }
+
+    handle = async (payload) => {
+        const expansionCode = payload.expansionCode;
         const sets = (await this.api.getSets()).filter(set => set.set_code.toLowerCase() === expansionCode);
         if (sets.length !== 1) {
             throw new Error(`Prices for expansion "${expansionCode}" not found`);
