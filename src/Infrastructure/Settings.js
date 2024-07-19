@@ -13,6 +13,18 @@ export class Settings {
         this.storage = storage;
     }
 
+    static getDefaults = () => {
+        return {
+            SETTING_HIDE_PRICES: false,
+            SETTING_MARKET_PLACE_LINKS: 'none',
+            SETTING_CARD_MARKET_CARD_LANGUAGES: [],
+            SETTING_CARD_MARKET_SELLER_LOCATIONS: [],
+            SETTING_CARD_MARKET_MIN_CONDITION: 2,
+            SETTING_EBAY_LISTING_TYPE: 'all',
+            SETTING_EBAY_SORT_BY: 'best_match'
+        }
+    }
+
     getGoogleSpreadSheetId = () => {
         return this.storage[SETTING_GOOGLE_SPREADSHEET_ID] || '';
     }

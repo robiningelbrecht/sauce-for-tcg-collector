@@ -1,8 +1,11 @@
 import Container from "./Infrastructure/Container";
 import {ShowToastCommand} from "./Domain/ShowToastCommand";
+import {Settings} from "./Infrastructure/Settings";
 
 chrome.runtime.onInstalled.addListener(async () => {
-    // @TODO: Save default settings.
+    await chrome.storage.sync.set({
+        settings: Settings.getDefaults()
+    });
 });
 
 // @TODO: Auto refresh price after a week.
