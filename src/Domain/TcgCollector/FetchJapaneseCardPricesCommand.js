@@ -3,7 +3,7 @@ export class FetchJapaneseCardPricesCommand {
         this.tcgCardPriceRepository = tcgCardPriceRepository;
     }
 
-    getCommandName = () => {
+    static getCommandName = () => {
         return 'FetchJapaneseCardPrices';
     }
 

@@ -5,8 +5,8 @@ export class ShowToastCommand {
 
     }
 
-    getCommandName = () => {
-        return 'FetchJapaneseCardPrices';
+    static getCommandName = () => {
+        return 'ShowToastCommand';
     }
 
     handle = (payload) => {

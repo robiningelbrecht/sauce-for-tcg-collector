@@ -6,7 +6,7 @@ export class UpdateCurrencyConversionRatesCommand {
         this.currencyApi = currencyApi;
     }
 
-    getCommandName = () => {
+    static getCommandName = () => {
         return 'UpdateCurrencyConversionRates';
     }
 

@@ -31,6 +31,21 @@ const keyValueRepository = new KeyValueRepository(connection);
 const tcgExpansionRepository = new TcgExpansionRepository(connection);
 const tcgCardPriceRepository = new TcgCardPriceRepository(connection, keyValueRepository);
 
+const commands = [];
+commands[FetchJapaneseCardPricesCommand.getCommandName()] = new FetchJapaneseCardPricesCommand(
+    tcgCardPriceRepository
+);
+commands[ShowToastCommand.getCommandName()] = new ShowToastCommand();
+commands[SyncJpnCardPricesCommand.getCommandName()] = new SyncJpnCardPricesCommand(
+    new JpnCardsApi(),
+    tcgExpansionRepository,
+    tcgCardPriceRepository
+);
+commands[UpdateCurrencyConversionRatesCommand.getCommandName()] = new UpdateCurrencyConversionRatesCommand(
+    keyValueRepository,
+    new CurrencyApi()
+);
+
 const Container = {
     Settings: settings,
     TcgExpansionRepository: tcgExpansionRepository,
@@ -47,18 +62,12 @@ const Container = {
         new MarketPlaceLinksFeature(settings),
         new SyncAndDisplayJapanesePrices(settings),
     ],
-    Commands: {
-        FetchJapaneseCardPrices: new FetchJapaneseCardPricesCommand(tcgCardPriceRepository),
-        ShowToast: new ShowToastCommand(),
-        SyncJapanesePrices: new SyncJpnCardPricesCommand(
-            new JpnCardsApi(),
-            tcgExpansionRepository,
-            tcgCardPriceRepository
-        ),
-        UpdateCurrencyConversionRates: new UpdateCurrencyConversionRatesCommand(
-            keyValueRepository,
-            new CurrencyApi()
-        )
+    getCommand: (commandName) => {
+        if (!commands.hasOwnProperty(commandName)) {
+            throw new Error(`Command ${commandName} not found`);
+        }
+
+        return commands[commandName];
     }
 }
 

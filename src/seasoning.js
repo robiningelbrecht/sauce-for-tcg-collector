@@ -1,4 +1,8 @@
 import Container from "./Infrastructure/Container";
+import {SyncJpnCardPricesCommand} from "./Domain/JpnCards/SyncJpnCardPricesCommand";
+import {FetchJapaneseCardPricesCommand} from "./Domain/TcgCollector/FetchJapaneseCardPricesCommand";
+import {UpdateCurrencyConversionRatesCommand} from "./Domain/JpnCards/UpdateCurrencyConversionRatesCommand";
+import {ShowToastCommand} from "./Domain/ShowToastCommand";
 
 chrome.runtime.onInstalled.addListener(async () => {
     // @TODO: Save default settings.
@@ -16,8 +20,8 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        if (request.cmd === Container.Commands.SyncJapanesePrices.getCommandName()) {
-            Container.Commands.SyncJapanesePrices.handle(request.payload)
+        if (request.cmd === SyncJpnCardPricesCommand.getCommandName()) {
+            Container.getCommand(request.cmd).handle(request.payload)
                 .then(() => {
                     pushMessageToContent(`Prices for expansion "${request.payload.expansionCode}" have been synced`);
                 })
@@ -25,8 +29,8 @@ chrome.runtime.onMessage.addListener(
                     pushErrorToContent(`Could not sync prices: ${e.message}`);
                 });
         }
-        if (request.cmd === Container.Commands.FetchJapaneseCardPrices.getCommandName()) {
-            Container.Commands.FetchJapaneseCardPrices.handle(request.payload).then(cards => {
+        if (request.cmd === FetchJapaneseCardPricesCommand.getCommandName()) {
+            Container.getCommand(request.cmd).handle(request.payload).then(cards => {
                 sendResponse(cards);
             }).catch(e => {
                 pushErrorToContent(`Could not fetch prices: ${e.message}`);
@@ -35,8 +39,8 @@ chrome.runtime.onMessage.addListener(
             return true;
         }
 
-        if (request.cmd === Container.Commands.UpdateCurrencyConversionRates.getCommandName()) {
-            Container.Commands.UpdateCurrencyConversionRates.handle(request.payload).then(() => {
+        if (request.cmd === UpdateCurrencyConversionRatesCommand.getCommandName()) {
+            Container.getCommand(request.cmd).handle(request.payload).then(() => {
                 sendResponse({});
             }).catch(e => {
                 pushErrorToContent(`Could update currency conversion rates: ${e.message}`);
@@ -49,12 +53,12 @@ chrome.runtime.onMessage.addListener(
 
 const pushMessageToContent = (msg) => {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {cmd: Container.Commands.ShowToast.getCommandName(), payload: {type: 'success', msg: msg}});
+        chrome.tabs.sendMessage(tabs[0].id, {cmd: ShowToastCommand.getCommandName(), payload: {type: 'success', msg: msg}});
     });
 }
 
 const pushErrorToContent = (msg) => {
     chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {cmd: Container.Commands.ShowToast.getCommandName(), payload: {type: 'error', msg: msg}});
+        chrome.tabs.sendMessage(tabs[0].id, {cmd: ShowToastCommand.getCommandName(), payload: {type: 'error', msg: msg}});
     });
 }

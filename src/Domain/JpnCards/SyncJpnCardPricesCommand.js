@@ -5,7 +5,7 @@ export class SyncJpnCardPricesCommand {
         this.tcgCardPriceRepository = tcgCardPriceRepository;
     }
 
-    getCommandName = () => {
+    static getCommandName = () => {
         return 'SyncJapanesePrices';
     }
 
