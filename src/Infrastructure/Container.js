@@ -14,8 +14,9 @@ import {PrintBinderPlaceholdersFeature} from "../Feature/PrintBinderPlaceholders
 import {MarketPlaceLinksFeature} from "../Feature/MarketPlaceLinksFeature";
 import {SyncAndDisplayJapanesePrices} from "../Feature/SyncAndDisplayJapanesePrices";
 import {Settings} from "./Settings";
-import {SyncJpnCardPrices} from "../Domain/JpnCards/SyncJpnCardPrices";
-import {FetchJapaneseCardPrices} from "../Domain/TcgCollector/FetchJapaneseCardPrices";
+import {SyncJpnCardPricesCommand} from "../Domain/JpnCards/SyncJpnCardPricesCommand";
+import {FetchJapaneseCardPricesCommand} from "../Domain/TcgCollector/FetchJapaneseCardPricesCommand";
+import {UpdateCurrencyConversionRatesCommand} from "../Domain/JpnCards/UpdateCurrencyConversionRatesCommand";
 
 const connection = new Dexie('TcgCollector');
 connection.version(1).stores({
@@ -34,7 +35,6 @@ const Container = {
     TcgExpansionRepository: tcgExpansionRepository,
     KeyValueRepository: keyValueRepository,
     TcgCardPriceRepository: tcgCardPriceRepository,
-    CurrencyApi: new CurrencyApi(),
     Features: [
         new NewMenuItemFeature(settings),
         new HidePricesFeature(settings),
@@ -47,14 +47,17 @@ const Container = {
         new SyncAndDisplayJapanesePrices(settings),
     ],
     Commands: {
-        FetchJapaneseCardPrices: new FetchJapaneseCardPrices(tcgCardPriceRepository),
+        FetchJapaneseCardPrices: new FetchJapaneseCardPricesCommand(tcgCardPriceRepository),
         ShowToast: 'ShowToast',
-        SyncJapanesePrices: new SyncJpnCardPrices(
+        SyncJapanesePrices: new SyncJpnCardPricesCommand(
             new JpnCardsApi(),
             tcgExpansionRepository,
             tcgCardPriceRepository
         ),
-        UpdateCurrencyConversionRates: 'UpdateCurrencyConversionRates'
+        UpdateCurrencyConversionRates: new UpdateCurrencyConversionRatesCommand(
+            keyValueRepository,
+            new CurrencyApi()
+        )
     }
 }
 

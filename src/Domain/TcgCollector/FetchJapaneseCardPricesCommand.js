@@ -1,4 +1,4 @@
-export class FetchJapaneseCardPrices {
+export class FetchJapaneseCardPricesCommand {
     constructor(tcgCardPriceRepository) {
         this.tcgCardPriceRepository = tcgCardPriceRepository;
     }

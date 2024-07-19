@@ -1,4 +1,3 @@
-import {KEY_CURRENCY_RATE_JPY_TO_USD} from "./Domain/KeyValueRepository";
 import Container from "./Infrastructure/Container";
 
 chrome.runtime.onInstalled.addListener(async () => {
@@ -36,22 +35,9 @@ chrome.runtime.onMessage.addListener(
             return true;
         }
 
-        if (request.cmd === Container.Commands.UpdateCurrencyConversionRates) {
-            Container.KeyValueRepository.find(KEY_CURRENCY_RATE_JPY_TO_USD).then(rate => {
-                if (rate && (new Date()).setHours(0, 0, 0, 0) === (new Date(rate.updatedOn)).setHours(0, 0, 0, 0)) {
-                    // Currency rate has already been updated today.
-                    sendResponse({});
-                }
-
-                Container.CurrencyApi.getRatesForJpy().then(rates => {
-                    Container.KeyValueRepository.save(
-                        KEY_CURRENCY_RATE_JPY_TO_USD,
-                        rates.jpy.usd,
-                        new Date(),
-                    );
-
-                    sendResponse({});
-                });
+        if (request.cmd === Container.Commands.UpdateCurrencyConversionRates.getCommandName()) {
+            Container.Commands.UpdateCurrencyConversionRates.handle(request.payload).then(() => {
+                sendResponse({});
             }).catch(e => {
                 pushErrorToContent(`Could update currency conversion rates: ${e.message}`);
             });

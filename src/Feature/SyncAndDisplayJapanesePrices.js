@@ -40,7 +40,7 @@ export class SyncAndDisplayJapanesePrices {
         document.querySelector('div#cards-page-buttons').appendChild($syncPricesButton);
 
         await chrome.runtime.sendMessage({
-            cmd: Container.Commands.UpdateCurrencyConversionRates,
+            cmd: Container.Commands.UpdateCurrencyConversionRates.getCommandName(),
             payload: {}
         });
         const cards = await chrome.runtime.sendMessage({
