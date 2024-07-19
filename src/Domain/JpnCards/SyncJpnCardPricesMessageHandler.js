@@ -1,3 +1,5 @@
+import {DateTime} from "luxon";
+
 export class SyncJpnCardPricesMessageHandler {
     constructor(api, tcgExpansionRepository, tcgCardPriceRepository) {
         this.api = api;
@@ -26,7 +28,7 @@ export class SyncJpnCardPricesMessageHandler {
         await this.tcgExpansionRepository.save({
             expansionCode: set.set_code.toLowerCase(),
             expansionName: set.name,
-            updatedOn: new Date()
+            updatedOn: DateTime.now().toISO()
         });
 
         await this.tcgCardPriceRepository.deleteForExpansion(expansionCode);

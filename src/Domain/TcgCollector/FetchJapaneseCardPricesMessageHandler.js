@@ -16,14 +16,14 @@ export class FetchJapaneseCardPricesMessageHandler {
         const rate = await this.keyValueRepository.find(KEY_CURRENCY_RATE_JPY_TO_USD);
         const today = DateTime.now();
 
-        if (!rate || !today.hasSame(DateTime.fromJSDate(new Date(rate.updatedOn)), 'day', {})) {
+        if (!rate || !today.hasSame(DateTime.fromISO(rate.updatedOn), 'day', {})) {
             // Currency need to be imported for today.
             const rates = await this.currencyApi.getRatesForJpy();
 
             await this.keyValueRepository.save(
                 KEY_CURRENCY_RATE_JPY_TO_USD,
                 rates.jpy.usd,
-                new Date(),
+                today.toISO(),
             );
         }
 

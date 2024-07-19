@@ -12,7 +12,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 chrome.webNavigation.onCompleted.addListener(
     function () {
         const today = DateTime.now();
-        console.log(today.weekNumber);
+        //console.log(today.weekNumber);
     },
     {url: [{hostSuffix: 'tcgcollector.com'}]}
 );
