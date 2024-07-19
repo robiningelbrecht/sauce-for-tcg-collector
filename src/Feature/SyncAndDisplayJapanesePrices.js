@@ -1,5 +1,4 @@
 import {Toast} from "../Component/Toast";
-import {UpdateCurrencyConversionRatesCommand} from "../Domain/JpnCards/UpdateCurrencyConversionRatesCommand";
 import {SyncJpnCardPricesCommand} from "../Domain/JpnCards/SyncJpnCardPricesCommand";
 import {FetchJapaneseCardPricesCommand} from "../Domain/TcgCollector/FetchJapaneseCardPricesCommand";
 
@@ -41,10 +40,6 @@ export class SyncAndDisplayJapanesePrices {
         });
         document.querySelector('div#cards-page-buttons').appendChild($syncPricesButton);
 
-        await chrome.runtime.sendMessage({
-            cmd: UpdateCurrencyConversionRatesCommand.getCommandName(),
-            payload: {}
-        });
         const cards = await chrome.runtime.sendMessage({
             cmd: FetchJapaneseCardPricesCommand.getCommandName(),
             payload: {expansionCode: expansionCode}

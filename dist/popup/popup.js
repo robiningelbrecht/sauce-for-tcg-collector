@@ -8,7 +8,6 @@ import {
     Settings
 } from "../src/Infrastructure/Settings";
 import Container from "../src/Infrastructure/Container";
-import {Toast} from "../src/Component/Toast";
 
 const initPopup = async () => {
     const settings = Container.Settings;
@@ -67,8 +66,6 @@ const initPopup = async () => {
     $clearIndexedDbButton.addEventListener('click', (e) => {
         e.preventDefault();
         Container.Connection.delete();
-
-        Toast.success('IndexedDB has been cleared');
     })
 };
 

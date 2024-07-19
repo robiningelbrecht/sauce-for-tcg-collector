@@ -16,7 +16,6 @@ import {SyncAndDisplayJapanesePrices} from "../Feature/SyncAndDisplayJapanesePri
 import {Settings} from "./Settings";
 import {SyncJpnCardPricesCommand} from "../Domain/JpnCards/SyncJpnCardPricesCommand";
 import {FetchJapaneseCardPricesCommand} from "../Domain/TcgCollector/FetchJapaneseCardPricesCommand";
-import {UpdateCurrencyConversionRatesCommand} from "../Domain/JpnCards/UpdateCurrencyConversionRatesCommand";
 import {ShowToastCommand} from "../Domain/ShowToastCommand";
 
 const connection = new Dexie('TcgCollector');
@@ -29,7 +28,7 @@ connection.version(1).stores({
 const settings = await Settings.fromSyncStorage();
 const keyValueRepository = new KeyValueRepository(connection);
 const tcgExpansionRepository = new TcgExpansionRepository(connection);
-const tcgCardPriceRepository = new TcgCardPriceRepository(connection, keyValueRepository);
+const tcgCardPriceRepository = new TcgCardPriceRepository(connection);
 
 const features = [
     new NewMenuItemFeature(settings),
@@ -45,17 +44,15 @@ const features = [
 
 const commands = [];
 commands[FetchJapaneseCardPricesCommand.getCommandName()] = new FetchJapaneseCardPricesCommand(
-    tcgCardPriceRepository
+    tcgCardPriceRepository,
+    keyValueRepository,
+    new CurrencyApi()
 );
 commands[ShowToastCommand.getCommandName()] = new ShowToastCommand();
 commands[SyncJpnCardPricesCommand.getCommandName()] = new SyncJpnCardPricesCommand(
     new JpnCardsApi(),
     tcgExpansionRepository,
     tcgCardPriceRepository
-);
-commands[UpdateCurrencyConversionRatesCommand.getCommandName()] = new UpdateCurrencyConversionRatesCommand(
-    keyValueRepository,
-    new CurrencyApi()
 );
 
 const Container = {

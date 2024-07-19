@@ -1,9 +1,6 @@
-import {KEY_CURRENCY_RATE_JPY_TO_USD, KeyValueRepository} from "../KeyValueRepository";
-
-export class TcgCardPriceRepository{
-    constructor(connection, keyValueRepository) {
+export class TcgCardPriceRepository {
+    constructor(connection) {
         this.connection = connection;
-        this.keyValueRepository = keyValueRepository;
     }
 
     deleteForExpansion = async (expansionCode) => {
@@ -11,18 +8,9 @@ export class TcgCardPriceRepository{
         await this.connection.TcgCardPrice.bulkDelete(cardIds);
     }
 
-    findByExpansion = async (expansionCode)=> {
-        const conversionRate = await this.keyValueRepository.find(KEY_CURRENCY_RATE_JPY_TO_USD);
-        const cards = await this.connection.TcgCardPrice.where('expansionCode').equals(expansionCode).toArray();
-
-        cards.forEach(card => {
-            card.priceInUsdInCents = null;
-            if (card.prices.length > 0) {
-                // @TODO: Use correct price source.
-                card.priceInUsdInCents = (card.prices[0].priceAmount * conversionRate.value).toFixed(2);
-            }
-        });
-        return cards;
+    findByExpansion = async (expansionCode) => {
+        const collection = await this.connection.TcgCardPrice.where('expansionCode').equals(expansionCode);
+        return collection.toArray();
     }
 
     save = async (tcgCardPrice) => {
