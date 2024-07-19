@@ -13,6 +13,11 @@ export class TcgCardPriceRepository {
         return collection.toArray();
     }
 
+    findByCardsIds = async (cardsIds) => {
+        const collection = await this.connection.TcgCardPrice.where('tcgCardId').anyOf(cardsIds);
+        return collection.toArray();
+    }
+
     save = async (tcgCardPrice) => {
         await this.connection.TcgCardPrice.put(tcgCardPrice);
     }

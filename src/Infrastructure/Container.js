@@ -12,11 +12,12 @@ import {QuickAccessLinksFeature} from "../Feature/QuickAccessLinksFeature";
 import {PurchasePriceFeature} from "../Feature/PurchasePriceFeature";
 import {PrintBinderPlaceholdersFeature} from "../Feature/PrintBinderPlaceholdersFeature";
 import {MarketPlaceLinksFeature} from "../Feature/MarketPlaceLinksFeature";
-import {SyncAndDisplayJapanesePricesFeature} from "../Feature/SyncAndDisplayJapanesePricesFeature";
+import {SyncJapanesePricesFeature} from "../Feature/SyncJapanesePricesFeature";
 import {Settings} from "./Settings";
 import {SyncJpnCardPricesMessage} from "../Domain/JpnCards/SyncJpnCardPricesMessage";
 import {FetchJapaneseCardPricesMessage} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessage";
 import {ShowToastMessage} from "../Domain/ShowToastMessage";
+import {DisplayJapanesePricesFeature} from "../Feature/DisplayJapanesePricesFeature";
 
 const connection = new Dexie('TcgCollector');
 connection.version(1).stores({
@@ -39,7 +40,8 @@ const features = [
     new PurchasePriceFeature(settings),
     new PrintBinderPlaceholdersFeature(),
     new MarketPlaceLinksFeature(settings),
-    new SyncAndDisplayJapanesePricesFeature(settings),
+    new SyncJapanesePricesFeature(settings),
+    new DisplayJapanesePricesFeature(settings),
 ];
 
 const messages = [];

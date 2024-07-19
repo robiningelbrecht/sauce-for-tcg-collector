@@ -1,14 +1,13 @@
 import {Toast} from "../Component/Toast";
 import {SyncJpnCardPricesMessage} from "../Domain/JpnCards/SyncJpnCardPricesMessage";
-import {FetchJapaneseCardPricesMessage} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessage";
 
-export class SyncAndDisplayJapanesePricesFeature {
+export class SyncJapanesePricesFeature {
     constructor(settings) {
         this.settings = settings;
     }
 
     getId = () => {
-        return 'display-japanese-prices-feature';
+        return 'sync-japanese-prices-feature';
     };
 
     needsToBeAppliedForLocation = (currentLocation) => {
@@ -31,7 +30,6 @@ export class SyncAndDisplayJapanesePricesFeature {
         $syncPricesButton.classList.add(...['button', 'button-plain-alt']);
         $syncPricesButton.innerHTML = `<span aria-hidden="true" class="button-icon fa-solid fa-rotate fa-fw"></span> Prices`;
         $syncPricesButton.addEventListener('click', () => {
-            // @TODO: Only allow one refresh per day.
             chrome.runtime.sendMessage({
                 cmd: SyncJpnCardPricesMessage.getId(),
                 payload: {expansionCode: expansionCode}
@@ -39,18 +37,6 @@ export class SyncAndDisplayJapanesePricesFeature {
             Toast.success('Price update started. You can navigate away from this page.').show();
         });
         document.querySelector('div#cards-page-buttons').appendChild($syncPricesButton);
-
-        const cards = await chrome.runtime.sendMessage({
-            cmd: FetchJapaneseCardPricesMessage.getId(),
-            payload: {expansionCode: expansionCode}
-        });
-
-        cards.forEach(card => {
-            const $card = document.querySelector(`div.card-image-grid-item[data-card-id="${card.tcgCardId}"]`);
-            if ($card && card.priceInUsdInCents) {
-                $card.querySelector('.card-image-controls-item-price').innerHTML = `$${card.priceInUsdInCents}`;
-            }
-        });
     }
 
 }
