@@ -55,7 +55,7 @@ export class PrintBinderPlaceholdersFeature {
         document.body.appendChild($printWrapper);
 
         const $printButton = document.createElement('button');
-        $printButton.classList.add(...['button', 'button-primary', 'print-placeholders']);
+        $printButton.classList.add(...['button', 'button-primary', 'print']);
         $printButton.setAttribute('title', 'Print binder placeholders');
         $printButton.innerHTML = `<span class="fa-solid fa-print"></span><div>Print binder placeholders</div>`;
         $printButton.addEventListener('click', () => {

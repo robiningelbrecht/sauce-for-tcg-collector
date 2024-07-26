@@ -71,6 +71,81 @@ body.market-place-links-feature {
   }
 }
 
+/* PRINT BINDER EXPANSION LOGOS */
+body.print-binder-expansion-logos {
+  div#expansion-search-result-header {
+    display: flex;
+    align-items: center;
+  }
+
+  button.print {
+    display: flex;
+    align-items: center;
+    min-width: auto;
+    margin-left: 15px;
+    padding: .175rem .35rem;
+    column-gap: 5px;
+  }
+
+  #print {
+    display: none;
+
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    justify-items: center;
+    row-gap: 10px;
+    color: #000;
+
+    .expansion {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 3.5cm !important;
+      width: 3.5cm !important;
+      min-width: 3.5cm !important;
+      max-width: 3.5cm !important;
+      border-radius: 50%;
+      border: 1px solid #000;
+
+      img.logo {
+        max-width: 95%;
+        max-height: 60%;
+      }
+
+      img.symbol {
+        position: absolute;
+        bottom: 8px;
+        width: 25px;
+      }
+
+      &:nth-child(35n) {
+        page-break-after: always;
+      }
+    }
+  }
+
+  &.printing {
+    #print, #print * {
+      box-sizing: border-box;
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+      }
+
+      > *:not(#print) {
+        display: none;
+      }
+
+      #print {
+        display: grid;
+      }
+    }
+  }
+}
+
 /* PRINT BINDER PLACEHOLDERS */
 body.print-binder-placeholders-feature {
   div#card-search-result-header {
@@ -78,7 +153,7 @@ body.print-binder-placeholders-feature {
     align-items: center;
   }
 
-  button.print-placeholders {
+  button.print {
     display: flex;
     align-items: center;
     min-width: auto;
@@ -250,7 +325,7 @@ html[data-darkreader-scheme="dark"] body.purchase-price-feature {
     opacity: 1;
   }
 
-  h3{
+  h3 {
     font-size: 0.6rem;
     line-height: 1;
     margin: 0;

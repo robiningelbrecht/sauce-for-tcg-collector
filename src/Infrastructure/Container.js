@@ -18,6 +18,7 @@ import {SyncJpnCardPricesMessageHandler} from "../Domain/JpnCards/SyncJpnCardPri
 import {FetchJapaneseCardPricesMessageHandler} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessageHandler";
 import {ShowToastMessageHandler} from "../Domain/ShowToastMessageHandler";
 import {DisplayJapanesePricesFeature} from "../Feature/DisplayJapanesePricesFeature";
+import {PrintBinderExpansionLogos} from "../Feature/PrintBinderExpansionLogos";
 
 const connection = new Dexie('TcgCollector');
 connection.version(1).stores({
@@ -39,6 +40,7 @@ const features = [
     new QuickAccessLinksFeature(settings),
     new PurchasePriceFeature(settings),
     new PrintBinderPlaceholdersFeature(),
+    new PrintBinderExpansionLogos(),
     new MarketPlaceLinksFeature(settings),
     new SyncJapanesePricesFeature(settings),
     new DisplayJapanesePricesFeature(settings),
