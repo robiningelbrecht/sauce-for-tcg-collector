@@ -7,7 +7,7 @@
 </head>
 
 <body class="min-h-24">
-    <form class="w-[600px] p-2.5">
+    <form class="w-[700px] p-2.5">
         <div class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">
             <img class="w-8 h-8 mr-2" src="icon-128.png" alt="logo">
             Sauce for TCG Collector
@@ -28,8 +28,8 @@
                     of slabs and singles.</p>
             </div>
             <div>
-                <ul class="items-center w-full text-sm text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                <ul class="items-center w-full text-sm text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <li class="w-full border-b border-gray-200 border-r dark:border-gray-600">
                         <div class="flex items-center ps-3">
                             <input data-target-toggle="cardMarketOptions" name="marketPlaceLinks" id="market-place-card-market-radio" type="radio" value="cardMarket"
                                    class="w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-400 dark:focus:ring-orange-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                    <li class="w-full border-b border-gray-200 border-r dark:border-gray-600">
                         <div class="flex items-center ps-3">
                             <input data-target-toggle="ebayOptions" name="marketPlaceLinks" id="market-place-ebay-radio" type="radio" value="ebay"
                                    class="w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-400 dark:focus:ring-orange-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
@@ -127,6 +127,15 @@
                                 </select>
                             </div>
                             <div>
+                                <label for="ebayLocation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+                                <select id="ebayLocation" name="ebayLocation" class="px-2 py-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="98">Standard</option>
+                                    <option value="1">Belgium</option>
+                                    <option value="3">European Union</option>
+                                    <option value="2">Worldwide</option>
+                                </select>
+                            </div>
+                            <div>
                                 <label for="ebaySortBy" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sort by</label>
                                 <select id="ebaySortBy" name="ebaySortBy" class="px-2 py-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option value="12">Best Match</option>
@@ -139,7 +148,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                    <li class="w-full border-b border-gray-200 border-r dark:border-gray-600">
                         <div class="flex items-center ps-3">
                             <input data-target-toggle="" name="marketPlaceLinks" id="market-place-none-radio" type="radio" value="none"
                                    class="w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-400 dark:focus:ring-orange-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">

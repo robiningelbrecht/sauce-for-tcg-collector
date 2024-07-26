@@ -1,6 +1,6 @@
 import {
     SETTING_CARD_MARKET_MIN_CONDITION,
-    SETTING_EBAY_LISTING_TYPE, SETTING_EBAY_SORT_BY,
+    SETTING_EBAY_LISTING_TYPE, SETTING_EBAY_LOCATION, SETTING_EBAY_SORT_BY,
     SETTING_EBAY_URL,
     SETTING_GOOGLE_SPREADSHEET_ID,
     SETTING_HIDE_PRICES,
@@ -21,6 +21,7 @@ const initPopup = async () => {
     $form.elements[SETTING_CARD_MARKET_MIN_CONDITION].value = settings.getCardMarketMinCondition();
     $form.elements[SETTING_EBAY_URL].value = settings.getEbayUrl();
     $form.elements[SETTING_EBAY_LISTING_TYPE].value = settings.getEbayListingType();
+    $form.elements[SETTING_EBAY_LOCATION].value = settings.getEbayLocation();
     $form.elements[SETTING_EBAY_SORT_BY].value = settings.getEbaySortBy();
 
     Settings.getSettingsWithMultipleValues().forEach(prop => {

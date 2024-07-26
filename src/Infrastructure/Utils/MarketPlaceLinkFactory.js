@@ -36,6 +36,9 @@ export class MarketPlaceLinkFactory {
         if (this.settings.getEbaySortBy()) {
             query._sop = this.settings.getEbaySortBy();
         }
+        if (this.settings.getEbayLocation()) {
+            query.LH_PrefLoc = this.settings.getEbayLocation();
+        }
 
         $marketPlaceLink.classList.add('market-place-link');
         $marketPlaceLink.setAttribute('href', `${this.settings.getEbayUrl().replace(/\/$/, "")}/sch/i.html?_nkw=${cardName}+${cardNumber}&${(new URLSearchParams(query)).toString()}`);

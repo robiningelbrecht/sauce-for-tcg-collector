@@ -6,6 +6,7 @@ export const SETTING_CARD_MARKET_SELLER_LOCATIONS = 'cardMarketSellerLocations';
 export const SETTING_CARD_MARKET_MIN_CONDITION = 'cardMarketMinCondition';
 export const SETTING_EBAY_URL = 'ebayUrl';
 export const SETTING_EBAY_LISTING_TYPE = 'ebayListingType';
+export const SETTING_EBAY_LOCATION = 'ebayLocation';
 export const SETTING_EBAY_SORT_BY = 'ebaySortBy';
 
 export class Settings {
@@ -20,8 +21,9 @@ export class Settings {
             SETTING_CARD_MARKET_CARD_LANGUAGES: [],
             SETTING_CARD_MARKET_SELLER_LOCATIONS: [],
             SETTING_CARD_MARKET_MIN_CONDITION: 2,
-            SETTING_EBAY_LISTING_TYPE: 'all',
-            SETTING_EBAY_SORT_BY: 'best_match'
+            SETTING_EBAY_LISTING_TYPE: 'All',
+            SETTING_EBAY_LOCATION: 98,
+            SETTING_EBAY_SORT_BY: 12
         }
     }
 
@@ -54,11 +56,15 @@ export class Settings {
     }
 
     getEbayListingType = () => {
-        return this.storage[SETTING_EBAY_LISTING_TYPE] || 'all';
+        return this.storage[SETTING_EBAY_LISTING_TYPE] || 'All';
+    }
+
+    getEbayLocation = () => {
+        return this.storage[SETTING_EBAY_LOCATION] || 98;
     }
 
     getEbaySortBy = () => {
-        return this.storage[SETTING_EBAY_SORT_BY] || 'best_match';
+        return this.storage[SETTING_EBAY_SORT_BY] || 12;
     }
 
     get = (property) => {
