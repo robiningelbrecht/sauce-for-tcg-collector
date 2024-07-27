@@ -1,5 +1,5 @@
 import {Toast} from "../Component/Toast";
-import {SyncJpnCardPricesMessageHandler} from "../Domain/JpnCards/SyncJpnCardPricesMessageHandler";
+import {SyncJpnExpansionCardPricesMessageHandler} from "../Domain/JpnCards/SyncJpnExpansionCardPricesMessageHandler";
 import {FetchJapaneseCardPricesMessageHandler} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessageHandler";
 
 export class DisplayJapanesePricesFeature {
