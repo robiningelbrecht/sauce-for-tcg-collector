@@ -1,6 +1,6 @@
 import {DateTime} from "luxon";
 
-export class SyncJpnExpansionCardPricesMessageHandler {
+export class SyncExpansionJpnCardPricesMessageHandler {
     constructor(api, tcgExpansionRepository, tcgCardPriceRepository) {
         this.api = api;
         this.tcgExpansionRepository = tcgExpansionRepository;

@@ -14,7 +14,7 @@ import {PrintBinderPlaceholdersFeature} from "../Feature/PrintBinderPlaceholders
 import {MarketPlaceLinksFeature} from "../Feature/MarketPlaceLinksFeature";
 import {SyncJapanesePricesFeature} from "../Feature/SyncJapanesePricesFeature";
 import {Settings} from "./Settings";
-import {SyncJpnExpansionCardPricesMessageHandler} from "../Domain/JpnCards/SyncJpnExpansionCardPricesMessageHandler";
+import {SyncExpansionJpnCardPricesMessageHandler} from "../Domain/JpnCards/SyncExpansionJpnCardPricesMessageHandler";
 import {FetchJapaneseCardPricesMessageHandler} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessageHandler";
 import {ShowToastMessageHandler} from "../Domain/ShowToastMessageHandler";
 import {DisplayJapanesePricesFeature} from "../Feature/DisplayJapanesePricesFeature";
@@ -53,7 +53,7 @@ messagesHandlers[FetchJapaneseCardPricesMessageHandler.getId()] = new FetchJapan
     new CurrencyApi()
 );
 messagesHandlers[ShowToastMessageHandler.getId()] = new ShowToastMessageHandler();
-messagesHandlers[SyncJpnExpansionCardPricesMessageHandler.getId()] = new SyncJpnExpansionCardPricesMessageHandler(
+messagesHandlers[SyncExpansionJpnCardPricesMessageHandler.getId()] = new SyncExpansionJpnCardPricesMessageHandler(
     new JpnCardsApi(),
     tcgExpansionRepository,
     tcgCardPriceRepository

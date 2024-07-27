@@ -2,6 +2,7 @@ import {DateTime} from "luxon";
 import Container from "./Infrastructure/Container";
 import {ShowToastMessageHandler} from "./Domain/ShowToastMessageHandler";
 import {Settings} from "./Infrastructure/Settings";
+import {SyncExpansionJpnCardPricesMessageHandler} from "./Domain/JpnCards/SyncExpansionJpnCardPricesMessageHandler";
 
 chrome.runtime.onInstalled.addListener(async () => {
     await chrome.storage.sync.set({
@@ -10,9 +11,16 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 
 chrome.webNavigation.onCompleted.addListener(
-    function () {
-        const today = DateTime.now();
-        //console.log(today.weekNumber);
+    async function () {
+        const expansions = await Container.TcgExpansionRepository.findAll();
+
+        expansions.forEach(expansion => {
+            if (DateTime.fromISO(expansion.updatedOn).weekNumber < DateTime.now().weekNumber) {
+                Container.getMessageHandler(SyncExpansionJpnCardPricesMessageHandler.getId()).handle({
+                    expansionCode: expansion.expansionCode
+                })
+            }
+        });
     },
     {url: [{hostSuffix: 'tcgcollector.com'}]}
 );

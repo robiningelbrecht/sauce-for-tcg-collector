@@ -11,5 +11,10 @@ export class TcgExpansionRepository {
         return await this.connection.TcgExpansion.get(expansionCode);
     };
 
+    findAll = async () => {
+        const collection = this.connection.TcgExpansion;
+        return collection.toArray();
+    };
+
 
 }
