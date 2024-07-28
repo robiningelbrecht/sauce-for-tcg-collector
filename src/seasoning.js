@@ -18,7 +18,9 @@ chrome.webNavigation.onCompleted.addListener(
             if (DateTime.fromISO(expansion.updatedOn).weekNumber < DateTime.now().weekNumber) {
                 Container.getMessageHandler(SyncExpansionJpnCardPricesMessageHandler.getId()).handle({
                     expansionCode: expansion.expansionCode
-                })
+                }).catch(e => {
+                    pushErrorToContent(e.message);
+                });
             }
         });
     },
