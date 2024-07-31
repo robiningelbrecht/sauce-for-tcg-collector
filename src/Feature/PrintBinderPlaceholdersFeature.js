@@ -1,3 +1,5 @@
+import {toValidCssClassName} from "../Infrastructure/Utils/Functions";
+
 export class PrintBinderPlaceholdersFeature {
     constructor() {
 
@@ -46,7 +48,7 @@ export class PrintBinderPlaceholdersFeature {
                 const variantName = variantTypes[cardVariantId].name;
 
                 const $placeholder = document.createElement('div');
-                $placeholder.classList.add('placeholder');
+                $placeholder.classList.add(...['placeholder', toValidCssClassName(cardName), toValidCssClassName(variantName)]);
                 $placeholder.innerHTML = `<div>${cardName}</div><div>${cardNumber}</div><div>${variantName}</div>`;
 
                 $printWrapper.appendChild($placeholder);

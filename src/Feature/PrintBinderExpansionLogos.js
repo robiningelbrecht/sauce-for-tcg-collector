@@ -1,3 +1,5 @@
+import {toValidCssClassName} from "../Infrastructure/Utils/Functions";
+
 export class PrintBinderExpansionLogos {
     constructor() {
 
@@ -19,9 +21,10 @@ export class PrintBinderExpansionLogos {
 
         $expansions.forEach($expansion => {
             const logoUri = $expansion.querySelector('img.expansion-logo-grid-item-expansion-logo').getAttribute('src');
+            const expansionName = $expansion.querySelector('.expansion-logo-grid-item-expansion-name').innerText;
 
             const $placeholder = document.createElement('div');
-            $placeholder.classList.add('expansion');
+            $placeholder.classList.add(...['expansion', toValidCssClassName(expansionName)]);
             $placeholder.innerHTML += `<img src="${logoUri}" class="logo" alt="Expansion logo"/>`;
 
             if ($expansion.querySelectorAll('img.expansion-logo-grid-item-expansion-symbol').length > 0) {

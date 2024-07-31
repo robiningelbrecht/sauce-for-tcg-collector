@@ -7,3 +7,10 @@ export const camelize = (str) => {
 export const contains = (selector, text) => {
     return [...document.querySelectorAll(selector)].filter(element => element.childNodes?.[0]?.nodeValue?.match(text))
 }
+
+export const toValidCssClassName = (string) => {
+    return string.trim()
+        .replace(/[!\"#$%&'\(\)\*\+,\.\/:;<=>\?\@\[\\\]\^`\{\|\}~]/g, '')
+        .replace(/\s/g, '-')
+        .toLowerCase();
+}
