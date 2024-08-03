@@ -17,7 +17,7 @@ export class MarketPlaceLinkFactory {
             const cardNumber = parseInt($card.querySelector('span.card-image-grid-item-info-overlay-text-part').innerText.split('/')[0].replace(/\D/g, "").trim());
 
             $marketPlaceLink.classList.add('market-place-link');
-            $marketPlaceLink.setAttribute('href', `https://www.cardmarket.com/en/Pokemon/Products/Search?searchString=${cardName}+${cardNumber}+${expansionCode}`);
+            $marketPlaceLink.setAttribute('href', `https://www.cardmarket.com/en/Pokemon/Products/Search?searchString=${encodeURIComponent(cardName)}+${encodeURIComponent(cardNumber)}+${expansionCode}`);
             $marketPlaceLink.setAttribute('title', 'Find this card on cardmarket.com');
             $marketPlaceLink.setAttribute('target', '_blank');
 
@@ -41,7 +41,7 @@ export class MarketPlaceLinkFactory {
         }
 
         $marketPlaceLink.classList.add('market-place-link');
-        $marketPlaceLink.setAttribute('href', `${this.settings.getEbayUrl().replace(/\/$/, "")}/sch/i.html?_nkw=${cardName}+${cardNumber}&${(new URLSearchParams(query)).toString()}`);
+        $marketPlaceLink.setAttribute('href', `${this.settings.getEbayUrl().replace(/\/$/, "")}/sch/i.html?_nkw=${encodeURIComponent(cardName)}+${encodeURIComponent(cardNumber)}&${(new URLSearchParams(query)).toString()}`);
         $marketPlaceLink.setAttribute('title', `Find this card on ${this.settings.getEbayUrl()}`);
         $marketPlaceLink.setAttribute('target', '_blank');
 
