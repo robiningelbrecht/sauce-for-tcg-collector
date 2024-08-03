@@ -19,10 +19,10 @@ export class SyncJapanesePricesFeature {
     }
 
     apply = async () => {
-        if (document.querySelectorAll('#card-search-result-title-expansion-code').length === 0) {
+        if (document.querySelectorAll('#card-search-result-title-expansion-name').length === 0) {
             return;
         }
-        const expansionCode = document.querySelector('#card-search-result-title-expansion-code').innerText.trim().toLowerCase();
+        const expansionId = document.querySelector('#card-search-result-title-expansion-name')?.innerText.trim().toLowerCase() || null;
 
         const $syncPricesButton = document.createElement('button');
         $syncPricesButton.setAttribute('type', 'button');
@@ -32,7 +32,7 @@ export class SyncJapanesePricesFeature {
         $syncPricesButton.addEventListener('click', () => {
             chrome.runtime.sendMessage({
                 handler: SyncExpansionJpnCardPricesMessageHandler.getId(),
-                payload: {expansionCode: expansionCode}
+                payload: {expansionId: expansionId}
             });
             Toast.success('Price update started. You can navigate away from this page.').show();
         });

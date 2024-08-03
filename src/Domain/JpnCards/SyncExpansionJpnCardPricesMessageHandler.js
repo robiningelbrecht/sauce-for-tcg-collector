@@ -1,9 +1,6 @@
-import {DateTime} from "luxon";
-
 export class SyncExpansionJpnCardPricesMessageHandler {
-    constructor(api, tcgExpansionRepository, tcgCardPriceRepository) {
+    constructor(api, tcgCardPriceRepository) {
         this.api = api;
-        this.tcgExpansionRepository = tcgExpansionRepository;
         this.tcgCardPriceRepository = tcgCardPriceRepository;
     }
 
@@ -12,32 +9,24 @@ export class SyncExpansionJpnCardPricesMessageHandler {
     }
 
     getSuccessMessage = (payload) => {
-        return `Prices for expansion "${payload.expansionCode}" have been synced`;
+        return `Prices for expansion "${payload.expansionId}" have been synced`;
     }
 
     handle = async (payload) => {
-        const expansionCode = payload.expansionCode;
-        const sets = (await this.api.getSets()).filter(set => set.set_code.toLowerCase() === expansionCode);
+        const expansionId = payload.expansionId;
+        const sets = (await this.api.getSets()).filter(set => set.name.toLowerCase() === expansionId.toLowerCase());
         if (sets.length !== 1) {
-            throw new Error(`Prices for expansion "${expansionCode}" not found`);
+            throw new Error(`Prices for expansion "${expansionId}" not found`);
         }
 
         const set = sets.at(0);
-        const cards = await this.api.getCardsForSet(expansionCode);
-
-        await this.tcgExpansionRepository.save({
-            expansionCode: set.set_code.toLowerCase(),
-            expansionName: set.name,
-            updatedOn: DateTime.now().toISO()
-        });
-
-        await this.tcgCardPriceRepository.deleteForExpansion(expansionCode);
+        const cards = await this.api.getCardsForSet(set.set_code);
 
         for (const card of cards.data) {
             await this.tcgCardPriceRepository.save({
-                tcgCardId: parseInt(card.cardUrl.replace('https://tcgcollector.com/cards/', '')),
+                cardId: parseInt(card.cardUrl.replace('https://tcgcollector.com/cards/', '')),
                 cardNumber: card.sequenceNumber,
-                expansionCode: expansionCode,
+                expansionId: expansionId,
                 prices: card.prices,
             });
         }

@@ -3,18 +3,8 @@ export class TcgCardPriceRepository {
         this.connection = connection;
     }
 
-    deleteForExpansion = async (expansionCode) => {
-        const cardIds = await this.connection.TcgCardPrice.where('expansionCode').equals(expansionCode).primaryKeys();
-        await this.connection.TcgCardPrice.bulkDelete(cardIds);
-    }
-
-    findByExpansion = async (expansionCode) => {
-        const collection = await this.connection.TcgCardPrice.where('expansionCode').equals(expansionCode);
-        return collection.toArray();
-    }
-
     findByCardsIds = async (cardsIds) => {
-        const collection = await this.connection.TcgCardPrice.where('tcgCardId').anyOf(cardsIds);
+        const collection = await this.connection.TcgCardPrice.where('cardId').anyOf(cardsIds);
         return collection.toArray();
     }
 

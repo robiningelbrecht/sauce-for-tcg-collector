@@ -41,7 +41,7 @@ const initPopup = async () => {
             const targetId = el.getAttribute('data-target-toggle');
             if (el.checked) {
                 $form.querySelector('[data-toggle-id="' + targetId + '"]').style.display = 'flex';
-            }else{
+            } else {
                 $form.querySelector('[data-toggle-id="' + targetId + '"]').style.display = 'none';
             }
         }

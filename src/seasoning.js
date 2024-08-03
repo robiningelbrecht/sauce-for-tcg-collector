@@ -12,8 +12,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 chrome.webNavigation.onCompleted.addListener(
     async function () {
-        const expansions = await Container.TcgExpansionRepository.findAll();
-
+        /*
         expansions.forEach(expansion => {
             if (DateTime.fromISO(expansion.updatedOn).weekNumber < DateTime.now().weekNumber) {
                 Container.getMessageHandler(SyncExpansionJpnCardPricesMessageHandler.getId()).handle({
@@ -22,7 +21,7 @@ chrome.webNavigation.onCompleted.addListener(
                     pushErrorToContent(e.message);
                 });
             }
-        });
+        });*/
     },
     {url: [{hostSuffix: 'tcgcollector.com'}]}
 );
