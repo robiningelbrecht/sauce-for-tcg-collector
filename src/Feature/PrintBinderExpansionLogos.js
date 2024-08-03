@@ -61,9 +61,6 @@ export class PrintBinderExpansionLogos {
         $cancelPrintSelectionModeButton.classList.add(...['cancel']);
         $cancelPrintSelectionModeButton.innerHTML = `<span class="fa-solid fa-ban"></span><div>Exit print mode</div>`;
         $cancelPrintSelectionModeButton.addEventListener('click', () => {
-            document.querySelectorAll('input[type="checkbox"][data-expansions-name]').forEach($checkbox => {
-                $checkbox.checked = false;
-            });
             $body.classList.remove('in-print-selection-mode');
         });
 
@@ -104,9 +101,6 @@ export class PrintBinderExpansionLogos {
         addEventListener("afterprint", () => {
             $body.classList.remove('in-print-selection-mode');
             $body.classList.remove('printing');
-            document.querySelectorAll('input[type="checkbox"][data-expansions-name]').forEach($checkbox => {
-                $checkbox.checked = false;
-            });
         });
 
     }
