@@ -17,3 +17,4 @@ export class KeyValueRepository {
 }
 
 export const KEY_CURRENCY_RATE_JPY_TO_USD = 'currencyRateJpyToUsd';
+export const KEY_JPN_PRICES_LAST_AUTO_SYNC = 'jpnPricesLastAutoSync';

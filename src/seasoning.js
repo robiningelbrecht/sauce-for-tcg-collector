@@ -3,6 +3,7 @@ import Container from "./Infrastructure/Container";
 import {ShowToastMessageHandler} from "./Domain/ShowToastMessageHandler";
 import {Settings} from "./Infrastructure/Settings";
 import {SyncExpansionJpnCardPricesMessageHandler} from "./Domain/JpnCards/SyncExpansionJpnCardPricesMessageHandler";
+import {KEY_CURRENCY_RATE_JPY_TO_USD, KEY_JPN_PRICES_LAST_AUTO_SYNC} from "./Domain/KeyValueRepository";
 
 chrome.runtime.onInstalled.addListener(async () => {
     await chrome.storage.sync.set({
@@ -12,16 +13,31 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 chrome.webNavigation.onCompleted.addListener(
     async function () {
-        /*
-        expansions.forEach(expansion => {
-            if (DateTime.fromISO(expansion.updatedOn).weekNumber < DateTime.now().weekNumber) {
-                Container.getMessageHandler(SyncExpansionJpnCardPricesMessageHandler.getId()).handle({
-                    expansionCode: expansion.expansionCode
-                }).catch(e => {
-                    pushErrorToContent(e.message);
-                });
-            }
-        });*/
+        const today = DateTime.now();
+        const keyValueRepository = Container.KeyValueRepository;
+        const jpnPricesLastAutoUpdate = keyValueRepository.find(KEY_JPN_PRICES_LAST_AUTO_SYNC)?.value || today.toISO();
+
+        if (DateTime.fromISO(jpnPricesLastAutoUpdate).weekNumber === today.weekNumber) {
+            // Auto update ran already this week.
+            return;
+        }
+
+        const expansionIds = await Container.TcgCardPriceRepository.findUniqueExpansionIds();
+        console.log(expansionIds);
+        expansionIds.forEach(expansionId => {
+            Container.getMessageHandler(SyncExpansionJpnCardPricesMessageHandler.getId()).handle({
+                expansionId: expansionId
+            }).catch(e => {
+                pushErrorToContent(e.message);
+            });
+        });
+
+        await keyValueRepository.save(
+            KEY_JPN_PRICES_LAST_AUTO_SYNC,
+            today.toISO(),
+            today.toISO(),
+        );
+        pushMessageToContent('Japanese prices auto updated 🥳');
     },
     {url: [{hostSuffix: 'tcgcollector.com'}]}
 );
