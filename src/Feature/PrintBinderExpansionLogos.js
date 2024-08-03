@@ -40,7 +40,7 @@ export class PrintBinderExpansionLogos {
         document.body.appendChild($printWrapper);
 
         const $printButton = document.createElement('button');
-        $printButton.classList.add(...['button', 'button-primary', 'print']);
+        $printButton.classList.add(...['button', 'button-plain-alt', 'print']);
         $printButton.setAttribute('title', 'Print expansion logos');
         $printButton.innerHTML = `<span class="fa-solid fa-print"></span><div>Print expansion logos</div>`;
         $printButton.addEventListener('click', () => {
