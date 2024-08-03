@@ -3,7 +3,7 @@ import Container from "./Infrastructure/Container";
 import {ShowToastMessageHandler} from "./Domain/ShowToastMessageHandler";
 import {Settings} from "./Infrastructure/Settings";
 import {SyncExpansionJpnCardPricesMessageHandler} from "./Domain/JpnCards/SyncExpansionJpnCardPricesMessageHandler";
-import {KEY_CURRENCY_RATE_JPY_TO_USD, KEY_JPN_PRICES_LAST_AUTO_SYNC} from "./Domain/KeyValueRepository";
+import {KEY_JPN_PRICES_LAST_AUTO_SYNC} from "./Domain/KeyValueRepository";
 
 chrome.runtime.onInstalled.addListener(async () => {
     await chrome.storage.sync.set({
