@@ -22,9 +22,11 @@ export class PrintBinderExpansionLogos {
         $expansions.forEach($expansion => {
             const logoUri = $expansion.querySelector('img.expansion-logo-grid-item-expansion-logo').getAttribute('src');
             const expansionName = $expansion.querySelector('.expansion-logo-grid-item-expansion-name').innerText;
+            const cleanExpansionName = toValidCssClassName(expansionName);
 
             const $placeholder = document.createElement('div');
-            $placeholder.classList.add(...['expansion', toValidCssClassName(expansionName)]);
+            $placeholder.classList.add(...['expansion']);
+            $placeholder.setAttribute('data-expansions-name', cleanExpansionName);
             $placeholder.innerHTML += `<img src="${logoUri}" class="logo" alt="Expansion logo"/>`;
 
             if ($expansion.querySelectorAll('img.expansion-logo-grid-item-expansion-symbol').length > 0) {
@@ -34,25 +36,77 @@ export class PrintBinderExpansionLogos {
 
             $printWrapper.appendChild($placeholder.cloneNode(true));
             $printWrapper.appendChild($placeholder.cloneNode(true));
+
+            // Add a checkbox to select the expansion in print-selection-mode.
+            const $checkbox = document.createElement('input');
+            $checkbox.setAttribute('type', 'checkbox');
+            $checkbox.setAttribute('data-expansions-name', cleanExpansionName);
+            $checkbox.addEventListener('click', () => {
+                document.querySelector('button span.count').innerHTML = document.querySelectorAll('input[type="checkbox"][data-expansions-name]:checked').length;
+            })
+            $expansion.appendChild($checkbox);
         });
 
+        const $body = document.body;
+        $body.appendChild($printWrapper);
 
-        document.body.appendChild($printWrapper);
+        const $printNavigation = document.createElement('div');
+        $printNavigation.classList.add(...['print-navigation']);
+        const $inner = document.createElement('div');
+        $inner.classList.add(...['inner']);
+        $printNavigation.appendChild($inner);
+        $body.appendChild($printNavigation);
+
+        const $cancelPrintSelectionModeButton = document.createElement('button');
+        $cancelPrintSelectionModeButton.classList.add(...['cancel']);
+        $cancelPrintSelectionModeButton.innerHTML = `<span class="fa-solid fa-ban"></span><div>Exit print mode</div>`;
+        $cancelPrintSelectionModeButton.addEventListener('click', () => {
+            document.querySelectorAll('input[type="checkbox"][data-expansions-name]').forEach($checkbox => {
+                $checkbox.checked = false;
+            });
+            $body.classList.remove('in-print-selection-mode');
+        });
 
         const $printButton = document.createElement('button');
-        $printButton.classList.add(...['button', 'button-plain-alt', 'print']);
-        $printButton.setAttribute('title', 'Print expansion logos');
-        $printButton.innerHTML = `<span class="fa-solid fa-print"></span><div>Print expansion logos</div>`;
+        $printButton.classList.add(...['print']);
+        $printButton.innerHTML = `<span class="fa-solid fa-print"></span><div>Print <span class="count">0</span> expansion logo(s)</div>`;
         $printButton.addEventListener('click', () => {
-            document.body.classList.add('printing');
+            // Hide all unchecked expansions.
+            document.querySelectorAll(`div.expansion[data-expansions-name]`).forEach($placeholder => {
+                $placeholder.style.display = null;
+            });
+            document.querySelectorAll('input[type="checkbox"][data-expansions-name]:not(:checked)').forEach($checkbox => {
+                const expansionName = $checkbox.getAttribute('data-expansions-name');
+                document.querySelectorAll(`div.expansion[data-expansions-name="${expansionName}"]`).forEach($placeholder => {
+                    $placeholder.style.display = 'none';
+                });
+
+            });
+            $body.classList.add('printing');
             window.print();
+        })
+
+        $inner.appendChild($printButton);
+        $inner.appendChild($cancelPrintSelectionModeButton);
+
+
+        const $togglePrintSelectionModeButton = document.createElement('button');
+        $togglePrintSelectionModeButton.classList.add(...['button', 'button-plain-alt', 'toggle-print-selection']);
+        $togglePrintSelectionModeButton.setAttribute('title', 'Print expansion logos');
+        $togglePrintSelectionModeButton.innerHTML = `<span class="fa-solid fa-print"></span><div>Print expansion logos</div>`;
+        $togglePrintSelectionModeButton.addEventListener('click', () => {
+            $body.classList.add('in-print-selection-mode');
         });
 
         const $appendTo = document.querySelector('div#expansion-search-result-header');
-        $appendTo.appendChild($printButton);
+        $appendTo.appendChild($togglePrintSelectionModeButton);
 
         addEventListener("afterprint", () => {
-            document.body.classList.remove('printing');
+            $body.classList.remove('in-print-selection-mode');
+            $body.classList.remove('printing');
+            document.querySelectorAll('input[type="checkbox"][data-expansions-name]').forEach($checkbox => {
+                $checkbox.checked = false;
+            });
         });
 
     }
