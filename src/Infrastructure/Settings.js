@@ -17,7 +17,7 @@ export class Settings {
     static getDefaults = () => {
         return {
             SETTING_HIDE_PRICES: false,
-            SETTING_MARKET_PLACE_LINKS: 'none',
+            SETTING_MARKET_PLACE_LINKS: [],
             SETTING_CARD_MARKET_CARD_LANGUAGES: [],
             SETTING_CARD_MARKET_SELLER_LOCATIONS: [],
             SETTING_CARD_MARKET_MIN_CONDITION: 2,
@@ -36,7 +36,7 @@ export class Settings {
     }
 
     getMarketPlaceLinks = () => {
-        return this.storage[SETTING_MARKET_PLACE_LINKS] || 'none';
+        return this.storage[SETTING_MARKET_PLACE_LINKS] || [];
     }
 
     getCardMarketCardLanguages = () => {
@@ -72,7 +72,11 @@ export class Settings {
     }
 
     static getSettingsWithMultipleValues = () => {
-        return [SETTING_CARD_MARKET_CARD_LANGUAGES, SETTING_CARD_MARKET_SELLER_LOCATIONS];
+        return [
+            SETTING_MARKET_PLACE_LINKS,
+            SETTING_CARD_MARKET_CARD_LANGUAGES,
+            SETTING_CARD_MARKET_SELLER_LOCATIONS
+        ];
     }
 
     static fromSyncStorage = async () => {

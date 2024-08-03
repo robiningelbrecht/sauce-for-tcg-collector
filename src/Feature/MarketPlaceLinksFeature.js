@@ -36,7 +36,9 @@ export class MarketPlaceLinksFeature {
         const marketPlaceLinkFactory = new MarketPlaceLinkFactory(this.settings);
 
         $cards.forEach($card => {
-            $card.querySelector('div.card-image-controls-item').appendChild(marketPlaceLinkFactory.buildFor($card, expansionCode));
+            marketPlaceLinkFactory.buildFor($card, expansionCode).forEach($link => {
+                $card.querySelector('div.card-image-controls-item').appendChild($link);
+            });
         });
     }
 }

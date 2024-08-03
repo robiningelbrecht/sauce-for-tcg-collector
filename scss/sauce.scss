@@ -63,6 +63,10 @@ body.market-place-links-feature {
     display: flex;
     align-items: center;
 
+    &:last-child {
+      margin-left: 3px;
+    }
+
     img {
       width: 16px;
       height: 16px;
