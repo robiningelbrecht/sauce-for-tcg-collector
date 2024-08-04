@@ -23,7 +23,6 @@ chrome.webNavigation.onCompleted.addListener(
         }
 
         const expansionIds = await Container.TcgCardPriceRepository.findUniqueExpansionIds();
-        console.log(expansionIds);
         expansionIds.forEach(expansionId => {
             Container.getMessageHandler(SyncExpansionJpnCardPricesMessageHandler.getId()).handle({
                 expansionId: expansionId
