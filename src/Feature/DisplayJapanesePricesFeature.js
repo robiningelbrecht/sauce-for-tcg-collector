@@ -1,6 +1,5 @@
-import {Toast} from "../Component/Toast";
-import {SyncExpansionJpnCardPricesMessageHandler} from "../Domain/JpnCards/SyncExpansionJpnCardPricesMessageHandler";
 import {FetchJapaneseCardPricesMessageHandler} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessageHandler";
+import {loadAppState} from "../Infrastructure/Utils/Functions";
 
 export class DisplayJapanesePricesFeature {
     constructor(settings) {
@@ -16,7 +15,11 @@ export class DisplayJapanesePricesFeature {
             return false;
         }
 
-        return currentLocation.pathname.includes('/cards/jp');
+        const appState = loadAppState();
+        if (appState.routeName === 'cards_page') {
+            return true;
+        }
+        return appState.routeName === 'sets_set_cards_page' && appState.tcgRegionId === 2;
     }
 
     apply = async () => {

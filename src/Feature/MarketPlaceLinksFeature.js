@@ -1,4 +1,5 @@
 import {MarketPlaceLinkFactory} from "../Infrastructure/Utils/MarketPlaceLinkFactory";
+import {loadAppState} from "../Infrastructure/Utils/Functions";
 
 export class MarketPlaceLinksFeature {
     constructor(settings) {
@@ -10,24 +11,15 @@ export class MarketPlaceLinksFeature {
     };
 
     needsToBeAppliedForLocation = (currentLocation) => {
-        if (!this.settings.getMarketPlaceLinks()) {
+        if (this.settings.getMarketPlaceLinks().length === 0) {
             return false;
         }
 
-        if (this.settings.getMarketPlaceLinks() === 'none') {
-            return false;
-        }
-
-        if (currentLocation.pathname === '/cards') {
+        const appState = loadAppState();
+        if (appState.routeName === 'cards_page') {
             return true;
         }
-        if (currentLocation.pathname === '/cards/intl') {
-            return true;
-        }
-        if (currentLocation.pathname === '/cards/jp') {
-            return true;
-        }
-        return currentLocation.pathname.includes('/cards/jp/') || currentLocation.pathname.includes('/cards/intl/');
+        return appState.routeName === 'sets_set_cards_page';
     }
 
     apply = async () => {

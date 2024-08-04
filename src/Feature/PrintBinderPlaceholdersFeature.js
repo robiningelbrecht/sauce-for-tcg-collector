@@ -1,4 +1,5 @@
-import {toValidCssClassName} from "../Infrastructure/Utils/Functions";
+import {loadAppState, toValidCssClassName} from "../Infrastructure/Utils/Functions";
+import Container from "../Infrastructure/Container";
 
 export class PrintBinderPlaceholdersFeature {
     constructor() {
@@ -23,13 +24,7 @@ export class PrintBinderPlaceholdersFeature {
     }
 
     apply = async () => {
-        const bodyHtml = document.body.innerHTML;
-        const regex = /window.tcgcollector[\s]*=[\s]*{[\s]*appState:(.*),[\s]*}/mi;
-        if (!regex.test(bodyHtml)) {
-            throw new Error('AppState could not be determined');
-        }
-
-        const appState = JSON.parse(bodyHtml.match(regex)[1]);
+        const appState = loadAppState();
 
         const cardVariantTypes = appState.cardIdToCardVariantTypeIdsMap;
         const variantTypes = appState.idToCardVariantTypeDtoMap;
