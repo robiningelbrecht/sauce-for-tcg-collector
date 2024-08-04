@@ -1,6 +1,5 @@
 import {GoogleSheet} from "../Infrastructure/Utils/GoogleSheet";
 import {TcgRegion} from "../Domain/TcgCollector/TcgRegion";
-import {loadAppState} from "../Infrastructure/Utils/Functions";
 
 export class QuickAccessLinksFeature {
     constructor(settings) {
@@ -11,8 +10,7 @@ export class QuickAccessLinksFeature {
         return 'quick-access-links-feature';
     };
 
-    needsToBeAppliedForLocation = () => {
-        const appState = loadAppState();
+    needsToBeAppliedForLocation = (appState) => {
         return appState.routeName === 'dashboard_page';
     }
 

@@ -11,8 +11,7 @@ export class CollectionHistoryFeature {
         return 'collection-history-feature';
     };
 
-    needsToBeAppliedForLocation = () => {
-        const appState = loadAppState();
+    needsToBeAppliedForLocation = (appState) => {
         return appState.routeName === 'dashboard_page';
     }
 

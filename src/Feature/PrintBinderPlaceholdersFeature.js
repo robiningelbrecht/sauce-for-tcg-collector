@@ -1,5 +1,4 @@
 import {loadAppState, toValidCssClassName} from "../Infrastructure/Utils/Functions";
-import Container from "../Infrastructure/Container";
 
 export class PrintBinderPlaceholdersFeature {
     constructor() {
@@ -10,8 +9,7 @@ export class PrintBinderPlaceholdersFeature {
         return 'print-binder-placeholders-feature';
     };
 
-    needsToBeAppliedForLocation = () => {
-        const appState = loadAppState();
+    needsToBeAppliedForLocation = (appState) => {
         return appState.routeName === 'sets_set_cards_page'
     }
 

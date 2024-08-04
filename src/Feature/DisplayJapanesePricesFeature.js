@@ -1,5 +1,4 @@
 import {FetchJapaneseCardPricesMessageHandler} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessageHandler";
-import {loadAppState} from "../Infrastructure/Utils/Functions";
 
 export class DisplayJapanesePricesFeature {
     constructor(settings) {
@@ -10,12 +9,11 @@ export class DisplayJapanesePricesFeature {
         return 'display-japanese-prices-feature';
     };
 
-    needsToBeAppliedForLocation = () => {
+    needsToBeAppliedForLocation = (appState) => {
         if (this.settings.hidePrices()) {
             return false;
         }
 
-        const appState = loadAppState();
         if (appState.routeName === 'cards_page') {
             return true;
         }

@@ -1,6 +1,5 @@
 import {GoogleSheet} from "../Infrastructure/Utils/GoogleSheet";
 import {GradingCompany} from "../Domain/GradingCompany";
-import {loadAppState} from "../Infrastructure/Utils/Functions";
 
 export class PurchasePriceFeature {
     constructor(settings) {
@@ -11,8 +10,7 @@ export class PurchasePriceFeature {
         return 'purchase-price-feature';
     };
 
-    needsToBeAppliedForLocation = () => {
-        const appState = loadAppState();
+    needsToBeAppliedForLocation = (appState) => {
         return appState.routeName === 'cards_card_page';
     }
 

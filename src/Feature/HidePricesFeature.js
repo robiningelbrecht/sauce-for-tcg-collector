@@ -9,7 +9,7 @@ export class HidePricesFeature {
         return 'hide-prices-feature';
     };
 
-    needsToBeAppliedForLocation = () => {
+    needsToBeAppliedForLocation = (appState) => {
         return this.settings.hidePrices();
     }
 

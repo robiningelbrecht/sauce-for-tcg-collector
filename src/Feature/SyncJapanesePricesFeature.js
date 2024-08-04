@@ -1,6 +1,5 @@
 import {Toast} from "../Component/Toast";
 import {SyncExpansionJpnCardPricesMessageHandler} from "../Domain/JpnCards/SyncExpansionJpnCardPricesMessageHandler";
-import {loadAppState} from "../Infrastructure/Utils/Functions";
 
 export class SyncJapanesePricesFeature {
     constructor(settings) {
@@ -11,12 +10,11 @@ export class SyncJapanesePricesFeature {
         return 'sync-japanese-prices-feature';
     };
 
-    needsToBeAppliedForLocation = () => {
+    needsToBeAppliedForLocation = (appState) => {
         if (this.settings.hidePrices()) {
             return false;
         }
 
-        const appState = loadAppState();
         return appState.routeName === 'sets_set_cards_page' && appState.tcgRegionId === 2;
     }
 

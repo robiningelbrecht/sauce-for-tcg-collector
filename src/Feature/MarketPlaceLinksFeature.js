@@ -1,5 +1,4 @@
 import {MarketPlaceLinkFactory} from "../Infrastructure/Utils/MarketPlaceLinkFactory";
-import {loadAppState} from "../Infrastructure/Utils/Functions";
 
 export class MarketPlaceLinksFeature {
     constructor(settings) {
@@ -10,12 +9,11 @@ export class MarketPlaceLinksFeature {
         return 'market-place-links-feature';
     };
 
-    needsToBeAppliedForLocation = () => {
+    needsToBeAppliedForLocation = (appState) => {
         if (this.settings.getMarketPlaceLinks().length === 0) {
             return false;
         }
 
-        const appState = loadAppState();
         if (appState.routeName === 'cards_page') {
             return true;
         }

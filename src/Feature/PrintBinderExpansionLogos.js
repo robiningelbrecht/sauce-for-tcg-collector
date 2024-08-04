@@ -1,4 +1,4 @@
-import {loadAppState, toValidCssClassName} from "../Infrastructure/Utils/Functions";
+import {toValidCssClassName} from "../Infrastructure/Utils/Functions";
 
 export class PrintBinderExpansionLogos {
     constructor() {
@@ -9,8 +9,7 @@ export class PrintBinderExpansionLogos {
         return 'print-binder-expansion-logos';
     };
 
-    needsToBeAppliedForLocation = () => {
-        const appState = loadAppState();
+    needsToBeAppliedForLocation = (appState) => {
         return appState.routeName === 'sets_page';
     }
 
