@@ -1,5 +1,5 @@
 body.print-binder-expansion-logos {
-  div#expansion-search-result-header {
+  div#set-search-result-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,7 +14,7 @@ body.print-binder-expansion-logos {
     column-gap: 5px;
   }
 
-  .expansion-logo-grid-item input[type="checkbox"] {
+  .set-logo-grid-item input[type="checkbox"] {
     display: none;
     margin-top: 6px;
   }
@@ -67,7 +67,7 @@ body.print-binder-expansion-logos {
       display: block;
     }
 
-    .expansion-logo-grid-item {
+    .set-logo-grid-item {
       align-items: center;
 
       a {
@@ -84,10 +84,10 @@ body.print-binder-expansion-logos {
       }
     }
 
-    .expansion-logo-grid-item-text-content,
-    .expansion-logo-grid-item-footer,
+    .set-logo-grid-item-text-content,
+    .set-logo-grid-item-footer,
     #page-content > .container,
-    #expansion-search-result > .container:first-child,
+    #set > .container:first-child,
     #expansion-series-nav {
       display: none;
     }

@@ -1,4 +1,4 @@
-import {toValidCssClassName} from "../Infrastructure/Utils/Functions";
+import {loadAppState, toValidCssClassName} from "../Infrastructure/Utils/Functions";
 
 export class PrintBinderExpansionLogos {
     constructor() {
@@ -10,18 +10,19 @@ export class PrintBinderExpansionLogos {
     };
 
     needsToBeAppliedForLocation = (currentLocation) => {
-        return currentLocation.pathname.includes('/expansions/');
+        const appState = loadAppState();
+        return appState.routeName === 'sets_page';
     }
 
     apply = async () => {
-        const $expansions = document.querySelectorAll('.expansion-logo-grid-item');
+        const $expansions = document.querySelectorAll('.set-logo-grid-item');
 
         const $printWrapper = document.createElement('div');
         $printWrapper.setAttribute('id', 'print');
 
         $expansions.forEach($expansion => {
-            const logoUri = $expansion.querySelector('img.expansion-logo-grid-item-expansion-logo').getAttribute('src');
-            const expansionName = $expansion.querySelector('.expansion-logo-grid-item-expansion-name').innerText;
+            const logoUri = $expansion.querySelector('img.set-logo-grid-item-set-logo').getAttribute('src');
+            const expansionName = $expansion.querySelector('.set-logo-grid-item-set-name').innerText;
             const cleanExpansionName = toValidCssClassName(expansionName);
 
             const $placeholder = document.createElement('div');
@@ -29,8 +30,8 @@ export class PrintBinderExpansionLogos {
             $placeholder.setAttribute('data-expansions-name', cleanExpansionName);
             $placeholder.innerHTML += `<img src="${logoUri}" class="logo" alt="Expansion logo"/>`;
 
-            if ($expansion.querySelectorAll('img.expansion-logo-grid-item-expansion-symbol').length > 0) {
-                const symbolUri = $expansion.querySelector('img.expansion-logo-grid-item-expansion-symbol').getAttribute('src');
+            if ($expansion.querySelectorAll('img.set-logo-grid-item-set-symbol').length > 0) {
+                const symbolUri = $expansion.querySelector('img.set-logo-grid-item-set-symbol').getAttribute('src');
                 $placeholder.innerHTML += `<img src="${symbolUri}" class="symbol" alt="Expansion Symbol"/>`;
             }
 
@@ -95,7 +96,7 @@ export class PrintBinderExpansionLogos {
             $body.classList.add('in-print-selection-mode');
         });
 
-        const $appendTo = document.querySelector('div#expansion-search-result-header');
+        const $appendTo = document.querySelector('div#set-search-result-header');
         $appendTo.appendChild($togglePrintSelectionModeButton);
 
         addEventListener("afterprint", () => {

@@ -11,16 +11,8 @@ export class PrintBinderPlaceholdersFeature {
     };
 
     needsToBeAppliedForLocation = (currentLocation) => {
-        if (currentLocation.pathname === '/cards') {
-            return true;
-        }
-        if (currentLocation.pathname === '/cards/intl') {
-            return true;
-        }
-        if (currentLocation.pathname === '/cards/jp') {
-            return true;
-        }
-        return currentLocation.pathname.includes('/cards/jp/') || currentLocation.pathname.includes('/cards/intl/');
+        const appState = loadAppState();
+        return appState.routeName === 'sets_set_cards_page'
     }
 
     apply = async () => {

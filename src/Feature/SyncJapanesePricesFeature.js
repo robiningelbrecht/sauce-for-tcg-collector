@@ -1,5 +1,6 @@
 import {Toast} from "../Component/Toast";
 import {SyncExpansionJpnCardPricesMessageHandler} from "../Domain/JpnCards/SyncExpansionJpnCardPricesMessageHandler";
+import {loadAppState} from "../Infrastructure/Utils/Functions";
 
 export class SyncJapanesePricesFeature {
     constructor(settings) {
@@ -15,14 +16,15 @@ export class SyncJapanesePricesFeature {
             return false;
         }
 
-        return currentLocation.pathname.includes('/cards/jp/');
+        const appState = loadAppState();
+        return appState.routeName === 'sets_set_cards_page' && appState.tcgRegionId === 2;
     }
 
     apply = async () => {
-        if (document.querySelectorAll('#card-search-result-title-expansion-name').length === 0) {
+        if (document.querySelectorAll('#card-search-result-title-set-like-name').length === 0) {
             return;
         }
-        const expansionId = document.querySelector('#card-search-result-title-expansion-name')?.innerText.trim().toLowerCase() || null;
+        const expansionId = document.querySelector('#card-search-result-title-set-like-name')?.innerText.trim().toLowerCase() || null;
 
         const $syncPricesButton = document.createElement('button');
         $syncPricesButton.setAttribute('type', 'button');

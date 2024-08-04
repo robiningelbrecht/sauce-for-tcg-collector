@@ -1,5 +1,6 @@
 import {GoogleSheet} from "../Infrastructure/Utils/GoogleSheet";
 import {GradingCompany} from "../Domain/GradingCompany";
+import {loadAppState} from "../Infrastructure/Utils/Functions";
 
 export class PurchasePriceFeature {
     constructor(settings) {
@@ -11,8 +12,8 @@ export class PurchasePriceFeature {
     };
 
     needsToBeAppliedForLocation = (currentLocation) => {
-        const regex = /cards\/[\d]+\/[\S]+/mi;
-        return regex.test(currentLocation.pathname);
+        const appState = loadAppState();
+        return appState.routeName === 'cards_card_page';
     }
 
     apply = async () => {
@@ -39,7 +40,7 @@ export class PurchasePriceFeature {
 
             try {
                 const gradingCompany = new GradingCompany(row.gradingCompany);
-                if(row.certNumber){
+                if (row.certNumber) {
                     $priceRowDiv.innerHTML += `
 <div class="grading">
     <span>${row.type}</span>
@@ -47,7 +48,7 @@ export class PurchasePriceFeature {
         ${gradingCompany.getLabel()}
     </a>
 </div>`;
-                }else{
+                } else {
                     $priceRowDiv.innerHTML += `
 <div class="grading">
     <span>${row.type}</span>
