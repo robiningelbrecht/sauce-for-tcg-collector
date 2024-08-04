@@ -7,7 +7,7 @@ export class NewMenuItemFeature {
         return 'new-menu-item-feature';
     };
 
-    needsToBeAppliedForLocation = (appState) => {
+    needsToBeApplied = (appState) => {
         return document.querySelectorAll('div#navbar-buttons').length > 0;
     }
 

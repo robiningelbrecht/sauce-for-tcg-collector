@@ -6,7 +6,7 @@ export class DashboardRearrangementFeature {
         return 'dashboard-rearrangement-feature';
     };
 
-    needsToBeAppliedForLocation = (appState) => {
+    needsToBeApplied = (appState) => {
         return appState.getRouteName() === 'dashboard_page';
     }
 

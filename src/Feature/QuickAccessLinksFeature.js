@@ -10,7 +10,7 @@ export class QuickAccessLinksFeature {
         return 'quick-access-links-feature';
     };
 
-    needsToBeAppliedForLocation = (appState) => {
+    needsToBeApplied = (appState) => {
         return appState.getRouteName() === 'dashboard_page';
     }
 

@@ -10,7 +10,7 @@ export class SyncJapanesePricesFeature {
         return 'sync-japanese-prices-feature';
     };
 
-    needsToBeAppliedForLocation = (appState) => {
+    needsToBeApplied = (appState) => {
         if (this.settings.hidePrices()) {
             return false;
         }

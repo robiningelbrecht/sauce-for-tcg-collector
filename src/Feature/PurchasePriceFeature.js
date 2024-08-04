@@ -10,7 +10,7 @@ export class PurchasePriceFeature {
         return 'purchase-price-feature';
     };
 
-    needsToBeAppliedForLocation = (appState) => {
+    needsToBeApplied = (appState) => {
         return appState.getRouteName() === 'cards_card_page';
     }
 

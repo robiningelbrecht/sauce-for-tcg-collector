@@ -17,7 +17,7 @@ document.querySelector('a.navbar-logo-link img').setAttribute('src', chrome.runt
 consolePrintLogo('Applying that sweet sauce 🥫');
 const $body = document.body;
 for (const feature of Container.Features) {
-    if (feature.needsToBeAppliedForLocation(appState)) {
+    if (feature.needsToBeApplied(appState)) {
         $body.classList.add(feature.getId());
 
         feature.apply().catch(error => {

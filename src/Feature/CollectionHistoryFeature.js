@@ -10,7 +10,7 @@ export class CollectionHistoryFeature {
         return 'collection-history-feature';
     };
 
-    needsToBeAppliedForLocation = (appState) => {
+    needsToBeApplied = (appState) => {
         return appState.getRouteName() === 'dashboard_page';
     }
 
