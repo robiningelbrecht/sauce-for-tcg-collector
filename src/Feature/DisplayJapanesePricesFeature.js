@@ -10,7 +10,7 @@ export class DisplayJapanesePricesFeature {
         return 'display-japanese-prices-feature';
     };
 
-    needsToBeAppliedForLocation = (currentLocation) => {
+    needsToBeAppliedForLocation = () => {
         if (this.settings.hidePrices()) {
             return false;
         }

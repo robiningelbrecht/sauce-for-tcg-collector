@@ -4,8 +4,6 @@ import {Toast} from "./Component/Toast";
 import Container from "./Infrastructure/Container";
 import {ShowToastMessageHandler} from "./Domain/ShowToastMessageHandler";
 
-const currentLocation = window.location;
-
 if (!Container.Settings.getGoogleSpreadSheetId()) {
     Toast.error(`Google Spreadsheet ID not configured`).show();
     throw new Error('Google Spreadsheet ID not configured');
@@ -17,7 +15,7 @@ document.querySelector('a.navbar-logo-link img').setAttribute('src', chrome.runt
 consolePrintLogo('Applying that sweet sauce 🥫');
 const $body = document.body;
 for (const feature of Container.Features) {
-    if (feature.needsToBeAppliedForLocation(currentLocation)) {
+    if (feature.needsToBeAppliedForLocation()) {
         $body.classList.add(feature.getId());
 
         feature.apply().catch(error => {

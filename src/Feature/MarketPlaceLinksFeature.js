@@ -10,7 +10,7 @@ export class MarketPlaceLinksFeature {
         return 'market-place-links-feature';
     };
 
-    needsToBeAppliedForLocation = (currentLocation) => {
+    needsToBeAppliedForLocation = () => {
         if (this.settings.getMarketPlaceLinks().length === 0) {
             return false;
         }

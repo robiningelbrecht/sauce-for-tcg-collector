@@ -11,7 +11,7 @@ export class QuickAccessLinksFeature {
         return 'quick-access-links-feature';
     };
 
-    needsToBeAppliedForLocation = (currentLocation) => {
+    needsToBeAppliedForLocation = () => {
         const appState = loadAppState();
         return appState.routeName === 'dashboard_page';
     }

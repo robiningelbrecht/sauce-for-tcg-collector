@@ -9,7 +9,7 @@ export class PrintBinderExpansionLogos {
         return 'print-binder-expansion-logos';
     };
 
-    needsToBeAppliedForLocation = (currentLocation) => {
+    needsToBeAppliedForLocation = () => {
         const appState = loadAppState();
         return appState.routeName === 'sets_page';
     }

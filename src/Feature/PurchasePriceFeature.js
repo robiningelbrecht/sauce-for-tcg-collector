@@ -11,7 +11,7 @@ export class PurchasePriceFeature {
         return 'purchase-price-feature';
     };
 
-    needsToBeAppliedForLocation = (currentLocation) => {
+    needsToBeAppliedForLocation = () => {
         const appState = loadAppState();
         return appState.routeName === 'cards_card_page';
     }

@@ -10,7 +10,7 @@ export class PrintBinderPlaceholdersFeature {
         return 'print-binder-placeholders-feature';
     };
 
-    needsToBeAppliedForLocation = (currentLocation) => {
+    needsToBeAppliedForLocation = () => {
         const appState = loadAppState();
         return appState.routeName === 'sets_set_cards_page'
     }

@@ -1,3 +1,5 @@
+import {loadAppState} from "../Infrastructure/Utils/Functions";
+
 export class DashboardRearrangementFeature {
     constructor() {
     }
@@ -6,8 +8,9 @@ export class DashboardRearrangementFeature {
         return 'dashboard-rearrangement-feature';
     };
 
-    needsToBeAppliedForLocation = (currentLocation) => {
-        return currentLocation.pathname.includes('/dashboard');
+    needsToBeAppliedForLocation = () => {
+        const appState = loadAppState();
+        return appState.routeName === 'dashboard_page';
     }
 
     apply = async () => {
