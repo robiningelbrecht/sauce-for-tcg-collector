@@ -14,10 +14,10 @@ export class MarketPlaceLinksFeature {
             return false;
         }
 
-        if (appState.routeName === 'cards_page') {
+        if (appState.getRouteName() === 'cards_page') {
             return true;
         }
-        return appState.routeName === 'sets_set_cards_page';
+        return appState.getRouteName() === 'sets_set_cards_page';
     }
 
     apply = async () => {

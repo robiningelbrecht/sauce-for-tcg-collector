@@ -11,7 +11,7 @@ export class QuickAccessLinksFeature {
     };
 
     needsToBeAppliedForLocation = (appState) => {
-        return appState.routeName === 'dashboard_page';
+        return appState.getRouteName() === 'dashboard_page';
     }
 
     apply = async () => {

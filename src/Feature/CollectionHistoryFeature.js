@@ -1,6 +1,5 @@
 import {GoogleSheet} from "../Infrastructure/Utils/GoogleSheet";
 import {TcgRegion} from "../Domain/TcgCollector/TcgRegion";
-import {loadAppState} from "../Infrastructure/Utils/Functions";
 
 export class CollectionHistoryFeature {
     constructor(settings) {
@@ -12,7 +11,7 @@ export class CollectionHistoryFeature {
     };
 
     needsToBeAppliedForLocation = (appState) => {
-        return appState.routeName === 'dashboard_page';
+        return appState.getRouteName() === 'dashboard_page';
     }
 
     apply = async () => {

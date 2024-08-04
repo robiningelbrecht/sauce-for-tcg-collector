@@ -1,4 +1,5 @@
-import {loadAppState, toValidCssClassName} from "../Infrastructure/Utils/Functions";
+import {toValidCssClassName} from "../Infrastructure/Utils/Functions";
+import {AppState} from "../Infrastructure/AppState";
 
 export class PrintBinderPlaceholdersFeature {
     constructor() {
@@ -10,14 +11,14 @@ export class PrintBinderPlaceholdersFeature {
     };
 
     needsToBeAppliedForLocation = (appState) => {
-        return appState.routeName === 'sets_set_cards_page'
+        return appState.getRouteName() === 'sets_set_cards_page'
     }
 
     apply = async () => {
-        const appState = loadAppState();
+        const appState = AppState.fromHtml();
 
-        const cardVariantTypes = appState.cardIdToCardVariantTypeIdsMap;
-        const variantTypes = appState.idToCardVariantTypeDtoMap;
+        const cardVariantTypes = appState.getCardIdToCardVariantTypeIdsMap();
+        const variantTypes = appState.getIdToCardVariantTypeDtoMap();
 
         const $cards = document.querySelectorAll('div#card-image-grid div.card-image-grid-item');
 

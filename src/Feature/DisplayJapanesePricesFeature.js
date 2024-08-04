@@ -14,10 +14,10 @@ export class DisplayJapanesePricesFeature {
             return false;
         }
 
-        if (appState.routeName === 'cards_page') {
+        if (appState.getRouteName() === 'cards_page') {
             return true;
         }
-        return appState.routeName === 'sets_set_cards_page' && appState.tcgRegionId === 2;
+        return appState.getRouteName() === 'sets_set_cards_page' && appState.getTcgRegionId() === 2;
     }
 
     apply = async () => {

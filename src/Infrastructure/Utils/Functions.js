@@ -14,13 +14,3 @@ export const toValidCssClassName = (string) => {
         .replace(/\s/g, '-')
         .toLowerCase();
 }
-
-export const loadAppState = () => {
-    const bodyHtml = document.body.innerHTML;
-    const regex = /window.tcgcollector[\s]*=[\s]*{[\s]*appState:(.*),[\s]*}/mi;
-    if (!regex.test(bodyHtml)) {
-        throw new Error('AppState could not be determined');
-    }
-
-    return JSON.parse(bodyHtml.match(regex)[1]);
-}

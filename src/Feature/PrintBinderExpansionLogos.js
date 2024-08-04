@@ -10,7 +10,7 @@ export class PrintBinderExpansionLogos {
     };
 
     needsToBeAppliedForLocation = (appState) => {
-        return appState.routeName === 'sets_page';
+        return appState.getRouteName() === 'sets_page';
     }
 
     apply = async () => {

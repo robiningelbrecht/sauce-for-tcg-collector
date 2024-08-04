@@ -11,7 +11,7 @@ export class PurchasePriceFeature {
     };
 
     needsToBeAppliedForLocation = (appState) => {
-        return appState.routeName === 'cards_card_page';
+        return appState.getRouteName() === 'cards_card_page';
     }
 
     apply = async () => {
