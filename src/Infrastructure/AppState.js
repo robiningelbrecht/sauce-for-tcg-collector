@@ -11,6 +11,14 @@ export class AppState {
         return this.state.tcgRegionId
     }
 
+    getCardIds = () => {
+        return this.state.cardIds || [];
+    }
+
+    getCardId = () => {
+        return this.getCardIds()[0];
+    }
+
     getCardIdToCardVariantTypeIdsMap = () => {
         return this.state.cardIdToCardVariantTypeIdsMap;
     }

@@ -1,5 +1,6 @@
 import {GoogleSheet} from "../Infrastructure/Utils/GoogleSheet";
 import {GradingCompany} from "../Domain/GradingCompany";
+import {AppState} from "../Infrastructure/AppState";
 
 export class PurchasePriceFeature {
     constructor(settings) {
@@ -15,7 +16,9 @@ export class PurchasePriceFeature {
     }
 
     apply = async () => {
-        const cardId = document.querySelector('[data-card-id]').getAttribute('data-card-id');
+        const appState = AppState.fromHtml();
+        const cardId = appState.getCardId();
+
         const $wrapperDiv = document.createElement("div");
         $wrapperDiv.classList.add('tcg-collector-card-prices-wrapper');
 
@@ -27,7 +30,7 @@ export class PurchasePriceFeature {
             'Slabs / Singles',
         )
         const parsedRows = await googleSheet.parse();
-        const matchedRows = parsedRows.filter((row) => row.cardId === cardId);
+        const matchedRows = parsedRows.filter((row) => parseInt(row.cardId) === cardId);
         if (matchedRows.length === 0) {
             return $wrapperDiv;
         }

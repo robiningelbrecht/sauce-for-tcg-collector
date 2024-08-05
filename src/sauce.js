@@ -6,7 +6,6 @@ import {AppState} from "./Infrastructure/AppState";
 
 if (!Container.Settings.getGoogleSpreadSheetId()) {
     Toast.error(`Google Spreadsheet ID not configured`).show();
-    throw new Error('Google Spreadsheet ID not configured');
 }
 const appState = AppState.fromHtml();
 

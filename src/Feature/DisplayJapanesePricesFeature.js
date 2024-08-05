@@ -1,7 +1,7 @@
 import {FetchJapaneseCardPricesMessageHandler} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessageHandler";
 import Container from "../Infrastructure/Container";
-import {SyncExpansionJpnCardPricesMessageHandler} from "../Domain/JpnCards/SyncExpansionJpnCardPricesMessageHandler";
 import {Toast} from "../Component/Toast";
+import {AppState} from "../Infrastructure/AppState";
 
 export class DisplayJapanesePricesFeature {
     constructor(settings) {
@@ -24,8 +24,8 @@ export class DisplayJapanesePricesFeature {
     }
 
     apply = async () => {
-        const cardIds = [...document.querySelectorAll(`div.card-image-grid-item[data-card-id]`)]
-            .map(el => parseInt(el.getAttribute('data-card-id')));
+        const appState = AppState.fromHtml();
+        const cardIds = appState.getCardIds();
 
         Container.getMessageHandler(FetchJapaneseCardPricesMessageHandler.getId()).handle({cardIds: cardIds}).then((cards) => {
             cards.forEach(card => {
