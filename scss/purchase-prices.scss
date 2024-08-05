@@ -8,12 +8,21 @@ body.purchase-price-feature {
     }
 
     div.tcg-collector-card-prices > * {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px 15px;
       justify-content: space-between;
       align-items: center;
       padding: 10px 0;
       border-bottom: 1px solid;
+
+      div:nth-child(2) {
+        justify-self: center;
+      }
+
+      div:last-child {
+        justify-self: end;
+      }
 
       div.grading {
         display: flex;
