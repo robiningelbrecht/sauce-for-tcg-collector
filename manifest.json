@@ -19,9 +19,6 @@
     "default_title": "Sauce for TCG Collector Settings",
     "default_popup": "dist/popup/popup.html"
   },
-  "background": {
-    "service_worker": "dist/seasoning.min.js"
-  },
   "content_scripts": [
     {
       "run_at": "document_end",

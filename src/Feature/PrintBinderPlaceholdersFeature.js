@@ -20,13 +20,11 @@ export class PrintBinderPlaceholdersFeature {
         const cardVariantTypes = appState.getCardIdToCardVariantTypeIdsMap();
         const variantTypes = appState.getIdToCardVariantTypeDtoMap();
 
-        const $cards = document.querySelectorAll('div#card-image-grid div.card-image-grid-item');
-
         const $printWrapper = document.createElement('div');
         $printWrapper.setAttribute('id', 'print');
 
-        $cards.forEach($card => {
-            const cardId = $card.getAttribute('data-card-id');
+        appState.getCardIds().forEach(cardId => {
+            const $card = document.querySelector(`div.card-image-grid-item[data-card-id="${cardId}"]`);
             const cardName = $card.querySelector('a').getAttribute('title').split('(')[0].trim();
             const cardNumber = $card.querySelector('span.card-image-grid-item-info-overlay-text-part').innerText.trim();
 
