@@ -37,9 +37,12 @@ export class SyncJapanesePricesFeature {
         $syncPricesButton.classList.add(...['button', 'button-plain-alt', 'sync-prices']);
         $syncPricesButton.innerHTML = `<span aria-hidden="true" class="button-icon fa-solid fa-rotate fa-fw"></span>Prices`;
 
+        if (tcgExpansionMetadata?.lastPriceSync) {
+            $syncPricesButton.innerHTML = `<span aria-hidden="true" class="button-icon fa-solid fa-rotate fa-fw"></span>Prices <span class="last-refresh-date">(${lastRefreshDate.toFormat('dd LLL yyyy')})</span>`;
+        }
+
         if (lastRefreshDate.weekNumber !== today.weekNumber) {
             $syncPricesButton.classList.add(...['warning']);
-            $syncPricesButton.innerHTML = `<span aria-hidden="true" class="button-icon fa-solid fa-rotate fa-fw"></span>Prices <span class="last-refresh-date">(${lastRefreshDate.toFormat('dd LLL yyyy')})</span>`;
         }
         $syncPricesButton.addEventListener('click', () => {
             Container.getMessageHandler(SyncExpansionJpnCardPricesMessageHandler.getId()).handle({expansionId: expansionId}).then(() => {
