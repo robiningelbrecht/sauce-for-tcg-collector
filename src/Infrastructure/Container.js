@@ -17,16 +17,19 @@ import {SyncExpansionJpnCardPricesMessageHandler} from "../Domain/JpnCards/SyncE
 import {FetchJapaneseCardPricesMessageHandler} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessageHandler";
 import {DisplayJapanesePricesFeature} from "../Feature/DisplayJapanesePricesFeature";
 import {PrintBinderExpansionLogos} from "../Feature/PrintBinderExpansionLogos";
+import {TcgExpansionMetadataRepository} from "../Domain/TcgCollector/TcgExpansionMetadataRepository";
 
 const connection = new Dexie('TcgCollector');
 connection.version(1).stores({
     TcgCardPrice: `cardId,cardNumber,expansionId`,
+    TcgExpansionMetadata: `expansionId,lastPriceSync`,
     KeyValue: `key,value`
 });
 
 const settings = await Settings.fromSyncStorage();
 const keyValueRepository = new KeyValueRepository(connection);
 const tcgCardPriceRepository = new TcgCardPriceRepository(connection);
+const tcgExpansionMetadataRepository = new TcgExpansionMetadataRepository(connection);
 
 const features = [
     new NewMenuItemFeature(settings),
@@ -50,7 +53,8 @@ messagesHandlers[FetchJapaneseCardPricesMessageHandler.getId()] = new FetchJapan
 );
 messagesHandlers[SyncExpansionJpnCardPricesMessageHandler.getId()] = new SyncExpansionJpnCardPricesMessageHandler(
     new JpnCardsApi(),
-    tcgCardPriceRepository
+    tcgCardPriceRepository,
+    tcgExpansionMetadataRepository
 );
 
 const Container = {
@@ -58,6 +62,7 @@ const Container = {
     Connection: connection,
     KeyValueRepository: keyValueRepository,
     TcgCardPriceRepository: tcgCardPriceRepository,
+    TcgExpansionMetadataRepository: tcgExpansionMetadataRepository,
     Features: features,
     getMessageHandler: (handlerName) => {
         if (!messagesHandlers.hasOwnProperty(handlerName)) {

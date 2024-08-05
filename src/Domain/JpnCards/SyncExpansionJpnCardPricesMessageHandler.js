@@ -1,7 +1,10 @@
+import {DateTime} from "luxon";
+
 export class SyncExpansionJpnCardPricesMessageHandler {
-    constructor(api, tcgCardPriceRepository) {
+    constructor(api, tcgCardPriceRepository, tcgExpansionMetadataRepository) {
         this.api = api;
         this.tcgCardPriceRepository = tcgCardPriceRepository;
+        this.tcgExpansionMetadataRepository = tcgExpansionMetadataRepository;
     }
 
     static getId = () => {
@@ -26,5 +29,11 @@ export class SyncExpansionJpnCardPricesMessageHandler {
                 prices: card.prices,
             });
         }
+
+        this.tcgExpansionMetadataRepository.save({
+            expansionId: expansionId,
+            lastPriceSync: DateTime.now().toISO()
+        })
+
     }
 }

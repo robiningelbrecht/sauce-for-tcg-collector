@@ -3,7 +3,7 @@ export class TcgCardPriceRepository {
         this.connection = connection;
     }
 
-    findByCardsIds = async (cardsIds) => {
+    findByCardIds = async (cardsIds) => {
         const collection = await this.connection.TcgCardPrice.where('cardId').anyOf(cardsIds);
         return collection.toArray();
     }

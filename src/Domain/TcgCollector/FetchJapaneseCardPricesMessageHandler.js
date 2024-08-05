@@ -28,7 +28,7 @@ export class FetchJapaneseCardPricesMessageHandler {
         }
 
         const conversionRate = await this.keyValueRepository.find(KEY_CURRENCY_RATE_JPY_TO_USD);
-        const cards = await this.tcgCardPriceRepository.findByCardsIds(payload.cardIds);
+        const cards = await this.tcgCardPriceRepository.findByCardIds(payload.cardIds);
 
         cards.forEach(card => {
             card.priceInUsd = null;

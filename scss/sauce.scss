@@ -5,3 +5,22 @@
 @use 'purchase-prices';
 @use 'toastify';
 
+button.sync-prices.warning {
+  color: #fff;
+  background-color: #e3a008;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: #c27803;
+    color: #fff;
+  }
+
+  span.last-refresh-date {
+    font-size: 12px;
+  }
+
+  > .button-icon {
+    color: #fff;
+  }
+}
