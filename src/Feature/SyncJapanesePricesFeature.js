@@ -1,5 +1,6 @@
 import {Toast} from "../Component/Toast";
 import {SyncExpansionJpnCardPricesMessageHandler} from "../Domain/JpnCards/SyncExpansionJpnCardPricesMessageHandler";
+import Container from "../Infrastructure/Container";
 
 export class SyncJapanesePricesFeature {
     constructor(settings) {
@@ -30,11 +31,13 @@ export class SyncJapanesePricesFeature {
         $syncPricesButton.classList.add(...['button', 'button-plain-alt']);
         $syncPricesButton.innerHTML = `<span aria-hidden="true" class="button-icon fa-solid fa-rotate fa-fw"></span> Prices`;
         $syncPricesButton.addEventListener('click', () => {
-            chrome.runtime.sendMessage({
-                handler: SyncExpansionJpnCardPricesMessageHandler.getId(),
-                payload: {expansionId: expansionId}
+            Container.getMessageHandler(SyncExpansionJpnCardPricesMessageHandler.getId()).handle({expansionId: expansionId}).then(() => {
+                Toast.success(`Prices for expansion "${expansionId}" have been synced.`).show();
+            }).catch(e => {
+                Toast.error(e.message);
             });
-            Toast.success('Price update started. You can navigate away from this page.').show();
+
+            Toast.success('Price update started. Please do NOT navigate away from this page.').show();
         });
         document.querySelector('div#cards-page-buttons').appendChild($syncPricesButton);
     }

@@ -2,7 +2,6 @@ import './../scss/sauce.scss';
 import {consolePrint, consolePrintLogo} from "./Infrastructure/Utils/Console";
 import {Toast} from "./Component/Toast";
 import Container from "./Infrastructure/Container";
-import {ShowToastMessageHandler} from "./Domain/ShowToastMessageHandler";
 import {AppState} from "./Infrastructure/AppState";
 
 if (!Container.Settings.getGoogleSpreadSheetId()) {
@@ -29,10 +28,5 @@ for (const feature of Container.Features) {
     }
 }
 
-chrome.runtime.onMessage.addListener(function (request) {
-    if (request.handler === ShowToastMessageHandler.getId()) {
-        Container.getMessageHandler(request.handler).handle(request.payload)
-    }
-});
 
 

@@ -1,4 +1,7 @@
 import {FetchJapaneseCardPricesMessageHandler} from "../Domain/TcgCollector/FetchJapaneseCardPricesMessageHandler";
+import Container from "../Infrastructure/Container";
+import {SyncExpansionJpnCardPricesMessageHandler} from "../Domain/JpnCards/SyncExpansionJpnCardPricesMessageHandler";
+import {Toast} from "../Component/Toast";
 
 export class DisplayJapanesePricesFeature {
     constructor(settings) {
@@ -24,17 +27,16 @@ export class DisplayJapanesePricesFeature {
         const cardIds = [...document.querySelectorAll(`div.card-image-grid-item[data-card-id]`)]
             .map(el => parseInt(el.getAttribute('data-card-id')));
 
-        const cards = await chrome.runtime.sendMessage({
-            handler: FetchJapaneseCardPricesMessageHandler.getId(),
-            payload: {cardIds: cardIds}
-        });
-
-        cards.forEach(card => {
-            const $card = document.querySelector(`div.card-image-grid-item[data-card-id="${card.cardId}"]`);
-            if ($card && card.priceInUsd) {
-                $card.querySelector('.card-image-controls-item-price').innerHTML =
-                    `<a href="${card.urlToListing}" target="_blank">$${card.priceInUsd}</a>`;
-            }
+        Container.getMessageHandler(FetchJapaneseCardPricesMessageHandler.getId()).handle({cardIds: cardIds}).then((cards) => {
+            cards.forEach(card => {
+                const $card = document.querySelector(`div.card-image-grid-item[data-card-id="${card.cardId}"]`);
+                if ($card && card.priceInUsd) {
+                    $card.querySelector('.card-image-controls-item-price').innerHTML =
+                        `<a href="${card.urlToListing}" target="_blank">$${card.priceInUsd}</a>`;
+                }
+            });
+        }).catch(e => {
+            Toast.error(e.message);
         });
     }
 

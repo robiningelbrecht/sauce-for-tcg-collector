@@ -8,10 +8,6 @@ export class SyncExpansionJpnCardPricesMessageHandler {
         return 'SyncJapanesePrices';
     }
 
-    getSuccessMessage = (payload) => {
-        return `Prices for expansion "${payload.expansionId}" have been synced`;
-    }
-
     handle = async (payload) => {
         const expansionId = payload.expansionId;
         const sets = (await this.api.getSets()).filter(set => set.name.toLowerCase() === expansionId.toLowerCase());
