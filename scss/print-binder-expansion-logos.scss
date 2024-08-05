@@ -72,6 +72,8 @@ body.print-binder-expansion-logos {
 
       a {
         color: #a69e92;
+        position: relative;
+        pointer-events: none;
 
         &:hover {
           text-decoration: none;
@@ -87,7 +89,7 @@ body.print-binder-expansion-logos {
     .set-logo-grid-item-text-content,
     .set-logo-grid-item-footer,
     #page-content > .container,
-    #set > .container:first-child,
+    #set-search-result > .container:first-child,
     #expansion-series-nav {
       display: none;
     }

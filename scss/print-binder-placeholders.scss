@@ -4,6 +4,10 @@ body.print-binder-placeholders-feature {
     align-items: center;
   }
 
+  #card-search-result-header-actions-dropdown {
+    display: flex;
+  }
+
   button.toggle-print-selection {
     display: flex;
     align-items: center;
@@ -72,12 +76,7 @@ body.print-binder-placeholders-feature {
       align-items: center;
 
       a {
-        color: #a69e92;
-
-        &:hover {
-          text-decoration: none;
-          cursor: default;
-        }
+        pointer-events: none;
       }
 
       input[type="checkbox"] {
@@ -85,7 +84,7 @@ body.print-binder-placeholders-feature {
       }
     }
 
-    .card-image-controls,
+    .card-image-controls, #tcg-region-links-button-group-container,
     #tcg-region-button-group-container, #cards-page-actions,
     #card-search-result-header, #card-display-options-container {
       display: none;
