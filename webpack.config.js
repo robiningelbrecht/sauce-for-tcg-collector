@@ -7,7 +7,6 @@ module.exports = {
     entry: {
         'gravy.min': './src/gravy.js',
         'sauce.min': './src/sauce.js',
-        'seasoning.min': './src/seasoning.js',
         'popup/popup.min': './popup/popup.js',
     },
     output: {
