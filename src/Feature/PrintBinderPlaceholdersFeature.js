@@ -46,7 +46,10 @@ export class PrintBinderPlaceholdersFeature {
             $checkbox.addEventListener('click', () => {
                 document.querySelector('button span.count').innerHTML = document.querySelectorAll('input[type="checkbox"][data-card-id]:checked').length;
             })
-            $card.appendChild($checkbox);
+
+            const $checkboxLabel = document.createElement('label');
+            $checkboxLabel.appendChild($checkbox);
+            $card.appendChild($checkboxLabel);
         });
 
         const $body = document.body;

@@ -17,9 +17,24 @@ body.print-binder-placeholders-feature {
     column-gap: 5px;
   }
 
-  .card-image-grid-item input[type="checkbox"] {
-    display: none;
-    margin-top: 6px;
+  .card-image-grid-item {
+    position: relative;
+
+    .card-image-grid-item-link {
+      margin-bottom: 1.1rem;
+    }
+
+    label {
+      display: none;
+      cursor: pointer;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: end;
+      margin: 0;
+      padding: 0;
+    }
   }
 
   div.print-navigation {
@@ -79,8 +94,8 @@ body.print-binder-placeholders-feature {
         pointer-events: none;
       }
 
-      input[type="checkbox"] {
-        display: block;
+      label {
+        display: flex;
       }
     }
 
