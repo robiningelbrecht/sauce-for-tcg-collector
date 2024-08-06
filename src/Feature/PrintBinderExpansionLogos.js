@@ -106,5 +106,10 @@ export class PrintBinderExpansionLogos {
             $body.classList.remove('printing');
         });
 
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                $body.classList.remove('in-print-selection-mode');
+            }
+        });
     }
 }
