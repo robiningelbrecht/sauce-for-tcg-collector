@@ -22,19 +22,15 @@ body.print-binder-expansion-logos {
     }
 
     label {
+      display: none;
       cursor: pointer;
       position: absolute;
       width: 100%;
       height: calc(100% - 1.5rem);
-      display: flex;
       justify-content: center;
       align-items: end;
       margin: 0;
       padding: 0;
-
-      input[type="checkbox"] {
-        display: none;
-      }
     }
   }
 
@@ -100,8 +96,8 @@ body.print-binder-expansion-logos {
         }
       }
 
-      input[type="checkbox"] {
-        display: block;
+      label {
+        display: flex;
       }
     }
 
