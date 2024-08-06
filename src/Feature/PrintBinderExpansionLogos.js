@@ -44,7 +44,10 @@ export class PrintBinderExpansionLogos {
             $checkbox.addEventListener('click', () => {
                 document.querySelector('button span.count').innerHTML = document.querySelectorAll('input[type="checkbox"][data-expansions-name]:checked').length;
             })
-            $expansion.appendChild($checkbox);
+
+            const $checkboxLabel = document.createElement('label');
+            $checkboxLabel.appendChild($checkbox);
+            $expansion.appendChild($checkboxLabel);
         });
 
         const $body = document.body;

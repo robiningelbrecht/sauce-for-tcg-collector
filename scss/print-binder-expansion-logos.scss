@@ -14,9 +14,28 @@ body.print-binder-expansion-logos {
     column-gap: 5px;
   }
 
-  .set-logo-grid-item input[type="checkbox"] {
-    display: none;
-    margin-top: 6px;
+  .set-logo-grid-item {
+    position: relative;
+
+    .set-logo-grid-item-body {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      cursor: pointer;
+      position: absolute;
+      width: 100%;
+      height: calc(100% - 1.5rem);
+      display: flex;
+      justify-content: center;
+      align-items: end;
+      margin: 0;
+      padding: 0;
+
+      input[type="checkbox"] {
+        display: none;
+      }
+    }
   }
 
   div.print-navigation {
