@@ -71,21 +71,48 @@ export class PrintBinderExpansionLogos {
         $printButton.classList.add(...['print']);
         $printButton.innerHTML = `<span class="fa-solid fa-print"></span><div>Print <span class="count">0</span> expansion logo(s)</div>`;
         $printButton.addEventListener('click', () => {
-            // Hide all unchecked expansions.
+            const size = parseInt(document.querySelector('.size input').value);
+            const shape = document.querySelector('.shape select').value;
+
+            const pageBreakAfterElementCount = Math.floor(210 / (size + 2.5)) * Math.floor(297 / (size + 2.5));
+
             document.querySelectorAll(`div.expansion[data-expansions-name]`).forEach($placeholder => {
-                $placeholder.style.display = null;
+                $placeholder.style.display = 'none';
+                $placeholder.style.setProperty('--expansion-width', `${size}mm`);
+                $placeholder.style.setProperty('--expansion-border-radius', shape);
+                $placeholder.classList.remove(...['page-break']);
             });
-            document.querySelectorAll('input[type="checkbox"][data-expansions-name]:not(:checked)').forEach($checkbox => {
+
+            let count = 0;
+            document.querySelectorAll('input[type="checkbox"][data-expansions-name]:checked').forEach($checkbox => {
                 const expansionName = $checkbox.getAttribute('data-expansions-name');
                 document.querySelectorAll(`div.expansion[data-expansions-name="${expansionName}"]`).forEach($placeholder => {
-                    $placeholder.style.display = 'none';
+                    $placeholder.style.display = null;
+                    count++;
+                    if (count % pageBreakAfterElementCount === 0) {
+                        $placeholder.classList.add(...['page-break']);
+                    }
                 });
-
             });
+
             $body.classList.add('printing');
             window.print();
-        })
+        });
 
+        const $shapeSelect = document.createElement('div');
+        $shapeSelect.classList.add(...['shape']);
+        $shapeSelect.innerHTML = `<span class="fa-swatchbook fa-solid"></span>
+            <select>
+            <option value="50%" selected>Circle</option>
+            <option value="0">Rectangle</option>
+            </select>`;
+
+        const $sizeInput = document.createElement('div');
+        $sizeInput.classList.add(...['size']);
+        $sizeInput.innerHTML = `<span class="fa-up-right-and-down-left-from-center fa-solid"></span><input type="number" min="1" max="99" value="35"/><span class="unit">mm</span>`;
+
+        $inner.appendChild($shapeSelect);
+        $inner.appendChild($sizeInput);
         $inner.appendChild($printButton);
         $inner.appendChild($cancelPrintSelectionModeButton);
 
@@ -102,7 +129,6 @@ export class PrintBinderExpansionLogos {
         $appendTo.appendChild($togglePrintSelectionModeButton);
 
         addEventListener("afterprint", () => {
-            $body.classList.remove('in-print-selection-mode');
             $body.classList.remove('printing');
         });
 
@@ -111,5 +137,7 @@ export class PrintBinderExpansionLogos {
                 $body.classList.remove('in-print-selection-mode');
             }
         });
+
+
     }
 }

@@ -102,7 +102,6 @@ export class PrintBinderPlaceholdersFeature {
         document.querySelector('#card-search-result-header-actions-dropdown').appendChild($togglePrintSelectionModeButton$);
 
         addEventListener("afterprint", () => {
-            $body.classList.remove('in-print-selection-mode');
             $body.classList.remove('printing');
         });
 

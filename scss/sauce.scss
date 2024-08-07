@@ -1,29 +1,10 @@
+@use './fontawesome/scss/fontawesome.scss';
+@use './fontawesome/scss/solid.scss';
+
 @use 'collection-history';
 @use 'market-place-links';
 @use 'print-binder-expansion-logos';
 @use 'print-binder-placeholders';
 @use 'purchase-prices';
+@use 'sync-japanese-prices';
 @use 'toastify';
-
-button.sync-prices {
-  &.warning {
-    color: #fff;
-    background-color: #e3a008;
-
-    &:hover,
-    &:focus,
-    &:active {
-      background-color: #c27803;
-      color: #fff;
-    }
-
-    > .button-icon {
-      color: #fff;
-    }
-  }
-
-
-  span.last-refresh-date {
-    font-size: 12px;
-  }
-}

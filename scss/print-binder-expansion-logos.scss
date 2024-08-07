@@ -74,6 +74,54 @@ body.print-binder-expansion-logos {
           background-color: #c81e1e;
         }
       }
+
+      div.shape {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+        position: relative;
+
+        span {
+          position: absolute;
+          left: 15px;
+        }
+
+        select {
+          border: 2px solid rgb(53, 58, 60);
+          border-radius: 0.5em;
+          padding: 5px 10px 5px 35px;
+        }
+      }
+
+      div.size {
+        display: flex;
+        column-gap: 2px;
+        align-items: center;
+        position: relative;
+
+        span.fa-solid {
+          position: absolute;
+          left: 15px;
+        }
+        span.unit {
+          position: absolute;
+          right: 15px;
+        }
+
+        input {
+          width: auto;
+          padding: 8px 40px 8px 35px;
+          border: 2px solid rgb(53, 58, 60);
+          border-radius: 0.5em;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button{
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
+      }
     }
   }
 
@@ -112,11 +160,15 @@ body.print-binder-expansion-logos {
 
   #print {
     display: none;
-
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    flex-wrap: wrap;
+    justify-content: center;
     justify-items: center;
-    row-gap: 10px;
+    gap: 10px;
     color: #000;
+    width: 210mm;
+
+    --expansion-width: 35mm;
+    --expansion-border-radius: 50%;
 
     .expansion {
       position: relative;
@@ -124,11 +176,11 @@ body.print-binder-expansion-logos {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 3.5cm !important;
-      width: 3.5cm !important;
-      min-width: 3.5cm !important;
-      max-width: 3.5cm !important;
-      border-radius: 50%;
+      height: var(--expansion-width) !important;
+      width: var(--expansion-width) !important;
+      min-width: var(--expansion-width) !important;
+      max-width: var(--expansion-width) !important;
+      border-radius: var(--expansion-border-radius);
       border: 1px solid #000;
 
       img.logo {
@@ -142,7 +194,7 @@ body.print-binder-expansion-logos {
         width: 25px;
       }
 
-      &:nth-child(35n) {
+      &.page-break {
         page-break-after: always;
       }
     }
@@ -163,7 +215,7 @@ body.print-binder-expansion-logos {
       }
 
       #print {
-        display: grid;
+        display: flex;
       }
     }
   }
