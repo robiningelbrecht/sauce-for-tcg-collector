@@ -109,7 +109,7 @@ export class PrintBinderExpansionLogos {
 
         const $sizeInput = document.createElement('div');
         $sizeInput.classList.add(...['size']);
-        $sizeInput.innerHTML = `<span class="fa-up-right-and-down-left-from-center fa-solid"></span><input type="number" min="1" max="99" value="35"/><span class="unit">mm</span>`;
+        $sizeInput.innerHTML = `<span class="fa-up-right-and-down-left-from-center fa-solid"></span><input type="number" min="1" max="99" value="39"/><span class="unit">mm</span>`;
 
         $inner.appendChild($shapeSelect);
         $inner.appendChild($sizeInput);
