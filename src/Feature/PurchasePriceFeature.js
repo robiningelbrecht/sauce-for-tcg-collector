@@ -16,13 +16,13 @@ export class PurchasePriceFeature {
     }
 
     apply = async () => {
-        const appState = AppState.fromHtml();
-        const cardId = appState.getCardId();
+        const cardId = AppState.fromHtml().getCardId();
+        await navigator.clipboard.writeText(cardId);
 
-        const $wrapperDiv = document.createElement("div");
+        const $wrapperDiv = document.createElement('div');
         $wrapperDiv.classList.add('tcg-collector-card-prices-wrapper');
 
-        const $priceRowsDiv = document.createElement("div");
+        const $priceRowsDiv = document.createElement('div');
         $priceRowsDiv.classList.add('tcg-collector-card-prices');
 
         const googleSheet = new GoogleSheet(
