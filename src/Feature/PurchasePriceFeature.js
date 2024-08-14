@@ -1,6 +1,7 @@
 import {GoogleSheet} from "../Infrastructure/Utils/GoogleSheet";
 import {GradingCompany} from "../Domain/GradingCompany";
 import {AppState} from "../Infrastructure/AppState";
+import {Toast} from "../Component/Toast";
 
 export class PurchasePriceFeature {
     constructor(settings) {
@@ -18,6 +19,7 @@ export class PurchasePriceFeature {
     apply = async () => {
         const cardId = AppState.fromHtml().getCardId();
         await navigator.clipboard.writeText(cardId);
+        Toast.success(`Card id "${cardId}" copied to clipboard.`).show();
 
         const $wrapperDiv = document.createElement('div');
         $wrapperDiv.classList.add('tcg-collector-card-prices-wrapper');

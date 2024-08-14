@@ -36,7 +36,7 @@ export class DisplayJapanesePricesFeature {
                 }
             });
         }).catch(e => {
-            Toast.error(e.message);
+            Toast.error(e.message).show();
         });
     }
 

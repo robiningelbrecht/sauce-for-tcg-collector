@@ -48,7 +48,7 @@ export class SyncJapanesePricesFeature {
             Container.getMessageHandler(SyncExpansionJpnCardPricesMessageHandler.getId()).handle({expansionId: expansionId}).then(() => {
                 Toast.success(`Prices for expansion "${expansionId}" have been synced.`).show();
             }).catch(e => {
-                Toast.error(e.message);
+                Toast.error(e.message).show();
             });
 
             Toast.success('Price update started. Please do NOT navigate away from this page.').show();
