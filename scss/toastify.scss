@@ -34,10 +34,6 @@
     }
   }
 
-  &.on .toast-progress .toast-progress-inner {
-    animation-play-state: running;
-  }
-
   &.success {
     background-color: #def7ec;
     border-color: #0b9f6e;

@@ -306,7 +306,9 @@ class Toastify {
             divElement.addEventListener(
                 "mouseleave",
                 () => {
-                    progressBar.classList.remove(...['animation-paused']);
+                    progressBar.classList.remove(...['animation-paused', 'toast-progress']);
+                    void progressBar.offsetWidth;
+                    progressBar.classList.add(...['toast-progress']);
                     divElement.timeOutValue = window.setTimeout(
                         () => {
                             // Remove the toast from DOM
