@@ -13,13 +13,18 @@
   max-width: calc(50% - 20px);
   z-index: 2147483647;
   background: #1f2937 no-repeat;
+  border-left: 5px solid #ffffff;
 
   &.success {
-    background-color: #0e9f6e;
+    background-color: #def7ec;
+    border-color: #0b9f6e;
+    color: #0b9f6e;
   }
 
   &.error {
-    background-color: #9b1c1c;
+    background-color: #fce8e7;
+    border-color: #9b1c1c;
+    color: #9b1c1c;
   }
 
   @media only screen and (max-width: 360px) {

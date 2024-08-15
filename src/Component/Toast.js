@@ -18,7 +18,7 @@ export class Toast {
         Toastify({
             text: `<div><h3>Sauce for TCG Collector</h3><span>${this.message}</span></div>`,
             className: this.type,
-            duration: 6000,
+            duration: 60000000,
             destination: "#",
             newWindow: false,
             close: true,
