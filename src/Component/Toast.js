@@ -24,8 +24,9 @@ export class Toast {
             close: true,
             gravity: "bottom", // `top` or `bottom`
             position: "center", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
-            escapeMarkup: false
+            stopOnFocus: false, // Prevents dismissing of toast on hover
+            escapeMarkup: false,
+            progressBar: true,
         }).showToast();
     }
 
