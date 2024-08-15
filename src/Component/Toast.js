@@ -1,4 +1,4 @@
-import Toastify from "toastify-js";
+import Toastify from "./toastify";
 
 export class Toast {
     constructor(type, message) {
@@ -18,7 +18,7 @@ export class Toast {
         Toastify({
             text: `<div><h3>Sauce for TCG Collector</h3><span>${this.message}</span></div>`,
             className: this.type,
-            duration: 60000000,
+            duration: 6000,
             destination: "#",
             newWindow: false,
             close: true,
