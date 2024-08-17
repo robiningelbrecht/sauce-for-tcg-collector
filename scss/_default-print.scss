@@ -1,0 +1,22 @@
+@media print {
+  body:not(.printing) {
+    #page-content, #card-search-result, #card-image-grid {
+      padding-top: 0 !important;
+      margin-top: 0 !important;
+    }
+
+    #navbar, #page-footer, #flash-messages, #floating-action-buttons,
+    #cards-page-actions, #card-search-result-header, #card-display-options-container,
+    #tcg-region-links-button-group-container, #tcg-region-button-group-container,
+    #set-search-result-header, #set-display-options {
+      display: none !important;
+    }
+
+    &.print-binder-expansion-logos {
+      #page-content > .container,
+      #expansion-series-nav {
+        display: none !important;
+      }
+    }
+  }
+}
