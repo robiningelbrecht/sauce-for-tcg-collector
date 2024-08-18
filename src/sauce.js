@@ -26,6 +26,3 @@ for (const feature of Container.Features) {
 
     }
 }
-
-
-

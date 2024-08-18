@@ -1,4 +1,7 @@
 import {MarketPlaceLinkFactory} from "../Infrastructure/Utils/MarketPlaceLinkFactory";
+import Container from "../Infrastructure/Container";
+import {Toast} from "../Component/Toast";
+import {consolePrint} from "../Infrastructure/Utils/Console";
 
 export class MarketPlaceLinksFeature {
     constructor(settings) {
@@ -21,14 +24,26 @@ export class MarketPlaceLinksFeature {
     }
 
     apply = async () => {
-        const $cards = document.querySelectorAll('div#card-image-grid div.card-image-grid-item');
-        const expansionCode = document.querySelector('span#card-search-result-title-expansion-code')?.innerText || '';
-        const marketPlaceLinkFactory = new MarketPlaceLinkFactory(this.settings);
+        const attachMarketPlaceLinks = () => {
+            const $cards = document.querySelectorAll('div#card-image-grid div.card-image-grid-item');
+            const expansionCode = document.querySelector('span#card-search-result-title-expansion-code')?.innerText || '';
+            const marketPlaceLinkFactory = new MarketPlaceLinkFactory(this.settings);
 
-        $cards.forEach($card => {
-            marketPlaceLinkFactory.buildFor($card, expansionCode).forEach($link => {
-                $card.querySelector('div.card-image-controls-item').appendChild($link);
+            $cards.forEach($card => {
+                marketPlaceLinkFactory.buildFor($card, expansionCode).forEach($link => {
+                    $card.querySelector('div.card-image-controls-item').appendChild($link);
+                });
             });
+        }
+
+        attachMarketPlaceLinks();
+
+        const observer = new MutationObserver((mutations) => {
+            attachMarketPlaceLinks();
+        });
+
+        observer.observe(document.querySelector('#page-content > .container'), {
+            childList: true,
         });
     }
 }
