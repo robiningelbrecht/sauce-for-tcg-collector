@@ -1,6 +1,6 @@
 import {toValidCssClassName} from "../Infrastructure/Utils/Functions";
 
-export class PrintBinderExpansionLogos {
+export class PrintBinderExpansionLogosFeature {
     constructor() {
 
     }
