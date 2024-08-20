@@ -10,6 +10,10 @@ export class PrintBinderPlaceholdersFeature {
         return 'print-binder-placeholders-feature';
     };
 
+    needsMutationObserver = () => {
+        return false;
+    };
+
     needsToBeApplied = (appState) => {
         return appState.getRouteName() === 'sets_set_cards_page'
     }

@@ -9,6 +9,10 @@ export class PrintBinderExpansionLogosFeature {
         return 'print-binder-expansion-logos';
     };
 
+    needsMutationObserver = () => {
+        return false;
+    };
+
     needsToBeApplied = (appState) => {
         return appState.getRouteName() === 'sets_page';
     }

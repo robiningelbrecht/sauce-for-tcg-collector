@@ -10,6 +10,10 @@ export class CollectionHistoryFeature {
         return 'collection-history-feature';
     };
 
+    needsMutationObserver = () => {
+        return false;
+    };
+
     needsToBeApplied = (appState) => {
         return appState.getRouteName() === 'dashboard_page';
     }

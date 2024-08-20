@@ -12,6 +12,10 @@ export class PurchasePriceFeature {
         return 'purchase-price-feature';
     };
 
+    needsMutationObserver = () => {
+        return false;
+    };
+
     needsToBeApplied = (appState) => {
         return appState.getRouteName() === 'cards_card_page';
     }

@@ -24,5 +24,14 @@ for (const feature of Container.Features) {
             consolePrint(error.stack);
         });
 
+        if(feature.needsMutationObserver()){
+            const observer = new MutationObserver((mutations) => {
+                feature.apply();
+            });
+
+            observer.observe(document.querySelector('#page-content > .container'), {
+                childList: true,
+            });
+        }
     }
 }

@@ -9,6 +9,10 @@ export class HidePricesFeature {
         return 'hide-prices-feature';
     };
 
+    needsMutationObserver = () => {
+        return false;
+    };
+
     needsToBeApplied = (appState) => {
         return this.settings.hidePrices();
     }

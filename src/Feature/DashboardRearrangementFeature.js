@@ -6,6 +6,10 @@ export class DashboardRearrangementFeature {
         return 'dashboard-rearrangement-feature';
     };
 
+    needsMutationObserver = () => {
+        return false;
+    };
+
     needsToBeApplied = (appState) => {
         return appState.getRouteName() === 'dashboard_page';
     }

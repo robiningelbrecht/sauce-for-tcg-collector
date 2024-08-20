@@ -12,6 +12,10 @@ export class SyncJapanesePricesFeature {
         return 'sync-japanese-prices-feature';
     };
 
+    needsMutationObserver = () => {
+        return false;
+    };
+
     needsToBeApplied = (appState) => {
         if (this.settings.hidePrices()) {
             return false;

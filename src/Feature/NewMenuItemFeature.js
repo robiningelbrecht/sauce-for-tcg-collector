@@ -7,6 +7,10 @@ export class NewMenuItemFeature {
         return 'new-menu-item-feature';
     };
 
+    needsMutationObserver = () => {
+        return false;
+    };
+
     needsToBeApplied = (appState) => {
         return document.querySelectorAll('div#navbar-buttons').length > 0;
     }

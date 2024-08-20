@@ -7,6 +7,10 @@ export class FilterExpansionsFeature {
         return 'filter-expansions';
     };
 
+    needsMutationObserver = () => {
+        return false;
+    };
+
     needsToBeApplied = (appState) => {
         return appState.getRouteName() === 'sets_page';
     }

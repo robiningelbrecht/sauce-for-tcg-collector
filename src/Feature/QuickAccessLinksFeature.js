@@ -10,6 +10,10 @@ export class QuickAccessLinksFeature {
         return 'quick-access-links-feature';
     };
 
+    needsMutationObserver = () => {
+        return false;
+    };
+
     needsToBeApplied = (appState) => {
         return appState.getRouteName() === 'dashboard_page';
     }

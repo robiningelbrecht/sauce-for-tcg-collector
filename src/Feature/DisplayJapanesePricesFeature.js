@@ -12,6 +12,10 @@ export class DisplayJapanesePricesFeature {
         return 'display-japanese-prices-feature';
     };
 
+    needsMutationObserver = () => {
+        return true;
+    };
+
     needsToBeApplied = (appState) => {
         if (this.settings.hidePrices()) {
             return false;
@@ -24,30 +28,19 @@ export class DisplayJapanesePricesFeature {
     }
 
     apply = async () => {
-        const displayPrices = () => {
-            const appState = AppState.fromHtml();
-            const cardIds = appState.getCardIds();
+        const appState = AppState.fromHtml();
+        const cardIds = appState.getCardIds();
 
-            Container.getMessageHandler(FetchJapaneseCardPricesMessageHandler.getId()).handle({cardIds: cardIds}).then((cards) => {
-                cards.forEach(card => {
-                    const $card = document.querySelector(`div.card-image-grid-item[data-card-id="${card.cardId}"]`);
-                    if ($card && card.priceInUsd) {
-                        $card.querySelector('.card-image-controls-item-price').innerHTML =
-                            `<a href="${card.urlToListing}" target="_blank">$${card.priceInUsd}</a>`;
-                    }
-                });
-            }).catch(e => {
-                Toast.error(e.message).show();
+        Container.getMessageHandler(FetchJapaneseCardPricesMessageHandler.getId()).handle({cardIds: cardIds}).then((cards) => {
+            cards.forEach(card => {
+                const $card = document.querySelector(`div.card-image-grid-item[data-card-id="${card.cardId}"]`);
+                if ($card && card.priceInUsd) {
+                    $card.querySelector('.card-image-controls-item-price').innerHTML =
+                        `<a href="${card.urlToListing}" target="_blank">$${card.priceInUsd}</a>`;
+                }
             });
-        }
-        displayPrices();
-
-        const observer = new MutationObserver((mutations) => {
-            displayPrices();
-        });
-
-        observer.observe(document.querySelector('#page-content > .container'), {
-            childList: true,
+        }).catch(e => {
+            Toast.error(e.message).show();
         });
     }
 }
