@@ -27,4 +27,6 @@ Feature highlights
 * Manage the quick access links on the dashboard
 * Re-arrange dashboard and get rid of clutter
 * Print placeholders for your binders
+* Print expansion logos
 * Add [cardmarket.com](https://www.cardmarket.com) or Ebay links to card overviews
+* Import & display Japanese prices 
