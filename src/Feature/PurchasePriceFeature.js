@@ -47,7 +47,7 @@ export class PurchasePriceFeature {
                     $priceRowDiv.innerHTML += `
 <div class="grading">
     <span>${row.type}</span>
-    <a href="${gradingCompany.getGetCertUrl(row.certNumber)}" target="_blank" title="${gradingCompany.getLabel()}" class="icon ${gradingCompany.getName()}">
+    <a href="${gradingCompany.getCertUrl(row.certNumber)}" target="_blank" title="${gradingCompany.getLabel()}" class="icon ${gradingCompany.getName()}">
         ${gradingCompany.getLabel()}
     </a>
 </div>`;

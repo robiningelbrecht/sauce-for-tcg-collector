@@ -14,7 +14,7 @@ export class GradingCompany {
         return this.name;
     }
 
-    getGetCertUrl = (certNumber) => {
+    getCertUrl = (certNumber) => {
         if (this.getName() === 'psa') {
             return `https://www.psacard.com/cert/${certNumber}`;
         }
