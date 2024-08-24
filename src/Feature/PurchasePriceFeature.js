@@ -13,7 +13,7 @@ export class PurchasePriceFeature {
     };
 
     needsMutationObserver = () => {
-        return false;
+        return true;
     };
 
     needsToBeApplied = (appState) => {
