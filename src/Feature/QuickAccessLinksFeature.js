@@ -29,7 +29,7 @@ export class QuickAccessLinksFeature {
         );
         const slabsAndSingles = currentRegion.filterRows(await googleSheetSlabsAndSingles.parse());
         const singlesCardIds = slabsAndSingles.filter(row => row.type === 'Single').map(row => parseInt(row.cardId));
-        const uri = `/cards?releaseDateOrder=newToOld&cardsPerPage=120&displayAs=images&sortBy=cardNameAsc&cards=${singlesCardIds.join(',')}`;
+        const uri = `/cards?cardSource=inCardCollection&cardsPerPage=120&sortBy=cardNameAsc&cards=${singlesCardIds.join(',')}`;
 
         const googleSheetQuickAccessLinks = new GoogleSheet(
             this.settings.getGoogleSpreadSheetId(),
