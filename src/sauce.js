@@ -24,7 +24,7 @@ for (const feature of Container.Features) {
             consolePrint(error.stack);
         });
 
-        if(feature.needsMutationObserver()){
+        if (feature.needsMutationObserver()) {
             const observer = new MutationObserver((mutations) => {
                 feature.apply();
             });
