@@ -73,7 +73,6 @@ export class CollectionHistoryFeature {
             animation: false,
             tooltip: {
                 trigger: 'axis',
-                valueFormatter: (value) => value,
                 backgroundColor: '#181A1B',
                 axisPointer: {
                     label: {
@@ -86,7 +85,21 @@ export class CollectionHistoryFeature {
             legend: {
                 textStyle: {
                     color: '#d8d4cf'
-                }
+                },
+                formatter: function (name) {
+                    switch (name) {
+                        case 'Unique cards':
+                            return `Unique cards (${currentCollectionState.uniqueCards})`;
+                        case 'Unique variants':
+                            return `Unique variants (${currentCollectionState.uniqueVariants})`;
+                        case 'Total cards':
+                            return `Total cards (${currentCollectionState.totalCards})`;
+                        case 'Total value':
+                            return `Total value ($${currentCollectionState.totalValue})`;
+                        default:
+                            return name;
+                    }
+                },
             },
             xAxis: {
                 type: 'time',
@@ -119,7 +132,7 @@ export class CollectionHistoryFeature {
             ],
             series: [
                 {
-                    name: `Unique cards (${currentCollectionState.uniqueCards})`,
+                    name: `Unique cards`,
                     type: 'line',
                     symbol: 'none',
                     smooth: 0.6,
@@ -129,7 +142,7 @@ export class CollectionHistoryFeature {
                     ])
                 },
                 {
-                    name: `Unique variants (${currentCollectionState.uniqueVariants})`,
+                    name: `Unique variants`,
                     type: 'line',
                     symbol: 'none',
                     smooth: 0.6,
@@ -139,7 +152,7 @@ export class CollectionHistoryFeature {
                     ])
                 },
                 {
-                    name: `Total cards (${currentCollectionState.totalCards})`,
+                    name: `Total cards`,
                     type: 'line',
                     symbol: 'none',
                     smooth: 0.6,
@@ -149,7 +162,7 @@ export class CollectionHistoryFeature {
                     ])
                 },
                 {
-                    name: `Total value ($${currentCollectionState.totalValue})`,
+                    name: `Total value`,
                     type: 'line',
                     symbol: 'none',
                     smooth: 0.6,
