@@ -28,7 +28,7 @@ export class QuickAccessLinksFeature {
             'Slabs / Singles'
         );
         const slabsAndSingles = currentRegion.filterRows(await googleSheetSlabsAndSingles.parse());
-        const singlesCardIds = slabsAndSingles.filter(row => row.type === 'Single').map(row => parseInt(row.cardId));
+        const singlesCardIds = slabsAndSingles.filter(row => row.type === 'Single' && row.price !== undefined).map(row => parseInt(row.cardId));
         const uri = `/cards?cardSource=inCardCollection&cardsPerPage=120&sortBy=cardNameAsc&cards=${singlesCardIds.join(',')}`;
 
         const googleSheetQuickAccessLinks = new GoogleSheet(
