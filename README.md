@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="dist/assets/readme-logo.png" alt="Sauce for TCG Collector">
+	<img src="dist/assets/readme/readme-logo.png" alt="Sauce for TCG Collector">
 </p>
 
 ---
@@ -15,18 +15,30 @@ Installation
 - Enable this extension
 - Reference your Google spreadsheet ID in the options
 
-![Settings!](dist/assets/settings.png)
+![Settings](dist/assets/settings.png)
 
 Feature highlights
 --------
 
-* Hide prices on TCG Collector
-* Manage & display purchases prices for cards
-* Links to slab certifications
-* Visualize the value of your collection trough time
-* Manage the quick access links on the dashboard
-* Re-arrange dashboard and get rid of clutter
-* Print placeholders for your binders
-* Print expansion logos
-* Add [cardmarket.com](https://www.cardmarket.com) or Ebay links to card overviews
-* Import & display Japanese prices 
+### Hide prices on TCG Collector
+![Hide prices](dist/assets/readme/hide-prices.jpeg)
+
+### Manage & display purchases prices for cards
+![Purchase prices](dist/assets/readme/purchase-prices.png)
+ 
+### Manage the quick access links on the dashboard
+![Dashboard quick links](dist/assets/readme/dashboard-quick-links.png)
+
+### Visualize the value of your collection trough time
+![Collection history](dist/assets/readme/collection-history.png)
+
+### Print placeholders for your binders
+![Binder placeholders](dist/assets/readme/print-binder-placeholders.png)
+
+### Print set logos
+![Set logos](dist/assets/readme/print-set-logos.png)
+
+### Add [cardmarket.com](https://www.cardmarket.com) or Ebay links to card overviews
+![Marketplace links](dist/assets/readme/marketplace-links.jpeg)
+
+### Import & display Japanese prices 
