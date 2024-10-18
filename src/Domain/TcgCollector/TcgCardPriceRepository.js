@@ -1,14 +1,12 @@
 export class TcgCardPriceRepository {
-    constructor(connection) {
-        this.connection = connection;
+    constructor(settings) {
+        this.settings = settings;
     }
 
     findByCardIds = async (cardsIds) => {
-        const collection = await this.connection.TcgCardPrice.where('cardId').anyOf(cardsIds);
-        return collection.toArray();
-    }
+        const response = await fetch(this.settings.getJapaneseCardPricesUrl());
+        const json = await response.json();
 
-    save = async (tcgCardPrice) => {
-        await this.connection.TcgCardPrice.put(tcgCardPrice);
+        return json.cards.filter((card)=> cardsIds.includes(card.cardId));
     }
 }

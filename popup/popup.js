@@ -3,7 +3,7 @@ import {
     SETTING_EBAY_LISTING_TYPE, SETTING_EBAY_LOCATION, SETTING_EBAY_SORT_BY,
     SETTING_EBAY_URL,
     SETTING_GOOGLE_SPREADSHEET_ID,
-    SETTING_HIDE_PRICES,
+    SETTING_HIDE_PRICES, SETTING_JAPANESE_CARD_PRICES_URL,
     Settings
 } from "../src/Infrastructure/Settings";
 import Container from "../src/Infrastructure/Container";
@@ -12,9 +12,9 @@ const initPopup = async () => {
     const settings = Container.Settings;
     const $form = document.querySelector("form");
     const $submitButton = $form.querySelector('button[type="submit"]');
-    const $clearIndexedDbButton = $form.querySelector('button[type="button"]');
 
     $form.elements[SETTING_GOOGLE_SPREADSHEET_ID].value = settings.getGoogleSpreadSheetId();
+    $form.elements[SETTING_JAPANESE_CARD_PRICES_URL].value = settings.getJapaneseCardPricesUrl();
     $form.elements[SETTING_HIDE_PRICES].checked = settings.hidePrices();
     $form.elements[SETTING_CARD_MARKET_MIN_CONDITION].value = settings.getCardMarketMinCondition();
     $form.elements[SETTING_EBAY_URL].value = settings.getEbayUrl();
@@ -60,11 +60,6 @@ const initPopup = async () => {
             chrome.tabs.update(tab.id, {url: tab.url});
         });
     });
-
-    $clearIndexedDbButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        Container.Connection.delete();
-    })
 };
 
 initPopup();

@@ -6,14 +6,14 @@
     <link href="popup.min.css" rel="stylesheet"/>
 </head>
 
-<body class="min-h-24">
+<body class="min-h-32">
     <form class="w-[700px] p-2.5">
         <div class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">
             <img class="w-8 h-8 mr-2" src="icon-128.png" alt="logo">
             Sauce for TCG Collector
         </div>
 
-        <div class="grid gap-6 mb-6 md:grid-cols-2">
+        <div class="grid gap-6 mb-6">
             <div>
                 <div class="relative">
                     <input type="text" id="googleSpreadSheetId" name="googleSpreadSheetId"
@@ -26,6 +26,18 @@
                 </div>
                 <p class="text-xs text-gray-500 dark:text-gray-400">The spreadsheet ID that references the purchases prices
                     of slabs and singles.</p>
+            </div>
+            <div>
+                <div class="relative">
+                    <input type="text" id="japaneseCardPricesUrl" name="japaneseCardPricesUrl"
+                           class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                           placeholder=""/>
+                    <label for="japaneseCardPricesUrl"
+                           class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                        Japanese card prices URL
+                    </label>
+                </div>
+                <p class="text-xs text-gray-500 dark:text-gray-400">URL to JSON file of Japanese card prices</p>
             </div>
             <div>
                 <ul class="items-center w-full text-sm text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -166,15 +178,6 @@
                     class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg disabled:bg-blue-400 disabled:dark:bg-blue-500 disabled:cursor-not-allowed hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Save changes
             </button>
-            <div>
-                <button type="button" class="inline-flex items-center px-3 py-2 text-xs font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                    <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-                    </svg>
-                    Clear IndexedDB
-                </button>
-            </div>
-
         </div>
     </form>
     <script defer src="flowbite.min.js"></script>

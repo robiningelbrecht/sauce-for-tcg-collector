@@ -1,4 +1,5 @@
 export const SETTING_GOOGLE_SPREADSHEET_ID = 'googleSpreadSheetId';
+export const SETTING_JAPANESE_CARD_PRICES_URL = 'japaneseCardPricesUrl';
 export const SETTING_HIDE_PRICES = 'hidePrices';
 export const SETTING_MARKET_PLACE_LINKS = 'marketPlaceLinks';
 export const SETTING_CARD_MARKET_CARD_LANGUAGES = 'cardMarketCardLanguages';
@@ -14,21 +15,12 @@ export class Settings {
         this.storage = storage;
     }
 
-    static getDefaults = () => {
-        return {
-            SETTING_HIDE_PRICES: false,
-            SETTING_MARKET_PLACE_LINKS: [],
-            SETTING_CARD_MARKET_CARD_LANGUAGES: [],
-            SETTING_CARD_MARKET_SELLER_LOCATIONS: [],
-            SETTING_CARD_MARKET_MIN_CONDITION: 2,
-            SETTING_EBAY_LISTING_TYPE: 'All',
-            SETTING_EBAY_LOCATION: 98,
-            SETTING_EBAY_SORT_BY: 12
-        }
-    }
-
     getGoogleSpreadSheetId = () => {
         return this.storage[SETTING_GOOGLE_SPREADSHEET_ID] || '';
+    }
+
+    getJapaneseCardPricesUrl = () => {
+        return this.storage[SETTING_JAPANESE_CARD_PRICES_URL] || '';
     }
 
     hidePrices = () => {
