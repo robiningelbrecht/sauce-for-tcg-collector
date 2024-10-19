@@ -29,9 +29,6 @@ Feature highlights
 ### Manage the quick access links on the dashboard
 ![Dashboard quick links](dist/assets/readme/dashboard-quick-links.png)
 
-### Visualize the value of your collection trough time
-![Collection history](dist/assets/readme/collection-history.png)
-
 ### Print placeholders for your binders
 ![Binder placeholders](dist/assets/readme/print-binder-placeholders.png)
 
@@ -40,5 +37,3 @@ Feature highlights
 
 ### Add [cardmarket.com](https://www.cardmarket.com) or Ebay links to card overviews
 ![Marketplace links](dist/assets/readme/marketplace-links.jpeg)
-
-### Import & display Japanese prices 
