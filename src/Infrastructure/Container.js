@@ -1,7 +1,6 @@
 import {TcgCardPriceRepository} from "../Domain/TcgCollector/TcgCardPriceRepository";
 import {NewMenuItemFeature} from "../Feature/NewMenuItemFeature";
 import {HidePricesFeature} from "../Feature/HidePricesFeature";
-import {CollectionHistoryFeature} from "../Feature/CollectionHistoryFeature";
 import {DashboardRearrangementFeature} from "../Feature/DashboardRearrangementFeature";
 import {QuickAccessLinksFeature} from "../Feature/QuickAccessLinksFeature";
 import {PurchasePriceFeature} from "../Feature/PurchasePriceFeature";
@@ -18,7 +17,6 @@ const tcgCardPriceRepository = new TcgCardPriceRepository(settings);
 const features = [
     new NewMenuItemFeature(settings),
     new HidePricesFeature(settings),
-    new CollectionHistoryFeature(settings),
     new DashboardRearrangementFeature(),
     new QuickAccessLinksFeature(settings),
     new PurchasePriceFeature(settings),
