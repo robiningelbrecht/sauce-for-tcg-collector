@@ -1,7 +1,7 @@
-import {TcgCardPriceRepository} from "../Domain/TcgCollector/TcgCardPriceRepository";
+import {JapaneseCardPriceRepository} from "../Domain/JapaneseCardPriceRepository";
 import {NewMenuItemFeature} from "../Feature/NewMenuItemFeature";
 import {HidePricesFeature} from "../Feature/HidePricesFeature";
-import {DashboardRearrangementFeature} from "../Feature/DashboardRearrangementFeature";
+import {DashboardFeature} from "../Feature/DashboardFeature";
 import {QuickAccessLinksFeature} from "../Feature/QuickAccessLinksFeature";
 import {PurchasePriceFeature} from "../Feature/PurchasePriceFeature";
 import {PrintBinderPlaceholdersFeature} from "../Feature/PrintBinderPlaceholdersFeature";
@@ -12,25 +12,25 @@ import {PrintBinderExpansionLogosFeature} from "../Feature/PrintBinderExpansionL
 import {FilterExpansionsFeature} from "../Feature/FilterExpansionsFeature";
 
 const settings = await Settings.fromSyncStorage();
-const tcgCardPriceRepository = new TcgCardPriceRepository(settings);
+const japaneseCardPriceRepository = new JapaneseCardPriceRepository(settings);
 
 const features = [
     new NewMenuItemFeature(settings),
     new HidePricesFeature(settings),
-    new DashboardRearrangementFeature(),
+    new DashboardFeature(settings, japaneseCardPriceRepository),
     new QuickAccessLinksFeature(settings),
     new PurchasePriceFeature(settings),
     new PrintBinderPlaceholdersFeature(),
     new PrintBinderExpansionLogosFeature(),
     new MarketPlaceLinksFeature(settings),
-    new DisplayJapanesePricesFeature(tcgCardPriceRepository, settings),
+    new DisplayJapanesePricesFeature(settings, japaneseCardPriceRepository),
     new FilterExpansionsFeature()
 ];
 
 
 const Container = {
     Settings: settings,
-    TcgCardPriceRepository: tcgCardPriceRepository,
+    TcgCardPriceRepository: japaneseCardPriceRepository,
     Features: features
 }
 

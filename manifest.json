@@ -26,7 +26,6 @@
         "https://www.tcgcollector.com/*"
       ],
       "js": [
-        "dist/echarts.min.js",
         "dist/sauce.min.js"
       ],
       "css": [

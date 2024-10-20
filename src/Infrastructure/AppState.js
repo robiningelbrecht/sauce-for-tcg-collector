@@ -11,6 +11,14 @@ export class AppState {
         return this.state.tcgRegionId
     }
 
+    isAllTcgRegionContext = () => {
+        return this.getTcgRegionId() === null;
+    }
+
+    isJapaneseTcgRegionContext = () => {
+        return this.getTcgRegionId() === 2;
+    }
+
     getCardIds = () => {
         return this.state.cardIds || [];
     }

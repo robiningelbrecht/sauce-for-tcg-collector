@@ -1,9 +1,9 @@
 import {AppState} from "../Infrastructure/AppState";
 
 export class DisplayJapanesePricesFeature {
-    constructor(tcgCardPriceRepository, settings) {
+    constructor(settings, JapaneseCardPriceRepository) {
         this.settings = settings;
-        this.tcgCardPriceRepository = tcgCardPriceRepository;
+        this.japaneseCardPriceRepository = JapaneseCardPriceRepository;
     }
 
     getId = () => {
@@ -22,17 +22,14 @@ export class DisplayJapanesePricesFeature {
             return false;
         }
 
-        if (appState.getRouteName() === 'cards_page') {
-            return true;
-        }
-        return appState.getRouteName() === 'sets_set_cards_page' && appState.getTcgRegionId() === 2;
+        return appState.getRouteName() === 'sets_set_cards_page' && appState.isJapaneseTcgRegionContext();
     }
 
     apply = async () => {
         const appState = AppState.fromHtml();
         const cardIds = appState.getCardIds();
 
-        const cards = await this.tcgCardPriceRepository.findByCardIds(cardIds);
+        const cards = await this.japaneseCardPriceRepository.findByCardIds(cardIds);
         cards.forEach(card => {
             const $card = document.querySelector(`div.card-image-grid-item[data-card-id="${card.cardId}"]`);
             if ($card && card.cardPrice) {
