@@ -1,4 +1,5 @@
 import {AppState} from "../Infrastructure/AppState";
+import Dinero from 'dinero.js'
 
 export class DisplayJapanesePricesFeature {
     constructor(settings, JapaneseCardPriceRepository) {
@@ -33,9 +34,8 @@ export class DisplayJapanesePricesFeature {
         cards.forEach(card => {
             const $card = document.querySelector(`div.card-image-grid-item[data-card-id="${card.cardId}"]`);
             if ($card && card.cardPrice) {
-                const usd = (card.cardPrice.amount / 100).toFixed(2);
                 $card.querySelector('.card-image-controls-item-price').innerHTML =
-                    `$${usd}`;
+                    Dinero(card.cardPrice).toFormat('$0.00');
             }
         });
     }

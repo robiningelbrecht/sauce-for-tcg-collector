@@ -6,7 +6,7 @@
     "build": "npm run build:popup && npm run build:webpack && npm run build:cleanup"
   },
   "dependencies": {
-    "luxon": "^3.4.4",
+    "dinero.js": "^1.9.1",
     "public-google-sheets-parser": "^1.5.4"
   },
   "devDependencies": {

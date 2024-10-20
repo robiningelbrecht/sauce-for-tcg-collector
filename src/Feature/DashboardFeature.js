@@ -35,16 +35,15 @@ export class DashboardFeature {
 
         if (appState.isJapaneseTcgRegionContext()) {
             // Set real total market price.
-            const totalCollectionValue = await this.japaneseCardPriceRepository.findTotalCollectionValue();
+            const totalCollectionValue = await this.japaneseCardPriceRepository.findTotalCollectionValueFor('jp');
             const $marketPrice = document.querySelectorAll('#dashboard-cards .dashboard-card')[3].querySelector('.dashboard-card-text');
-            const usd = (totalCollectionValue.jp.amount / 100).toFixed(0);
-            $marketPrice.innerHTML = `$${usd}`;
+            $marketPrice.innerHTML = `${totalCollectionValue.toFormat('$0')}`;
         }
         if (appState.isAllTcgRegionContext()) {
             const totalCollectionValue = await this.japaneseCardPriceRepository.findTotalCollectionValue();
             const $marketPrice = document.querySelectorAll('#dashboard-cards .dashboard-card')[3].querySelector('.dashboard-card-text');
-            const usd = ((parseInt(totalCollectionValue.intl.amount) + parseInt(totalCollectionValue.jp.amount)) / 100).toFixed(0);
-            $marketPrice.innerHTML = `$${usd}`;
+
+            $marketPrice.innerHTML = `${totalCollectionValue.toFormat('$0')}`;
         }
     }
 }
