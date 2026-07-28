@@ -1,23 +1,13 @@
 {
   "manifest_version": 3,
   "name": "Sauce for TCG Collector",
-  "description": "Sauce for TCG Collector is a browser extension that upgrades tcgcollector.com with more features.",
+  "description": "Sauce for TCG Collector is a browser extension that adds printing of binder placeholders and expansion logos to tcgcollector.com.",
   "version": "1.0",
   "icons": {
     "16": "dist/icons/icon-16.png",
     "32": "dist/icons/icon-32.png",
     "48": "dist/icons/icon-48.png",
     "128": "dist/icons/icon-128.png"
-  },
-  "action": {
-    "default_icon": {
-      "16": "dist/icons/icon-16.png",
-      "32": "dist/icons/icon-32.png",
-      "48": "dist/icons/icon-48.png",
-      "128": "dist/icons/icon-128.png"
-    },
-    "default_title": "Sauce for TCG Collector Settings",
-    "default_popup": "dist/popup/popup.html"
   },
   "content_scripts": [
     {
@@ -31,15 +21,6 @@
       "css": [
         "dist/sauce.min.css"
       ]
-    },
-    {
-      "run_at": "document_start",
-      "matches": [
-        "https://www.cardmarket.com/*/Pokemon/Products/Singles/*"
-      ],
-      "js": [
-        "dist/gravy.min.js"
-      ]
     }
   ],
   "web_accessible_resources": [
@@ -51,12 +32,5 @@
         "https://www.tcgcollector.com/*"
       ]
     }
-  ],
-  "permissions": [
-    "declarativeContent",
-    "storage",
-    "management",
-    "tabs",
-    "webNavigation"
   ]
 }

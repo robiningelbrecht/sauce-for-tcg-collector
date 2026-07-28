@@ -8,13 +8,14 @@
     #navbar, #page-footer, #flash-messages, #floating-action-buttons,
     #cards-page-actions, #card-search-result-header, #card-display-options-container,
     #tcg-region-links-button-group-container, #tcg-region-button-group-container,
-    #set-search-result-header, #set-display-options {
+    #sets-button-controls, #sets-main-controls,
+    #set-search-result-title, #set-display-as-radios, #scrollspy-bar {
       display: none !important;
     }
 
     &.print-binder-expansion-logos {
       #page-content > .container,
-      #expansion-series-nav {
+      #set-search-result > .container:first-child {
         display: none !important;
       }
     }

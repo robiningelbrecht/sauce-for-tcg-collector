@@ -5,9 +5,7 @@ module.exports = {
     mode: 'production',
     context: __dirname,
     entry: {
-        'gravy.min': './src/gravy.js',
         'sauce.min': './src/sauce.js',
-        'popup/popup.min': './popup/popup.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -25,9 +23,4 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin(),
     ],
-    resolve: {
-        fallback: {
-            "https": false,
-        }
-    },
 };

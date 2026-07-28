@@ -1,8 +1,7 @@
 body.print-binder-expansion-logos {
-  div#set-search-result-header {
+  #sets-side-buttons {
     display: flex;
     align-items: center;
-    justify-content: space-between;
   }
 
   button.toggle-print-selection {
@@ -153,7 +152,7 @@ body.print-binder-expansion-logos {
     .set-logo-grid-item-footer,
     #page-content > .container,
     #set-search-result > .container:first-child,
-    #expansion-series-nav {
+    #scrollspy-bar {
       display: none;
     }
   }
