@@ -1,11 +1,7 @@
 body.print-binder-placeholders-feature {
-  div#card-search-result-header {
+  #cards-side-buttons {
     display: flex;
     align-items: center;
-  }
-
-  #card-search-result-header-actions-dropdown {
-    display: flex;
   }
 
   button.toggle-print-selection {
@@ -99,9 +95,8 @@ body.print-binder-placeholders-feature {
       }
     }
 
-    .card-image-controls, #tcg-region-links-button-group-container,
-    #tcg-region-button-group-container, #cards-page-actions,
-    #card-search-result-header, #card-display-options-container {
+    .card-image-controls, #cards-page-header, #cards-button-controls,
+    #cards-main-controls, #card-search-result-header, #card-display-as-radios {
       display: none;
     }
   }

@@ -1,13 +1,13 @@
 @media print {
   body:not(.printing) {
-    #page-content, #card-search-result, #card-image-grid {
+    #page-content, #card-search-result, #card-search-result-main-content, #card-image-grid {
       padding-top: 0 !important;
       margin-top: 0 !important;
     }
 
     #navbar, #page-footer, #flash-messages, #floating-action-buttons,
-    #cards-page-actions, #card-search-result-header, #card-display-options-container,
-    #tcg-region-links-button-group-container, #tcg-region-button-group-container,
+    #cards-page-header, #cards-button-controls, #cards-main-controls,
+    #card-search-result-header, #card-display-as-radios,
     #sets-button-controls, #sets-main-controls,
     #set-search-result-title, #set-display-as-radios, #scrollspy-bar {
       display: none !important;

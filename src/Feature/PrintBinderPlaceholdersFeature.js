@@ -18,6 +18,19 @@ export class PrintBinderPlaceholdersFeature {
         return appState.getRouteName() === 'sets_set_cards_page'
     }
 
+    getCardNumber = ($card, fullCardName) => {
+        const $number = $card.querySelector('.card-image-grid-item-info-overlay-number');
+        if ($number) {
+            return $number.innerText.trim();
+        }
+
+        // The info overlay can be turned off in the preferences, fall back to the card title,
+        // which reads like "Tropius (Pitch Black 001/084)".
+        const match = fullCardName.match(/\(([^)]*)\)\s*$/);
+
+        return match ? match[1].split(' ').pop() : '';
+    }
+
     apply = async () => {
         const appState = AppState.fromHtml();
 
@@ -29,8 +42,15 @@ export class PrintBinderPlaceholdersFeature {
 
         appState.getCardIds().forEach(cardId => {
             const $card = document.querySelector(`div.card-image-grid-item[data-card-id="${cardId}"]`);
-            const cardName = $card.querySelector('a').getAttribute('title').split('(')[0].trim();
-            const cardNumber = $card.querySelector('span.card-image-grid-item-info-overlay-text-part').innerText.trim();
+            // Cards are only rendered in the image display mode, the list display mode has no grid items.
+            if (!$card || !cardVariantTypes[cardId]) {
+                return;
+            }
+
+            const $link = $card.querySelector('a.card-image-grid-item-link');
+            const fullCardName = $link ? $link.getAttribute('title') : '';
+            const cardName = fullCardName.split('(')[0].trim();
+            const cardNumber = this.getCardNumber($card, fullCardName);
 
             cardVariantTypes[cardId].forEach(cardVariantId => {
                 const variantName = variantTypes[cardVariantId].name;
@@ -103,7 +123,7 @@ export class PrintBinderPlaceholdersFeature {
             $body.classList.add('in-print-selection-mode');
         });
 
-        document.querySelector('#card-search-result-header-actions-dropdown').appendChild($togglePrintSelectionModeButton$);
+        document.querySelector('#cards-side-buttons').appendChild($togglePrintSelectionModeButton$);
 
         addEventListener("afterprint", () => {
             $body.classList.remove('printing');
